@@ -15,6 +15,9 @@ public class Clinet : SingletonHandler<Clinet>
     public TCP tcp;
 
 
+    private delegate void PacketHandler(Packet _packet);
+    private static Dictionary<int, PacketHandler> packetHandlers;
+
     private void Start()
     {
         tcp = new TCP();
@@ -24,8 +27,9 @@ public class Clinet : SingletonHandler<Clinet>
     public void ConnectToServer()
     {
         tcp = new TCP();
+        InitializeClientData();
         tcp.Connect();
-        
+
     }
 
     public class TCP
@@ -33,11 +37,11 @@ public class Clinet : SingletonHandler<Clinet>
         public TcpClient socket;
 
         private NetworkStream stream;
+        private Packet receiveData;
         private byte[] receiveBuffer;
 
         public void Connect()
         {
-            Debug.Log("Connect!");
             socket = new TcpClient
             {
                 ReceiveBufferSize = dataBufferSize,
@@ -60,6 +64,8 @@ public class Clinet : SingletonHandler<Clinet>
 
             stream = socket.GetStream();
 
+            receiveData = new Packet();
+
             stream.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveCallback, null);
         }
 
@@ -67,14 +73,80 @@ public class Clinet : SingletonHandler<Clinet>
         {
             try
             {
+                int _byteLength = stream.EndRead(_result);
+                if(_byteLength <= 0)
+                {
+                    //¿¬°á ²÷±è
+                    return;
+                }
 
+                byte[] _data = new byte[_byteLength];
+                Array.Copy(receiveBuffer, _data, _byteLength);
+
+                receiveData.Reset(HandleData(_data));
+                stream.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveCallback, null);
             }
             catch
             {
-
+                //¿¬°á ²÷±è
             }
 
         }
+
+        private bool HandleData(byte[] _data)
+        {
+            int _packetLength = 0;
+
+            receiveData.SetBytes(_data);
+
+            if(receiveData.UnreadLength() >= 4)
+            {
+                _packetLength = receiveData.ReadInt();
+                if(_packetLength <= 0)
+                {
+                    return true;
+                }
+            }
+
+            while(_packetLength > 0 && _packetLength <= receiveData.UnreadLength())
+            {
+                byte[] _packetBytes = receiveData.ReadBytes(_packetLength);
+                ThreadManager.ExecuteOnMainThread(() =>
+                {
+                    using(Packet _packet = new Packet(_packetBytes))
+                    {
+                        int _packetId = _packet.ReadInt();
+                        packetHandlers[_packetId](_packet);
+                    }
+                });
+
+                _packetLength = 0;
+                if (receiveData.UnreadLength() >= 4)
+                {
+                    _packetLength = receiveData.ReadInt();
+                    if (_packetLength <= 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            if(_packetLength <= 1)
+            {
+                return true;
+            }
+
+            return false;
+        }
+    }
+
+    private void InitializeClientData()
+    {
+        packetHandlers = new Dictionary<int, PacketHandler>()
+        {
+            {(int)ServerPackets.welcome, ClientHandle.Welcome }
+        };
+        Debug.Log("Initialized packet...");
     }
 }
 
