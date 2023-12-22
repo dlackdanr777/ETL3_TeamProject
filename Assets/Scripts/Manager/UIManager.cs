@@ -12,6 +12,6 @@ public class UIManager : SingletonHandler<UIManager>
     {
         startMenu.SetActive(false);
         usernameField.interactable = false;
-        Clinet.Instance.ConnectToServer();
+        Client.Instance.ConnectToServer();
     }
 }

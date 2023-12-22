@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Sockets;
 using System;
 
-public class Clinet : SingletonHandler<Clinet>
+public class Client : SingletonHandler<Client>
 {
     public static int dataBufferSize = 4096;
 
@@ -67,6 +67,21 @@ public class Clinet : SingletonHandler<Clinet>
             receiveData = new Packet();
 
             stream.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveCallback, null);
+        }
+
+        public void SendData(Packet _packet)
+        {
+            try
+            {
+                if(socket != null)
+                {
+                    stream.BeginWrite(_packet.ToArray(), 0, _packet.Length(), null, null);
+                }
+            }
+            catch(Exception e)
+            {
+                Debug.LogError($"Error sending data to server via TCP: {e}"); 
+            }
         }
 
         private void ReceiveCallback(IAsyncResult _result)
