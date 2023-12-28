@@ -9,6 +9,7 @@ public enum BossAIState
     Idle,
     Tracking,
     Backstep,
+    Reconnaissance,
     Attack,
     Guard,
 }
@@ -46,8 +47,6 @@ public class BossAI
     }
 
 
-
-
     private INode WaitConditionNode()
     {
         List<INode> nodes = new List<INode>();
@@ -69,18 +68,16 @@ public class BossAI
     }
 
     private INode.ENodeState Tracking()
-    {
-        
+    {     
         _boss.ChangeAiState(BossAIState.Tracking);
-
-        return INode.ENodeState.Running;
+        return INode.ENodeState.Success;
     }
 
 
     private INode.ENodeState Idle()
     {
         _boss.ChangeAiState(BossAIState.Idle);
-        return INode.ENodeState.Failure;
+        return INode.ENodeState.Success;
     }
 
     private INode.ENodeState SetWaitTime()

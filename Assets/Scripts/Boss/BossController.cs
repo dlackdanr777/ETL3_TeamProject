@@ -4,6 +4,7 @@ using UnityEditor.Playables;
 using UnityEngine;
 
 
+[RequireComponent(typeof(Animator))]
 public class BossController : MonoBehaviour
 {
     [Header("Ability")]
@@ -16,6 +17,8 @@ public class BossController : MonoBehaviour
     
 
     private BossAI _bossAI;
+
+    private Animator _animator;
     
     [SerializeField] private BossAIState _state;
 
@@ -26,6 +29,8 @@ public class BossController : MonoBehaviour
     {
         _bossAI = new BossAI(this);
 
+        _animator = GetComponent<Animator>();
+
         SetWaitTime();
         InvokeRepeating("AIUpdate", _aiUpdateTimeValue, _aiUpdateTimeValue);
     }
@@ -33,6 +38,7 @@ public class BossController : MonoBehaviour
     private void Update()
     {
         UpdateTimer();
+        _animator.SetInteger("State", (int)_state);
     }
 
     private void AIUpdate()

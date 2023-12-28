@@ -33,7 +33,10 @@ public class SequenceNode : INode
             }
         }
 
-        return INode.ENodeState.Failure;
+        if(_childs.Count == 0)
+            return INode.ENodeState.Failure;
+
+        return INode.ENodeState.Success;
     }
 
 }
