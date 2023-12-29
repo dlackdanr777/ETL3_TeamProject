@@ -23,9 +23,57 @@ public class Character : MonoBehaviour
     [Range(0f, 1f)]
     public float airControl = 0.5f;
 
-    //public StateMachine movenmentSM;
-    //public StrandingState standing;
-    //public JumpingState jumping;
-    //public LandingState landing;
-    //public SprintState sprinting; 
+    public StateMachine movementSM;
+    public StrandingState standing;
+    public JumpingState jumping;
+    public LandingState landing;
+    public SprintState sprinting;
+    public SprintJumpState sprintjumping;
+
+    [HideInInspector]
+    public float gravityValue = -9.81f;
+    [HideInInspector]
+    public float normalColliderHeight;
+    [HideInInspector]
+    public CharacterController controller;
+    [HideInInspector]
+    public PlayerInput playerInput;
+    [HideInInspector]
+    public Transform cameraTransform;
+    [HideInInspector]
+    public Animator animator;
+    [HideInInspector]
+    public Vector3 playerVelocity;
+
+    private void Start()
+    {
+        controller = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();
+        playerInput = GetComponent<PlayerInput>();
+        cameraTransform = Camera.main.transform;
+
+        movementSM = new StateMachine();
+        standing = new StrandingState(this, movementSM);
+        jumping = new JumpingState(this, movementSM);
+        landing = new LandingState(this, movementSM);
+        sprinting = new SprintState(this, movementSM);
+        sprintjumping = new SprintJumpState(this, movementSM);
+
+        movementSM.Initialize(standing);
+
+        normalColliderHeight = controller.height;
+        gravityValue *= gravityMultiplier;
+    }
+
+    private void Update()
+    {
+        movementSM.currentState.HandleInput();
+
+        movementSM.currentState.LogicUpdate();
+    }
+
+    private void FixedUpdate()
+    {
+        movementSM.currentState.PhysicsUpdate();
+    }
 }
