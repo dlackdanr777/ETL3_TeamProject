@@ -4,11 +4,15 @@ using UnityEditor.Playables;
 using UnityEngine;
 
 
-[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Animator), typeof(Rigidbody))]
 public class BossController : MonoBehaviour
 {
     [Header("Ability")]
     [SerializeField] private float _moveSpeed;
+    public float MoveSpeed => _moveSpeed;
+
+    [SerializeField] private float _rotateSpeed;
+    public float RotateSpeed => _rotateSpeed;
 
     [Space]
     [Header("AI")]
@@ -17,10 +21,16 @@ public class BossController : MonoBehaviour
     
 
     private BossAI _bossAI;
+    private BossStateMachineBehaviour[] _stateMachines;
 
     private Animator _animator;
+    private Rigidbody _rigidbody;
+    public Rigidbody Rigidbody => _rigidbody;
     
     [SerializeField] private BossAIState _state;
+
+    [SerializeField] private GameObject _target;
+    public GameObject Target => _target;
 
     private float _waitTimer;
 
@@ -29,10 +39,20 @@ public class BossController : MonoBehaviour
     {
         _bossAI = new BossAI(this);
 
-        _animator = GetComponent<Animator>();
-
+        Init();
         SetWaitTime();
         InvokeRepeating("AIUpdate", _aiUpdateTimeValue, _aiUpdateTimeValue);
+    }
+
+    private void Init()
+    {
+        _animator = GetComponent<Animator>();
+        _rigidbody = GetComponent<Rigidbody>();
+        _stateMachines = _animator.GetBehaviours<BossStateMachineBehaviour>();
+        foreach(BossStateMachineBehaviour behaviour in _stateMachines)
+        {
+            behaviour.Init(this);
+        }
     }
 
     private void Update()
@@ -46,20 +66,21 @@ public class BossController : MonoBehaviour
         _bossAI.AIUpdate();
     }
 
+
     private void UpdateTimer()
     {
         if (_waitTimer <= 0)
             return;
 
         _waitTimer -= Time.deltaTime;
-        Debug.Log(_waitTimer);
-
     }
+
 
     public bool CheckWaitTime()
     {
         return _waitTimer <= 0;
     }
+
 
     public void SetWaitTime()
     {
