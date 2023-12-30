@@ -53,6 +53,7 @@ public class BossAI
 
         // TODO : 아래에 공격, 방어 등등 넣어야함
         nodes.Add(TrackingNode());
+        nodes.Add(ReconnaissanceNode());
 
         SelectorNode actionNode = new SelectorNode(nodes);
 
@@ -62,9 +63,20 @@ public class BossAI
     private INode TrackingNode()
     {
         List<INode> nodes = new List<INode>();
+        nodes.Add(new ActionNode(CheckTracking));
         nodes.Add(new ActionNode(Tracking));
 
         return new SequenceNode(nodes);
+    }
+
+    private INode.ENodeState CheckTracking()
+    {
+        if(5 < Vector3.Distance(_boss.transform.position, _boss.Target.transform.position))
+        {
+            return INode.ENodeState.Success;
+        }
+
+        return INode.ENodeState.Failure;
     }
 
     private INode.ENodeState Tracking()
@@ -72,6 +84,22 @@ public class BossAI
         _boss.ChangeAiState(BossAIState.Tracking);
         return INode.ENodeState.Success;
     }
+
+    private INode ReconnaissanceNode()
+    {
+        List<INode> nodes = new List<INode>();
+        nodes.Add(new ActionNode(Reconnaissance));
+
+        return new SequenceNode(nodes);
+    }
+
+
+    private INode.ENodeState Reconnaissance()
+    {
+        _boss.ChangeAiState(BossAIState.Reconnaissance);
+        return INode.ENodeState.Success;
+    }
+
 
 
     private INode.ENodeState Idle()
