@@ -24,7 +24,7 @@ public class Character : MonoBehaviour
     public float airControl = 0.5f;
 
     public StateMachine movementSM;
-    public StrandingState standing;
+    public StandingState standing;
     public JumpingState jumping;
     public LandingState landing;
     public SprintState sprinting;
@@ -53,7 +53,7 @@ public class Character : MonoBehaviour
         cameraTransform = Camera.main.transform;
 
         movementSM = new StateMachine();
-        standing = new StrandingState(this, movementSM);
+        standing = new StandingState(this, movementSM);
         jumping = new JumpingState(this, movementSM);
         landing = new LandingState(this, movementSM);
         sprinting = new SprintState(this, movementSM);

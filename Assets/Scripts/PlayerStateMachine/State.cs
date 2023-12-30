@@ -10,7 +10,7 @@ public class State
 
 
     protected Vector3 gravityVelocity;
-    protected Vector3 Veloicty;
+    protected Vector3 veloicty;
     protected Vector2 input;
 
     public InputAction moveAction;
