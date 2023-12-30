@@ -7,6 +7,12 @@ public class B_TargetTracking : BossStateMachineBehaviour
     private float _speed => _boss.MoveSpeed;
     private Rigidbody _rigidbody => _boss.Rigidbody;
 
+    private float _verticalMove;
+
+    public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        _verticalMove = 0;
+    }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -22,8 +28,15 @@ public class B_TargetTracking : BossStateMachineBehaviour
 
     private void Move(Animator animator)
     {
-        animator.SetFloat("Vertical", 1);
-        _rigidbody.MovePosition(_boss.transform.position + _boss.transform.forward * _speed * Time.deltaTime);
+        if (_verticalMove < 1)
+            _verticalMove += Time.deltaTime * _speed;
+
+        if (1 <= _verticalMove)
+            _verticalMove = 1;
+
+        animator.SetFloat("Vertical", _verticalMove);
+
+        _rigidbody.MovePosition(_boss.transform.position + _boss.transform.forward * _speed * _verticalMove * Time.deltaTime);
     }
 
     private void ReduceHorizontalValue(Animator animator)
@@ -35,6 +48,7 @@ public class B_TargetTracking : BossStateMachineBehaviour
 
         else if (horizontalValue < 0f)
             horizontalValue += Time.deltaTime * 3;
+
 
         animator.SetFloat("Horizontal", horizontalValue);
 

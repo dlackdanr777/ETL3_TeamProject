@@ -8,6 +8,7 @@ public class B_HorizontalMove : BossStateMachineBehaviour
     private Rigidbody _rigidbody => _boss.Rigidbody;
 
     private int _randomMoveDirX;
+    private float _horizontalMove;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -28,6 +29,13 @@ public class B_HorizontalMove : BossStateMachineBehaviour
 
     private void Move(Animator animator)
     {
+
+        if (_horizontalMove < _randomMoveDirX)
+            _horizontalMove += Time.deltaTime * _speed * _randomMoveDirX;
+        // TODO : 음수 양수 확인해서 잘 나오는지
+        if (_randomMoveDirX <= _horizontalMove)
+            _horizontalMove = _randomMoveDirX;
+
         animator.SetFloat("Horizontal", _randomMoveDirX);
         _rigidbody.MovePosition(_boss.transform.position + _boss.transform.right * _speed * Time.deltaTime * _randomMoveDirX);
     }
@@ -40,8 +48,10 @@ public class B_HorizontalMove : BossStateMachineBehaviour
         if (0f < verticalValue)
             verticalValue -= Time.deltaTime * 3;
 
+        if (verticalValue < 0f)
+            verticalValue = 0;
+
         animator.SetFloat("Vertical", verticalValue);
 
-        Debug.Log(verticalValue);
     }
 }

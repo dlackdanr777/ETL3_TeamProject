@@ -15,6 +15,10 @@ public class BossController : MonoBehaviour
     public float RotateSpeed => _rotateSpeed;
 
     [Space]
+    [Header("Attack")]
+    [SerializeField] private BossAttackData[] _attackDatas;
+
+    [Space]
     [Header("AI")]
     [SerializeField] private float _waitTimeValue;
     [SerializeField] private float _aiUpdateTimeValue;
@@ -25,6 +29,7 @@ public class BossController : MonoBehaviour
 
     private BossAI _bossAI;
     private BossStateMachineBehaviour[] _stateMachines;
+    private BossAttackStateBehaviour[] _attackMachines;
 
     private Animator _animator;
     private Rigidbody _rigidbody;
@@ -52,10 +57,25 @@ public class BossController : MonoBehaviour
         _animator = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
         _stateMachines = _animator.GetBehaviours<BossStateMachineBehaviour>();
-        foreach(BossStateMachineBehaviour behaviour in _stateMachines)
+        _attackMachines = _animator.GetBehaviours<BossAttackStateBehaviour>();
+
+        foreach (BossStateMachineBehaviour behaviour in _stateMachines)
         {
             behaviour.Init(this);
         }
+
+        foreach(BossAttackData data in _attackDatas)
+        {
+            foreach (BossAttackStateBehaviour behaviour in _attackMachines)
+            {
+                if(data.AttackState == behaviour.AttackState)
+                {
+                    behaviour.Init(this, data);
+                    break;
+                }
+            }
+        }
+
     }
 
     private void Update()

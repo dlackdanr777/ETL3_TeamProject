@@ -3648,6 +3648,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 15
   _rotateSpeed: 2
+  _attackDatas:
+  - _name: "\uADFC\uC811 \uACF5\uACA9 1"
+    _timesDamage: 1
+    _attackState: 0
   _waitTimeValue: 1
   _aiUpdateTimeValue: 1
   _attackWaitTimeValue: 3
