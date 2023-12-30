@@ -642,31 +642,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c42679b5f5373904cab203907d233f45, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.36498442
+      value: -0.58274186
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c42679b5f5373904cab203907d233f45, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.65722317
+      value: 0.4752505
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c42679b5f5373904cab203907d233f45, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.64918095
+      value: 0.5593191
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c42679b5f5373904cab203907d233f45, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.11579421
+      value: -0.34887123
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c42679b5f5373904cab203907d233f45, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -19.233
+      value: -9.418
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c42679b5f5373904cab203907d233f45, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 221.536
+      value: 265.5
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c42679b5f5373904cab203907d233f45, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 83.353
+      value: 72
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: c42679b5f5373904cab203907d233f45, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1898,9 +1898,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2681707546919234382}
   - component: {fileID: 8347274689544401204}
-  - component: {fileID: 8347274689544401205}
   - component: {fileID: 8347274689544401207}
   - component: {fileID: 8347274689544401206}
+  - component: {fileID: 8347274689544401205}
   m_Layer: 0
   m_Name: DarkKnight
   m_TagString: Untagged
@@ -3650,6 +3650,7 @@ MonoBehaviour:
   _rotateSpeed: 2
   _waitTimeValue: 1
   _aiUpdateTimeValue: 1
+  _attackWaitTimeValue: 3
   _state: 0
   _target: {fileID: 881888502}
 --- !u!136 &8347274689544401206
@@ -3700,7 +3701,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!1 &8382382069790689679
 GameObject:

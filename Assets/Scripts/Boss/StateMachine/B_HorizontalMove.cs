@@ -17,12 +17,12 @@ public class B_HorizontalMove : BossStateMachineBehaviour
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         Move(animator);
+        ReduceVerticalValue(animator);
     }
 
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.SetFloat("Horizontal", 0);
     }
 
 
@@ -30,5 +30,18 @@ public class B_HorizontalMove : BossStateMachineBehaviour
     {
         animator.SetFloat("Horizontal", _randomMoveDirX);
         _rigidbody.MovePosition(_boss.transform.position + _boss.transform.right * _speed * Time.deltaTime * _randomMoveDirX);
+    }
+
+
+    private void ReduceVerticalValue(Animator animator)
+    {
+        float verticalValue = animator.GetFloat("Vertical");
+
+        if (0f < verticalValue)
+            verticalValue -= Time.deltaTime * 3;
+
+        animator.SetFloat("Vertical", verticalValue);
+
+        Debug.Log(verticalValue);
     }
 }

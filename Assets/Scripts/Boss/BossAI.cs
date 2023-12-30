@@ -54,6 +54,7 @@ public class BossAI
         // TODO : 아래에 공격, 방어 등등 넣어야함
         nodes.Add(TrackingNode());
         nodes.Add(ReconnaissanceNode());
+        nodes.Add(AttackNode());
 
         SelectorNode actionNode = new SelectorNode(nodes);
 
@@ -71,7 +72,7 @@ public class BossAI
 
     private INode.ENodeState CheckTracking()
     {
-        if(5 < Vector3.Distance(_boss.transform.position, _boss.Target.transform.position))
+        if(10 < Vector3.Distance(_boss.transform.position, _boss.Target.transform.position))
         {
             return INode.ENodeState.Success;
         }
@@ -88,15 +89,43 @@ public class BossAI
     private INode ReconnaissanceNode()
     {
         List<INode> nodes = new List<INode>();
+        nodes.Add(new ActionNode(CheckReconnaissance));
         nodes.Add(new ActionNode(Reconnaissance));
 
         return new SequenceNode(nodes);
     }
 
+    private INode.ENodeState CheckReconnaissance()
+    {
+        if (_reconnaissanceTimer < _boss.AttackWaitTime)
+            return INode.ENodeState.Success;
 
+        return INode.ENodeState.Failure;
+    }
+
+
+    private float _reconnaissanceTimer;
     private INode.ENodeState Reconnaissance()
     {
         _boss.ChangeAiState(BossAIState.Reconnaissance);
+        _reconnaissanceTimer += _boss.AIUpdateTime;
+
+        return INode.ENodeState.Success;
+    }
+
+
+    private INode AttackNode()
+    {
+        List<INode> nodes = new List<INode>();
+        nodes.Add(new ActionNode(Attack));
+
+        return new SequenceNode(nodes);
+    }
+
+    private INode.ENodeState Attack()
+    {
+        _boss.ChangeAiState(BossAIState.Attack);
+        _reconnaissanceTimer = 0;
         return INode.ENodeState.Success;
     }
 

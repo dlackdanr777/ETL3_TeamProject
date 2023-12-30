@@ -18,6 +18,9 @@ public class BossController : MonoBehaviour
     [Header("AI")]
     [SerializeField] private float _waitTimeValue;
     [SerializeField] private float _aiUpdateTimeValue;
+    public float AIUpdateTime => _aiUpdateTimeValue;
+    [SerializeField] private float _attackWaitTimeValue;
+    public float AttackWaitTime => _attackWaitTimeValue;
     
 
     private BossAI _bossAI;
