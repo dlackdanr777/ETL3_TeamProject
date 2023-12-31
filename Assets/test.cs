@@ -17,6 +17,7 @@ public class test : MonoBehaviour, IHp
     public event Action onHpMax;
     public event Action onHpMin;
 
+
     public void DepleteHp(object subject, float value)
     {
         Debug.Log("¸ÂÀ½");
