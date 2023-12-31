@@ -21,6 +21,8 @@ public class BossAI
 
     private BossController _boss;
 
+    private BossAttackData _currentAttackData;
+
     public BossAI(BossController boss)
     {
         _boss = boss;
@@ -30,6 +32,7 @@ public class BossAI
 
     public void AIUpdate()
     {
+        Debug.Log(_currentAttackData);
         _bt.Operate();
     }
 
@@ -72,7 +75,8 @@ public class BossAI
 
     private INode.ENodeState CheckTracking()
     {
-        if(10 < Vector3.Distance(_boss.transform.position, _boss.Target.transform.position))
+        _currentAttackData = _boss.GetPossibleAttackData();
+        if (_currentAttackData == null)
         {
             return INode.ENodeState.Success;
         }
@@ -125,6 +129,7 @@ public class BossAI
     private INode.ENodeState Attack()
     {
         _boss.ChangeAiState(BossAIState.Attack);
+        _boss.SetAnimatorAttackValue(_currentAttackData.AttackState);
         _reconnaissanceTimer = 0;
         return INode.ENodeState.Success;
     }

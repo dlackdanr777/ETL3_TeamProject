@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEditor.Playables;
 using UnityEngine;
 
@@ -8,6 +9,10 @@ using UnityEngine;
 public class BossController : MonoBehaviour
 {
     [Header("Ability")]
+
+    [SerializeField] private float _power;
+    public float Power => _power;
+
     [SerializeField] private float _moveSpeed;
     public float MoveSpeed => _moveSpeed;
 
@@ -40,6 +45,9 @@ public class BossController : MonoBehaviour
     [SerializeField] private GameObject _target;
     public GameObject Target => _target;
 
+    public float TargetDistance =>
+        Vector3.Distance(new Vector3(_target.transform.position.x, 0, _target.transform.position.z), new Vector3(transform.position.x, 0, transform.position.z));
+
     private float _waitTimer;
 
 
@@ -66,6 +74,7 @@ public class BossController : MonoBehaviour
 
         foreach(BossAttackData data in _attackDatas)
         {
+            data.Init(this);
             foreach (BossAttackStateBehaviour behaviour in _attackMachines)
             {
                 if(data.AttackState == behaviour.AttackState)
@@ -111,8 +120,31 @@ public class BossController : MonoBehaviour
     }
 
 
+    public BossAttackData GetPossibleAttackData()
+    {
+        List<BossAttackData> possibleSkillDataList = new List<BossAttackData>();
+        foreach (BossAttackData data in _attackDatas)
+        {
+            bool isWithInRange = TargetDistance <= data.MaxRange && data.MinRange <= TargetDistance;
+            if (isWithInRange)
+                possibleSkillDataList.Add(data);
+        }
+
+        if (possibleSkillDataList.Count == 0)
+            return null;
+
+        int randInt = Random.Range(0, possibleSkillDataList.Count);
+        return possibleSkillDataList[randInt];
+    }
+
+
     public void ChangeAiState(BossAIState nextState)
     {
         _state = nextState;
+    }
+
+    public void SetAnimatorAttackValue(BossAttackState nextState)
+    {
+        _animator.SetInteger("AttackState", (int)nextState);
     }
 }

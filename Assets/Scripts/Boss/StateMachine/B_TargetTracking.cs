@@ -52,7 +52,6 @@ public class B_TargetTracking : BossStateMachineBehaviour
 
         animator.SetFloat("Horizontal", horizontalValue);
 
-        Debug.Log(horizontalValue);
     }
 
 }
