@@ -1542,6 +1542,7 @@ GameObject:
   - component: {fileID: 7639332183112881918}
   - component: {fileID: 7639332183112881917}
   - component: {fileID: 7639332183112881916}
+  - component: {fileID: 7639332183112881919}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2426,7 +2427,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: bc61f928c94ca6045aee811def7195dd, type: 3}
   m_Controller: {fileID: 9100000, guid: 4893ccd2ca22d0b43995cad37dd05a74, type: 2}
-  m_CullingMode: 1
+  m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
@@ -2460,8 +2461,8 @@ CharacterController:
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.9, z: 0}
+  m_MinMoveDistance: 0.0001
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &7639332183112881918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2493,6 +2494,36 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 658797295}
+--- !u!114 &7639332183112881919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4012602115786184252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e46fe80ef535ad48ba9db843f5db17e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSpeed: 5
+  sprintSpeed: 8
+  jumpHeight: 0.8
+  gravityMultiplier: 2
+  rotationSpeed: 5
+  crouchColliderHeight: 1.35
+  speedDampTime: 0.1
+  velocityDampTime: 0.1
+  rotationDampTime: 0.2
+  airControl: 0.5
+  movementSM: {fileID: 0}
+  gravityValue: -9.81
+  normalColliderHeight: 0
+  controller: {fileID: 0}
+  playerInput: {fileID: 0}
+  cameraTransform: {fileID: 0}
+  animator: {fileID: 0}
+  playerVelocity: {x: 0, y: 0, z: 0}
 --- !u!4 &7676634083771801093
 Transform:
   m_ObjectHideFlags: 0

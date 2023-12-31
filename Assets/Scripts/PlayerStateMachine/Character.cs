@@ -59,7 +59,7 @@ public class Character : MonoBehaviour
         sprinting = new SprintState(this, movementSM);
         sprintjumping = new SprintJumpState(this, movementSM);
 
-        movementSM.Initialize(standing);
+        movementSM.initialized(standing);
 
         normalColliderHeight = controller.height;
         gravityValue *= gravityMultiplier;

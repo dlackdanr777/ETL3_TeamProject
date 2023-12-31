@@ -26,7 +26,7 @@ public class JumpingState : State
         playerSpeed = character.playerSpeed;
         gravityVelocity.y = 0;
 
-        character.animator.SetFloat("Speed", 0);
+        character.animator.SetFloat("speed", 0);
         character.animator.SetTrigger("jump");
         Jump();
     }
@@ -51,14 +51,14 @@ public class JumpingState : State
         base.PhysicsUpdate();
         if(!grounded)
         {
-            veloicty = character.playerVelocity;
+            velocity = character.playerVelocity;
             airVelocity = new Vector3(input.x, 0, input.y);
 
-            veloicty = veloicty.x * character.cameraTransform.right.normalized + veloicty.z * character.cameraTransform.forward.normalized;
-            veloicty.y = 0f;
+            velocity = velocity.x * character.cameraTransform.right.normalized + velocity.z * character.cameraTransform.forward.normalized;
+            velocity.y = 0f;
             airVelocity = airVelocity.x * character.cameraTransform.right.normalized + airVelocity.z * character.cameraTransform.forward.normalized;
             airVelocity.y = 0f;
-            character.controller.Move(gravityVelocity*Time.deltaTime+(airVelocity*character.airControl+veloicty*(1-character.airControl)*playerSpeed*Time.deltaTime));
+            character.controller.Move(gravityVelocity*Time.deltaTime+(airVelocity*character.airControl+velocity*(1-character.airControl)*playerSpeed*Time.deltaTime));
         }
         gravityVelocity.y += gravityValue * Time.deltaTime;
         grounded = character.controller.isGrounded;
