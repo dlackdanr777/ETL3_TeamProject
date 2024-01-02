@@ -15623,7 +15623,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8aa917f2276f3f946862da2970e54344, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _trail: {fileID: 146295561}
 --- !u!1 &56277944589483414
 GameObject:
   m_ObjectHideFlags: 0
@@ -16621,7 +16620,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3349699981126316532}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.563}
+  m_LocalPosition: {x: 0, y: 0, z: -15.65}
   m_LocalScale: {x: 1.7, y: 1.7, z: 1.7}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -18607,6 +18606,14 @@ MonoBehaviour:
     _endFrame: 90
     _attackClass: {fileID: 613795016}
     _attackState: 1
+  - _name: "\uADFC\uC811 \uACF5\uACA9 3"
+    _timesDamage: 2
+    _maxRange: 10
+    _minRange: 5
+    _startFrame: 58
+    _endFrame: 90
+    _attackClass: {fileID: 613795016}
+    _attackState: 2
   _waitTimeValue: 1
   _aiUpdateTimeValue: 1
   _attackWaitTimeValue: 1

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class B_TargetTracking : BossStateMachineBehaviour
 {
+    [SerializeField] private float _speedMul = 1;
     private float _speed => _boss.MoveSpeed;
     private Rigidbody _rigidbody => _boss.Rigidbody;
 
@@ -36,7 +37,7 @@ public class B_TargetTracking : BossStateMachineBehaviour
 
         animator.SetFloat("Vertical", _verticalMove);
 
-        _rigidbody.MovePosition(_boss.transform.position + _boss.transform.forward * _speed * _verticalMove * Time.deltaTime);
+        _rigidbody.MovePosition(_boss.transform.position + _boss.transform.forward * _speed * _verticalMove * Time.deltaTime * _speedMul);
     }
 
     private void ReduceHorizontalValue(Animator animator)
