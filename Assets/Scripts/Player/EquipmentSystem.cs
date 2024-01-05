@@ -28,4 +28,13 @@ public class EquipmentSystem : MonoBehaviour
         currentWeaponInhandSheath= Instantiate(weapon,weaponSheath.transform);
         Destroy(currentWeaponInhand);
     }
+    
+    public void StartDealDamage()
+    {
+        currentWeaponInhand.GetComponentInChildren<DamageDealer>().StartDealDamage();
+    }
+    public void EndDealDamage()
+    {
+        currentWeaponInhand.GetComponentInChildren<DamageDealer>().EndDealDamage();
+    }
 }
