@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using UnityEngine;
 
@@ -10,6 +11,27 @@ public enum BossAttackState
     Attack3,
     Attack4,
     Attack5,
+}
+
+[Serializable]
+public class BossAttackFrameData
+{
+    [Tooltip("공격 활성화 프레임")]
+    [SerializeField] private int _startFrame;
+    public int StartFrame => _startFrame;
+
+    [Tooltip("공격 비 활성화 프레임(원거리 경우 상관 없음)")]
+    [SerializeField] private int _finishedFrame;
+    public int FinishedFrame => _finishedFrame;
+
+
+    private bool _isStarted;
+    public bool GetIsStarted => _isStarted;
+    public bool SetIsStarted { set { _isStarted = value; } }
+
+    private bool _isFinished;
+    public bool GetIsFinished => _isFinished;
+    public bool SetIsFinished { set { _isFinished = value; } }
 }
 
 
@@ -35,14 +57,9 @@ public class BossAttackData
     public float MinRange => _minRange;
 
     [Space]
-
-    [Tooltip("공격 활성화 프레임")]
-    [SerializeField] private int _startFrame;
-    public int StartFrame => _startFrame;
-
-    [Tooltip("공격 비 활성화 프레임(원거리 경우 상관 없음)")]
-    [SerializeField] private int _endFrame;
-    public int EndFrame => _endFrame;
+    [Tooltip("타격 활성화, 비활성화 프레임 클래스(크기는 타격 횟수)")]
+    [SerializeField] private BossAttackFrameData[] _frames;
+    public BossAttackFrameData[] Frames => _frames;
 
     [Space]
 

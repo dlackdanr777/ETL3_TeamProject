@@ -18596,26 +18596,40 @@ MonoBehaviour:
     _timesDamage: 1
     _maxRange: 5
     _minRange: 3
-    _startFrame: 67
-    _endFrame: 84
+    _frames:
+    - _startFrame: 67
+      _finishedFrame: 84
     _attackClass: {fileID: 578059885}
     _attackState: 0
   - _name: "\uADFC\uC811 \uACF5\uACA9 2"
     _timesDamage: 1.2
     _maxRange: 5
     _minRange: 0
-    _startFrame: 58
-    _endFrame: 90
+    _frames:
+    - _startFrame: 58
+      _finishedFrame: 90
     _attackClass: {fileID: 613795016}
     _attackState: 1
-  - _name: "\uB3CC\uC9C4 \uACF5\uACA9"
+  - _name: "\uB3CC\uC9C4 \uACF5\uACA91_1"
     _timesDamage: 2
     _maxRange: 15
     _minRange: 7
-    _startFrame: 58
-    _endFrame: 90
+    _frames:
+    - _startFrame: 58
+      _finishedFrame: 90
     _attackClass: {fileID: 613795016}
     _attackState: 2
+  - _name: "\uB3CC\uC9C4 \uACF5\uACA91_2"
+    _timesDamage: 1.5
+    _maxRange: 15
+    _minRange: 7
+    _frames:
+    - _startFrame: 42
+      _finishedFrame: 90
+    - _startFrame: 120
+      _finishedFrame: 132
+    _attackClass: {fileID: 613795016}
+    _attackState: 3
   _waitTimeValue: 1
   _aiUpdateTimeValue: 1
   _attackWaitTimeValue: 1

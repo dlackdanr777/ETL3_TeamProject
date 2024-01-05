@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class B_TargetRotate : BossStateMachineBehaviour
 {
-
+    [SerializeField] private float _rotateSpeedMul;
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -18,6 +18,6 @@ public class B_TargetRotate : BossStateMachineBehaviour
         targetDir.y = 0;
 
         Quaternion rot = Quaternion.LookRotation(targetDir);
-        _boss.transform.rotation = Quaternion.Lerp(_boss.transform.rotation, rot, _boss.RotateSpeed * Time.deltaTime);
+        _boss.transform.rotation = Quaternion.Lerp(_boss.transform.rotation, rot, _boss.RotateSpeed * _rotateSpeedMul * Time.deltaTime);
     }
 }
