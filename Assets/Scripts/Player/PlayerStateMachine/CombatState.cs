@@ -44,10 +44,10 @@ public class CombatState : State
             sheathWeapon = true;
         }
 
-        //if (attackAction.triggered)
-        //{
-        //    attack = true;
-        //}
+        if (attackAction.triggered)
+        {
+            attack = true;
+        }
 
         input = moveAction.ReadValue<Vector2>();
         velocity = new Vector3(input.x, 0, input.y);
@@ -69,11 +69,11 @@ public class CombatState : State
             stateMachine.ChangeState(character.standing);
         }
 
-        //if (attack)
-        //{
-        //    character.animator.SetTrigger("attack");
-        //    stateMachine.ChangeState(character.attacking);
-        //}
+        if (attack)
+        {
+            character.animator.SetTrigger("attack");
+            stateMachine.ChangeState(character.attacking);
+        }
     }
 
     public override void PhysicsUpdate()

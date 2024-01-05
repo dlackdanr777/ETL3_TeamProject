@@ -123,6 +123,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &536624211
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 536624212}
+  m_Layer: 0
+  m_Name: WeaponHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &536624212
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 536624211}
+  m_LocalRotation: {x: 0.6915854, y: -0.14734165, z: 0.14734165, w: 0.6915854}
+  m_LocalPosition: {x: -0.161, y: 0.068, z: -0.029}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 2511712572622525605}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 90, y: -10.723, z: 13.331}
 --- !u!1 &658797293
 GameObject:
   m_ObjectHideFlags: 0
@@ -1226,6 +1257,7 @@ Transform:
   - {fileID: 3165122985374589701}
   - {fileID: 5035797553297788001}
   - {fileID: 5644374520018616211}
+  - {fileID: 536624212}
   m_Father: {fileID: 1800761889509596869}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1515,6 +1547,22 @@ Transform:
   m_Father: {fileID: 1998178170447645367}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3935262363076075677
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8904558014380508251}
+  m_Layer: 0
+  m_Name: sheatHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &3978868918047772659
 Transform:
   m_ObjectHideFlags: 0
@@ -1543,6 +1591,7 @@ GameObject:
   - component: {fileID: 7639332183112881917}
   - component: {fileID: 7639332183112881916}
   - component: {fileID: 7639332183112881919}
+  - component: {fileID: 7639332183112881920}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2516,7 +2565,6 @@ MonoBehaviour:
   velocityDampTime: 0.1
   rotationDampTime: 0.2
   airControl: 0.5
-  movementSM: {fileID: 0}
   gravityValue: -9.81
   normalColliderHeight: 0
   controller: {fileID: 0}
@@ -2524,6 +2572,21 @@ MonoBehaviour:
   cameraTransform: {fileID: 0}
   animator: {fileID: 0}
   playerVelocity: {x: 0, y: 0, z: 0}
+--- !u!114 &7639332183112881920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4012602115786184252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06caed6c0a40324caf41aa67c27df66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponHolder: {fileID: 536624211}
+  weapon: {fileID: 100000, guid: 898282c34212cdf4bac20881e1a35844, type: 3}
+  weaponSheath: {fileID: 3935262363076075677}
 --- !u!4 &7676634083771801093
 Transform:
   m_ObjectHideFlags: 0
@@ -2768,6 +2831,7 @@ Transform:
   - {fileID: 1795424857381639534}
   - {fileID: 5346252020967217965}
   - {fileID: 8420847202965839745}
+  - {fileID: 8904558014380508251}
   m_Father: {fileID: 4387756120624254086}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2899,6 +2963,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &8904558014380508251
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3935262363076075677}
+  m_LocalRotation: {x: 0.18453899, y: -0.6377324, z: 0.47727945, w: 0.57571447}
+  m_LocalPosition: {x: -0.224, y: 0.02, z: 0.115}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 8121153675475594258}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: -235.209, y: 101.985, z: -146.59}
 --- !u!1 &8970816797271990097
 GameObject:
   m_ObjectHideFlags: 0

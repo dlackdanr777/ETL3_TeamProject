@@ -62,7 +62,7 @@
             ],
             "bindings": [
                 {
-                    "name": "2D Vector",
+                    "name": "WASD",
                     "id": "66a92bd5-e1ce-4615-8dc2-f1cf9afffa22",
                     "path": "2DVector",
                     "interactions": "",
@@ -164,7 +164,7 @@
                     "name": "",
                     "id": "66206bfd-c952-45a8-aa38-bd883bc5a67a",
                     "path": "<Mouse>/leftButton",
-                    "interactions": "",
+                    "interactions": "Tap",
                     "processors": "",
                     "groups": "",
                     "action": "Attack",
