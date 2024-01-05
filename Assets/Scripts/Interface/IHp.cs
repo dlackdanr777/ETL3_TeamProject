@@ -2,17 +2,17 @@ using System;
 
 public interface IHp
 {
-    float hp { get; }
-    float maxHp { get; }
-    float minHp { get; }
+    public float Hp { get; }
+    public float MaxHp { get; }
+    public float MinHp { get; }
 
-    event Action<float> onHpChanged;
-    event Action<object, float> OnHpRecoverd;
-    event Action<object, float> OnHpDepleted;
-    event Action onHpMax;
+    public event Action<object, float> OnHpChanged;
+    public event Action<object, float> OnHpRecoverd;
+    public event Action<object, float> OnHpDepleted;
+    public event Action OnHpMax;
 
-    event Action onHpMin;
+    public event Action OnHpMin;
 
-    void RecoverHp(object subject, float value);
-    void DepleteHp(object subject, float value);
+    public void RecoverHp(object subject, float value);
+    public void DepleteHp(object subject, float value);
 }

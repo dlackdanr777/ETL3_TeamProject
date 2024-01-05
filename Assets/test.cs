@@ -5,17 +5,17 @@ using UnityEngine;
 
 public class test : MonoBehaviour, IHp
 {
-    public float hp => throw new NotImplementedException();
+    public float Hp => throw new NotImplementedException();
 
-    public float maxHp => throw new NotImplementedException();
+    public float MaxHp => throw new NotImplementedException();
 
-    public float minHp => throw new NotImplementedException();
+    public float MinHp => throw new NotImplementedException();
 
-    public event Action<float> onHpChanged;
+    public event Action<object, float> OnHpChanged;
     public event Action<object, float> OnHpRecoverd;
     public event Action<object, float> OnHpDepleted;
-    public event Action onHpMax;
-    public event Action onHpMin;
+    public event Action OnHpMax;
+    public event Action OnHpMin;
 
 
     public void DepleteHp(object subject, float value)
