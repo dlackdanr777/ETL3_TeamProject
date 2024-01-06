@@ -264,12 +264,6 @@ Transform:
   m_Father: {fileID: 2000731238}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &285596004 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100000, guid: c42679b5f5373904cab203907d233f45,
-    type: 3}
-  m_PrefabInstance: {fileID: 1921016789}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -537,7 +531,7 @@ GameObject:
   - component: {fileID: 578059886}
   - component: {fileID: 578059885}
   m_Layer: 13
-  m_Name: Attack1
+  m_Name: Melee Attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -591,72 +585,6 @@ Transform:
   m_Father: {fileID: 2000731238}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &613795014
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 613795015}
-  - component: {fileID: 613795017}
-  - component: {fileID: 613795016}
-  m_Layer: 13
-  m_Name: Attack2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &613795015
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 613795014}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2000731238}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &613795016
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 613795014}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c53ed953f646e144194ce6b68cb2163e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!65 &613795017
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 613795014}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.156911, y: 0.41343248, z: 0.6075752}
-  m_Center: {x: -1.0128694, y: -0.032391872, z: 0.021539023}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -15594,16 +15522,8 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 400000, guid: c42679b5f5373904cab203907d233f45,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 613795015}
-    - targetCorrespondingSourceObject: {fileID: 400000, guid: c42679b5f5373904cab203907d233f45,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 146295562}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 100000, guid: c42679b5f5373904cab203907d233f45,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2000731241}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c42679b5f5373904cab203907d233f45, type: 3}
 --- !u!4 &2000731238 stripped
 Transform:
@@ -15611,18 +15531,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1921016789}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2000731241
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 285596004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8aa917f2276f3f946862da2970e54344, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &56277944589483414
 GameObject:
   m_ObjectHideFlags: 0
@@ -18608,7 +18516,7 @@ MonoBehaviour:
     _frames:
     - _startFrame: 58
       _finishedFrame: 90
-    _attackClass: {fileID: 613795016}
+    _attackClass: {fileID: 578059885}
     _attackState: 1
   - _name: "\uB3CC\uC9C4 \uACF5\uACA91_1"
     _timesDamage: 2
@@ -18617,7 +18525,7 @@ MonoBehaviour:
     _frames:
     - _startFrame: 58
       _finishedFrame: 90
-    _attackClass: {fileID: 613795016}
+    _attackClass: {fileID: 578059885}
     _attackState: 2
   - _name: "\uB3CC\uC9C4 \uACF5\uACA91_2"
     _timesDamage: 1.5
@@ -18628,8 +18536,21 @@ MonoBehaviour:
       _finishedFrame: 90
     - _startFrame: 120
       _finishedFrame: 132
-    _attackClass: {fileID: 613795016}
+    _attackClass: {fileID: 578059885}
     _attackState: 3
+  - _name: "\uC6D0\uAC70\uB9AC \uACF5\uACA91-1"
+    _timesDamage: 1.5
+    _maxRange: 20
+    _minRange: 10
+    _frames:
+    - _startFrame: 0
+      _finishedFrame: 35
+    - _startFrame: 40
+      _finishedFrame: 75
+    - _startFrame: 80
+      _finishedFrame: 115
+    _attackClass: {fileID: 578059885}
+    _attackState: 4
   _waitTimeValue: 1
   _aiUpdateTimeValue: 1
   _attackWaitTimeValue: 1

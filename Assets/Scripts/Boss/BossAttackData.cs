@@ -11,6 +11,10 @@ public enum BossAttackState
     Attack3,
     Attack4,
     Attack5,
+    Attack6,
+    Attack7,
+    Attack8,
+    Attack9
 }
 
 [Serializable]

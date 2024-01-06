@@ -36,16 +36,21 @@ public class BossController : MonoBehaviour, IHp
     [Space]
     [Header("AI")]
     [SerializeField] private float _waitTimeValue;
+
     [SerializeField] private float _aiUpdateTimeValue;
     public float AIUpdateTime => _aiUpdateTimeValue;
+
     [SerializeField] private float _attackWaitTimeValue;
     public float AttackWaitTime => _attackWaitTimeValue;
     
     private BossAI _bossAI;
+
     private BossStateMachineBehaviour[] _stateMachines;
+
     private BossAttackStateBehaviour[] _attackMachines;
 
     private Animator _animator;
+
     private Rigidbody _rigidbody;
 
     public Rigidbody Rigidbody => _rigidbody;
@@ -58,7 +63,6 @@ public class BossController : MonoBehaviour, IHp
     public float TargetDistance =>
         Vector3.Distance(new Vector3(_target.transform.position.x, 0, _target.transform.position.z), new Vector3(transform.position.x, 0, transform.position.z));
 
-
     public event Action<object, float> OnHpChanged;
     public event Action<object, float> OnHpRecoverd;
     public event Action<object, float> OnHpDepleted;
@@ -66,7 +70,6 @@ public class BossController : MonoBehaviour, IHp
     public event Action OnHpMin;
 
     private float _waitTimer;
-
 
 
     void Start()
