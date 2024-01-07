@@ -1,20 +1,28 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class Projectile : MonoBehaviour, IAttack
 {
+    [Tooltip("데미지 갱신 간격(ex. 0.1일 경우 닿고 있는 모든 대상 0.1초마다 데미지)")]
+    [Range(0.1f, 1f)]
+    [SerializeField] private float _damageInterval;
+
+    //타격 데미지
     private float _damageValue;
     public float DamageValue => _damageValue;
 
     private object _subject;
 
-    private List<GameObject> _hitObjects = new List<GameObject>();
+    private Dictionary<GameObject, float> _hitObjectDic = new Dictionary<GameObject, float>();
+
+    //Dic에서 삭제될 Obj를 보관해두는 리스트
+    private List<GameObject> _removeObjectList = new List<GameObject>();
 
     public event Action OnTargetDamaged;
-
-    
 
     public void Init(object subject, float damageValue)
     {
@@ -24,6 +32,7 @@ public class Projectile : MonoBehaviour, IAttack
         _damageValue = damageValue;
     }
 
+
     public void AttackTarget(IHp iHp, float aomunt)
     {
         iHp.DepleteHp(_subject, aomunt);
@@ -31,18 +40,37 @@ public class Projectile : MonoBehaviour, IAttack
         OnTargetDamaged?.Invoke();
     }
 
+    private void Update()
+    {
+        _removeObjectList.Clear();
+
+        foreach (GameObject obj in _hitObjectDic.Keys.ToList())
+        {
+            // 아닐 경우 Time.deltaTime만큼만 뺀다.
+            _hitObjectDic[obj] = _hitObjectDic[obj] - Time.deltaTime;
+
+            // 만약 _damageInterval 시간을 지났다면 리스트에 추가
+            if (_hitObjectDic[obj] <= 0)
+                _removeObjectList.Add(obj);
+        }
+
+        foreach (GameObject obj in _removeObjectList)
+        {
+            _hitObjectDic.Remove(obj);
+        }
+    }
+
 
     private void OnTriggerStay(Collider other)
     {
-        GameObject obj = _hitObjects.Find(x => x == other.gameObject);
+        //만약 피격당한 object dic에 등록되있다면? 리턴
+        if (_hitObjectDic.ContainsKey(other.gameObject))
+            return;
 
-        if (obj == null)
+        if (other.TryGetComponent(out IHp iHp))
         {
-            if (other.TryGetComponent(out IHp iHp))
-            {
-                AttackTarget(iHp, _damageValue);
-                _hitObjects.Add(other.gameObject);
-            }
+            AttackTarget(iHp, _damageValue);
+            _hitObjectDic.Add(other.gameObject, _damageInterval);
         }
     }
 
