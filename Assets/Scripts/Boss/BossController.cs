@@ -112,6 +112,7 @@ public class BossController : MonoBehaviour, IHp
     {
         UpdateTimer();
         _animator.SetInteger("State", (int)_state);
+
     }
 
     private void AIUpdate()

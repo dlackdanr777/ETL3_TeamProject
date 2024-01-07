@@ -86,7 +86,7 @@ public class BossAttackData
 
     public void Start()
     {
-        _attackClass.Init(_boss.Power * _timesDamage);
+        _attackClass.Init(_boss, _boss.Power * _timesDamage);
         _attackClass.StartAttack();
     }
 

@@ -6,8 +6,11 @@ public abstract class BossAttack : MonoBehaviour
 {
     protected float _damage;
 
-    public virtual void Init(float damage)
+    protected BossController _boss;
+
+    public virtual void Init(BossController boss, float damage)
     {
+        _boss = boss;
         _damage = damage;
     }
 
