@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 31682906}
   - component: {fileID: 31682905}
   m_Layer: 11
-  m_Name: Attack6
+  m_Name: Attack6-1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -155,8 +155,9 @@ MonoBehaviour:
   _projectilePrefab: {fileID: 3506823187371743349, guid: 7a0dfed8be24ec5408d03ad12ea32fde,
     type: 3}
   _spawnPos: {x: 0, y: 0, z: 5}
-  _isAbsoluteSpawnPos: 0
   _disabledTime: 2
+  _damageInterval: 0.3
+  _isAbsoluteSpawnPos: 0
 --- !u!4 &31682906
 Transform:
   m_ObjectHideFlags: 0
@@ -313,6 +314,114 @@ Transform:
   m_Father: {fileID: 2000731238}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &193328016
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2808736787611939387, guid: e8bdafe19a48d8045a1faf9012c26006,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2808736788188893522, guid: e8bdafe19a48d8045a1faf9012c26006,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2808736789139889264, guid: e8bdafe19a48d8045a1faf9012c26006,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2826097458391882708, guid: e8bdafe19a48d8045a1faf9012c26006,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2826097458391882708, guid: e8bdafe19a48d8045a1faf9012c26006,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2826097458391882708, guid: e8bdafe19a48d8045a1faf9012c26006,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2826097458391882708, guid: e8bdafe19a48d8045a1faf9012c26006,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2826097458391882708, guid: e8bdafe19a48d8045a1faf9012c26006,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2826097458391882708, guid: e8bdafe19a48d8045a1faf9012c26006,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2826097458391882708, guid: e8bdafe19a48d8045a1faf9012c26006,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2826097458391882708, guid: e8bdafe19a48d8045a1faf9012c26006,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2826097458391882708, guid: e8bdafe19a48d8045a1faf9012c26006,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2826097458391882708, guid: e8bdafe19a48d8045a1faf9012c26006,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2826097458391882708, guid: e8bdafe19a48d8045a1faf9012c26006,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2826097458391882711, guid: e8bdafe19a48d8045a1faf9012c26006,
+        type: 3}
+      propertyPath: m_Name
+      value: Effect_45_BlastFlame
+      objectReference: {fileID: 0}
+    - target: {fileID: 2826097458391882711, guid: e8bdafe19a48d8045a1faf9012c26006,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4115878824964532878, guid: e8bdafe19a48d8045a1faf9012c26006,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4115878825528412647, guid: e8bdafe19a48d8045a1faf9012c26006,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8330659345209237295, guid: e8bdafe19a48d8045a1faf9012c26006,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e8bdafe19a48d8045a1faf9012c26006, type: 3}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -751,6 +860,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 768942c74190b084ca8f9b1163efe013, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &883648490
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 883648491}
+  - component: {fileID: 883648492}
+  m_Layer: 11
+  m_Name: Attack6-2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &883648491
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 883648490}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1526896532}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &883648492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 883648490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 281b55efa0210d14ba61c85a0180b17a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _projectilePrefab: {fileID: 3506823187371743349, guid: 7a0dfed8be24ec5408d03ad12ea32fde,
+    type: 3}
+  _spawnPos: {x: 0, y: 0, z: 10}
+  _disabledTime: 2
+  _damageInterval: 5
+  _isAbsoluteSpawnPos: 0
 --- !u!1 &1337663389
 GameObject:
   m_ObjectHideFlags: 0
@@ -5667,6 +5826,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 31682906}
+  - {fileID: 883648491}
   m_Father: {fileID: 2681707546919234382}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -18589,7 +18749,7 @@ MonoBehaviour:
     _frames:
     - _startFrame: 67
       _finishedFrame: 84
-    _attackClass: {fileID: 578059885}
+      _attackClass: {fileID: 578059885}
     _attackState: 0
   - _name: "\uADFC\uC811 \uACF5\uACA9 2"
     _timesDamage: 1.2
@@ -18598,7 +18758,7 @@ MonoBehaviour:
     _frames:
     - _startFrame: 58
       _finishedFrame: 90
-    _attackClass: {fileID: 578059885}
+      _attackClass: {fileID: 578059885}
     _attackState: 1
   - _name: "\uB3CC\uC9C4 \uACF5\uACA91_1"
     _timesDamage: 2
@@ -18607,7 +18767,7 @@ MonoBehaviour:
     _frames:
     - _startFrame: 58
       _finishedFrame: 90
-    _attackClass: {fileID: 578059885}
+      _attackClass: {fileID: 578059885}
     _attackState: 2
   - _name: "\uB3CC\uC9C4 \uACF5\uACA91_2"
     _timesDamage: 1.5
@@ -18616,9 +18776,10 @@ MonoBehaviour:
     _frames:
     - _startFrame: 42
       _finishedFrame: 90
+      _attackClass: {fileID: 578059885}
     - _startFrame: 120
       _finishedFrame: 132
-    _attackClass: {fileID: 578059885}
+      _attackClass: {fileID: 578059885}
     _attackState: 3
   - _name: "\uC6D0\uAC70\uB9AC \uACF5\uACA91-1"
     _timesDamage: 1.5
@@ -18627,11 +18788,13 @@ MonoBehaviour:
     _frames:
     - _startFrame: 0
       _finishedFrame: 35
+      _attackClass: {fileID: 578059885}
     - _startFrame: 40
       _finishedFrame: 75
+      _attackClass: {fileID: 578059885}
     - _startFrame: 80
       _finishedFrame: 115
-    _attackClass: {fileID: 578059885}
+      _attackClass: {fileID: 578059885}
     _attackState: 4
   - _name: "\uC6D0\uAC70\uB9AC \uACF5\uACA91-2"
     _timesDamage: 1
@@ -18640,7 +18803,10 @@ MonoBehaviour:
     _frames:
     - _startFrame: 68
       _finishedFrame: 90
-    _attackClass: {fileID: 31682905}
+      _attackClass: {fileID: 31682905}
+    - _startFrame: 72
+      _finishedFrame: 90
+      _attackClass: {fileID: 883648492}
     _attackState: 5
   _waitTimeValue: 1
   _aiUpdateTimeValue: 1

@@ -28,6 +28,9 @@ public class BossAttackFrameData
     [SerializeField] private int _finishedFrame;
     public int FinishedFrame => _finishedFrame;
 
+    [Tooltip("공격 클래스")]
+    [SerializeField] private BossAttack _attackClass;
+    public BossAttack AttackClass => _attackClass;
 
     private bool _isStarted;
     public bool GetIsStarted => _isStarted;
@@ -67,8 +70,7 @@ public class BossAttackData
 
     [Space]
 
-    [Tooltip("공격 클래스")]
-    [SerializeField] private BossAttack _attackClass;
+
 
 
     [Space]
@@ -84,15 +86,15 @@ public class BossAttackData
         _boss = boss;
     }
 
-    public void Start()
+    public void Start(int index)
     {
-        _attackClass.Init(_boss, _boss.Power * _timesDamage);
-        _attackClass.StartAttack();
+        _frames[index].AttackClass.Init(_boss, _boss.Power * _timesDamage);
+        _frames[index].AttackClass.StartAttack();
     }
 
-    public void End()
+    public void End(int index)
     {
-        _attackClass.EndAttack();
+        _frames[index].AttackClass.EndAttack();
     }
 
 }

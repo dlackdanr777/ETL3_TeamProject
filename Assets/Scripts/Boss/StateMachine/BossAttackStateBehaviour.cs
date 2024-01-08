@@ -40,14 +40,14 @@ public class BossAttackStateBehaviour : StateMachineBehaviour
         {
             if (_data.Frames[i].StartFrame <= _currentFrame && !_data.Frames[i].GetIsStarted)
             {
-                _data.Start();
+                _data.Start(i);
                 Debug.Log("공격 실행");
                 _data.Frames[i].SetIsStarted = true;
             }
 
             else if (_data.Frames[i].FinishedFrame <= _currentFrame && !_data.Frames[i].GetIsFinished)
             {
-                _data.End();
+                _data.End(i);
                 Debug.Log("종료 실행");
                 _data.Frames[i].SetIsFinished = true;
             }
