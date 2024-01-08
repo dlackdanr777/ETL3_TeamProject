@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1144937677655907654}
-  - component: {fileID: 3233063173001754940}
+  - component: {fileID: 1239823369883452344}
   m_Layer: 0
   m_Name: DamageDealer
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 8265922882017528685}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
---- !u!114 &3233063173001754940
+--- !u!114 &1239823369883452344
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponLength: 1.8
-  weaponDamage: 0
+  weaponDamage: 2
 --- !u!1001 &8265922882017399277
 PrefabInstance:
   m_ObjectHideFlags: 0

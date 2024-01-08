@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,6 +30,12 @@ public class DamageDealer : MonoBehaviour
                 //    enemy.HitVFX(hit.point);
                 //    hasDealtDamage.Add(hit.transform.gameObject);
                 //}
+
+                if(!hasDealtDamage.Contains(hit.transform.gameObject))
+                {
+                    Debug.Log("damage");
+                    hasDealtDamage.Add(hit.transform.gameObject);
+                }
             }
         }
     }
