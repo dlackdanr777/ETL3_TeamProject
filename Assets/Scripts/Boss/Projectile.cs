@@ -7,9 +7,8 @@ using UnityEngine.TextCore.Text;
 
 public class Projectile : MonoBehaviour, IAttack
 {
-    [Tooltip("데미지 갱신 간격(ex. 0.1일 경우 닿고 있는 모든 대상 0.1초마다 데미지)")]
-    [Range(0.1f, 1f)]
-    [SerializeField] private float _damageInterval;
+    //데미지 갱신 간격(ex. 0.1일 경우 닿고 있는 모든 대상 0.1초마다 데미지)
+    private float _damageInterval = 1;
 
     //타격 데미지
     private float _damageValue;
@@ -24,12 +23,13 @@ public class Projectile : MonoBehaviour, IAttack
 
     public event Action OnTargetDamaged;
 
-    public void Init(object subject, float damageValue)
+    public void Init(object subject, float damageValue, float damageInterval)
     {
         Debug.LogFormat("{0}의 공격력은 {1} 입니다.", subject, damageValue);
 
         _subject = subject;
         _damageValue = damageValue;
+        _damageInterval = damageInterval;
     }
 
 

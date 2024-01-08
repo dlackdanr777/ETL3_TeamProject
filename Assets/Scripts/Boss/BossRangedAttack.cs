@@ -13,6 +13,10 @@ public class BossRangedAttack : BossAttack
     [Tooltip("투사체 소환후 비활성화되기 까지의 시간")]
     [SerializeField] private float _disabledTime;
 
+    [Tooltip("데미지 갱신 간격(ex. 0.1일 경우 닿고 있는 모든 대상 0.1초마다 데미지)")]
+    [Range(0.1f, 10f)]
+    [SerializeField] private float _damageInterval;
+
     [Tooltip("회전값에 따른 스폰 위치 변경 여부(참일경우 변경, 거짓일 경우 회전값 무시")]
     [SerializeField] private bool _isAbsoluteSpawnPos;
 
@@ -25,7 +29,7 @@ public class BossRangedAttack : BossAttack
             Instantiate(_projectilePrefab, GetSpawnPos(), Quaternion.identity) :
             Instantiate(_projectilePrefab, GetSpawnPos(), Quaternion.identity, transform);
 
-        _currentProjectile.Init("boss", _damage);
+        _currentProjectile.Init("boss", _damage, _damageInterval);
         _currentProjectile.transform.parent = null;
 
         Destroy(_currentProjectile.gameObject, _disabledTime);
