@@ -44,6 +44,7 @@ public class Projectile : MonoBehaviour, IAttack
     {
         _removeObjectList.Clear();
 
+        //TODO: 수정 예정 (ToList를 사용해 메모리를 과다 사용할 수 있음)
         foreach (GameObject obj in _hitObjectDic.Keys.ToList())
         {
             // 아닐 경우 Time.deltaTime만큼만 뺀다.

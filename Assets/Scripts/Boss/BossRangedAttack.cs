@@ -10,32 +10,33 @@ public class BossRangedAttack : BossAttack
     [Tooltip("생성 위치(Boss 위치 기준)")]
     [SerializeField] private Vector3 _spawnPos;
 
-    [Tooltip("회전값에 따른 스폰 위치 변경 여부(참일경우 변경, 거짓일 경우 회전값 무시")]
-    [SerializeField] private bool _isAbsoluteSpawnPos;
-
     [Tooltip("투사체 소환후 비활성화되기 까지의 시간")]
     [SerializeField] private float _disabledTime;
 
+    [Tooltip("회전값에 따른 스폰 위치 변경 여부(참일경우 변경, 거짓일 경우 회전값 무시")]
+    [SerializeField] private bool _isAbsoluteSpawnPos;
+
     private Projectile _currentProjectile;
+
 
     public override void StartAttack()
     {
-        if (!_isAbsoluteSpawnPos)
-            _currentProjectile = Instantiate(_projectilePrefab, GetSpawnPos(), Quaternion.identity, transform);
-
-        else
-            _currentProjectile = Instantiate(_projectilePrefab, GetSpawnPos(), Quaternion.identity);
+        _currentProjectile = _isAbsoluteSpawnPos ?
+            Instantiate(_projectilePrefab, GetSpawnPos(), Quaternion.identity) :
+            Instantiate(_projectilePrefab, GetSpawnPos(), Quaternion.identity, transform);
 
         _currentProjectile.Init("boss", _damage);
         _currentProjectile.transform.parent = null;
 
-        Destroy(_currentProjectile, _disabledTime);
+        Destroy(_currentProjectile.gameObject, _disabledTime);
     }
 
 
     public override void EndAttack()
     {
+
     }
+
 
     private Vector3 GetSpawnPos()
     {
