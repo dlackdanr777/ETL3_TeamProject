@@ -10,6 +10,7 @@ public class StandingState : State
     Vector3 currentVelocity;
     bool grounded;
     bool sprint;
+    bool roll;
     float playerSpeed;
     bool drawWeapon;
 
@@ -27,6 +28,7 @@ public class StandingState : State
 
         jump = false;
         sprint = false;
+        roll = false;
         input = Vector2.zero;
         velocity = Vector3.zero;
         currentVelocity = Vector3.zero;
@@ -50,6 +52,10 @@ public class StandingState : State
         if (drawWeaponAction.triggered)
         {
             drawWeapon = true;
+        }
+        if (rollAction.triggered)
+        {
+            roll = true;
         }
         input = moveAction.ReadValue<Vector2>();
         velocity=new Vector3(input.x,0,input.y);
@@ -78,6 +84,11 @@ public class StandingState : State
             stateMachine.ChangeState(character.combatting);
             character.animator.SetTrigger("drawWeapon");
         }
+        if (roll)
+        {
+            stateMachine.ChangeState(character.rolling);
+        }
+        
         
     }
 

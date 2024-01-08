@@ -31,6 +31,7 @@ public class Character : MonoBehaviour
     public SprintJumpState sprintjumping;
     public CombatState combatting;
     public AttackState attacking;
+    public RollState rolling;
 
     [HideInInspector]
     public float gravityValue = -9.81f;
@@ -62,6 +63,7 @@ public class Character : MonoBehaviour
         sprintjumping = new SprintJumpState(this, movementSM);
         combatting = new CombatState(this, movementSM);
         attacking = new AttackState(this, movementSM);
+        rolling = new RollState(this, movementSM);
 
         movementSM.initialized(standing);
 
