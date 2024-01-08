@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class BossAttackStateBehaviour : StateMachineBehaviour
@@ -16,9 +12,6 @@ public class BossAttackStateBehaviour : StateMachineBehaviour
 
     protected AnimationClip _clip;
 
-    private bool _isStart;
-
-    private bool _isEnd;
 
     public void Init(BossController boss, BossAttackData data)
     {
@@ -29,8 +22,11 @@ public class BossAttackStateBehaviour : StateMachineBehaviour
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        _isStart = false;
-        _isEnd = false;
+        for(int i = 0, count = _data.Frames.Length; i < count; i++)
+        {
+            _data.Frames[i].SetIsStarted = false;
+            _data.Frames[i].SetIsFinished = false;
+        }
     }
 
 
@@ -40,17 +36,23 @@ public class BossAttackStateBehaviour : StateMachineBehaviour
         float currentTime = _clip.length * stateInfo.normalizedTime;
         int _currentFrame = Mathf.RoundToInt(_clip.frameRate * currentTime);
 
-        if (_data.StartFrame <= _currentFrame && !_isStart)
+        for(int i = 0, count = _data.Frames.Length; i < count; i++)
         {
-            _data.Start();
-            _isStart = true;
-        }
+            if (_data.Frames[i].StartFrame <= _currentFrame && !_data.Frames[i].GetIsStarted)
+            {
+                _data.Start();
+                Debug.Log("공격 실행");
+                _data.Frames[i].SetIsStarted = true;
+            }
 
-        else if (_data.EndFrame <= _currentFrame && !_isEnd)
-        {
-            _data.End();
-            _isEnd = true;
+            else if (_data.Frames[i].FinishedFrame <= _currentFrame && !_data.Frames[i].GetIsFinished)
+            {
+                _data.End();
+                Debug.Log("종료 실행");
+                _data.Frames[i].SetIsFinished = true;
+            }
         }
+       
     }
 
 }
