@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcec8173e8bbae84b8766fcfde37ead3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponLength: 1.8
+  weaponLength: 1.5
   weaponDamage: 2
 --- !u!1001 &8265922882017399277
 PrefabInstance:

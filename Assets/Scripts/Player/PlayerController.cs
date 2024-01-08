@@ -4,21 +4,17 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour,IHp
 {
-    [SerializeField]
-    private float _maxHp;
+    [SerializeField] private float _maxHp;
+    public float MaxHp => _maxHp;
+    [SerializeField] private float _minHp;
+    public float MinHp => _minHp;
 
-    
-
-    public float hp => _hp;
     private float _hp;
-    public float maxHp => _maxHp;
+    public float Hp => _hp;
 
-    private float _minHp;
-    public float minHp => _minHp;
-
-    public event Action<object, float> onHpChanged;
+    public event Action<object, float> OnHpChanged;
     public event Action<object, float> OnHpRecoverd;
     public event Action<object, float> OnHpDepleted;
     public event Action OnHpMax;
@@ -28,7 +24,7 @@ public class PlayerController : MonoBehaviour
     {
         _hp = Mathf.Clamp(_hp + value, _minHp, _maxHp);
 
-        onHpChanged?.Invoke(subject, value);
+        OnHpChanged?.Invoke(subject, value);
         OnHpRecoverd?.Invoke(subject, value);
 
         if (_hp == _maxHp)
@@ -39,7 +35,7 @@ public class PlayerController : MonoBehaviour
     {
         _hp = Mathf.Clamp(_hp - value, _minHp, _maxHp);
 
-        onHpChanged?.Invoke(subject, value);
+        OnHpChanged?.Invoke(subject, value);
         OnHpDepleted?.Invoke(subject, value);
 
         if (_hp == _maxHp)
