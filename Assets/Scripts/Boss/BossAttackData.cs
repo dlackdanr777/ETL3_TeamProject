@@ -95,6 +95,9 @@ public class BossAttackData
     public void End(int index)
     {
         _frames[index].AttackClass.EndAttack();
+
+
+        
     }
 
 }
