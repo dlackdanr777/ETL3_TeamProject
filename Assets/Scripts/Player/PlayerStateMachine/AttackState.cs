@@ -36,8 +36,8 @@ public class AttackState : State
         base.LogicUpdate();
 
         timePassed += Time.deltaTime;
-        clipLength = character.animator.GetCurrentAnimatorClipInfo(1)[0].clip.length;
-        clipSpeed = character.animator.GetCurrentAnimatorStateInfo(1).speed;
+        clipLength = character.animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
+        clipSpeed = character.animator.GetCurrentAnimatorStateInfo(0).speed;
 
         if (timePassed >= clipLength / clipSpeed && attack)
         {
@@ -45,7 +45,7 @@ public class AttackState : State
         }
         if (timePassed >= clipLength / clipSpeed)
         {
-            stateMachine.ChangeState(character.combatting);
+            stateMachine.ChangeState(character.standing);
             character.animator.SetTrigger("move");
         }
 

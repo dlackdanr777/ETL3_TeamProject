@@ -12,7 +12,7 @@ public class StandingState : State
     bool sprint;
     bool roll;
     float playerSpeed;
-    bool drawWeapon;
+    bool attack;
 
     Vector3 cVelocity;
 
@@ -29,6 +29,7 @@ public class StandingState : State
         jump = false;
         sprint = false;
         roll = false;
+        attack = false;
         input = Vector2.zero;
         velocity = Vector3.zero;
         currentVelocity = Vector3.zero;
@@ -49,9 +50,9 @@ public class StandingState : State
         {
             sprint = true;
         }
-        if (drawWeaponAction.triggered)
+        if (attackAction.triggered)
         {
-            drawWeapon = true;
+            attack = true;
         }
         if (rollAction.triggered)
         {
@@ -79,10 +80,10 @@ public class StandingState : State
         {
             stateMachine.ChangeState(character.jumping);
         }
-        if (drawWeapon)
+        if (attack)
         {
-            stateMachine.ChangeState(character.combatting);
-            character.animator.SetTrigger("drawWeapon");
+            stateMachine.ChangeState(character.attacking);
+            character.animator.SetTrigger("attack");
         }
         if (roll)
         {

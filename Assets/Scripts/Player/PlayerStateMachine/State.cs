@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,7 +8,7 @@ public class State
 {
     public Character character;
     public StateMachine stateMachine;
-
+    public PlayerController playerController;
 
     protected Vector3 gravityVelocity;
     protected Vector3 velocity;
@@ -30,7 +31,7 @@ public class State
         lookAction = character.playerInput.actions["Look"];
         jumpAction = character.playerInput.actions["Jump"];
         sprintAction = character.playerInput.actions["Sprint"];
-        drawWeaponAction = character.playerInput.actions["DrawWeapon"];
+        //drawWeaponAction = character.playerInput.actions["DrawWeapon"];
         attackAction = character.playerInput.actions["Attack"];
         rollAction = character.playerInput.actions["Roll"];
 
@@ -38,6 +39,7 @@ public class State
     public virtual void Enter()
     {
         Debug.Log("enter state: " + this.ToString());
+        
     }
 
     public virtual void HandleInput()
@@ -57,4 +59,6 @@ public class State
     {
 
     }
+
+  
 }

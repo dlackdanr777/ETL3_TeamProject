@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour,IHp
 {
+    Animator animator;
     [SerializeField] private float _maxHp;
     public float MaxHp => _maxHp;
     [SerializeField] private float _minHp;
@@ -19,6 +20,11 @@ public class PlayerController : MonoBehaviour,IHp
     public event Action<object, float> OnHpDepleted;
     public event Action OnHpMax;
     public event Action OnHpMin;
+
+    public void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     public void RecoverHp(object subject, float value)
     {
@@ -37,6 +43,11 @@ public class PlayerController : MonoBehaviour,IHp
 
         OnHpChanged?.Invoke(subject, value);
         OnHpDepleted?.Invoke(subject, value);
+
+        if (10 > value)
+        {
+            animator.SetTrigger("hit");
+        }
 
         if (_hp == _maxHp)
             OnHpMin?.Invoke();

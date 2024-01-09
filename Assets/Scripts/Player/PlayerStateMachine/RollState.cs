@@ -54,14 +54,17 @@ public class RollState : State
         {
             gravityVelocity.y = 0f;
         }
-        
-        //character.controller.Move(currentVelocity * Time.deltaTime * playerSpeed + gravityVelocity * Time.deltaTime);
 
-        //if (velocity.sqrMagnitude > 0)
-        //{
-        //    character.transform.rotation = Quaternion.Slerp(character.transform.rotation, Quaternion.LookRotation(velocity), character.rotationDampTime);
-        //}
+        character.controller.Move(currentVelocity * Time.deltaTime * playerSpeed + gravityVelocity * Time.deltaTime);
+
+        if (velocity.sqrMagnitude > 0)
+        {
+            character.transform.rotation = Quaternion.Slerp(character.transform.rotation, Quaternion.LookRotation(velocity), character.rotationDampTime);
+        }
+
+
     }
+
 
 
 }

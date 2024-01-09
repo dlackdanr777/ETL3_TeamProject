@@ -29,9 +29,11 @@ public class Character : MonoBehaviour
     public LandingState landing;
     public SprintState sprinting;
     public SprintJumpState sprintjumping;
-    public CombatState combatting;
+    //public CombatState combatting;
     public AttackState attacking;
     public RollState rolling;
+
+    public PlayerController playerController;
 
     [HideInInspector]
     public float gravityValue = -9.81f;
@@ -50,6 +52,7 @@ public class Character : MonoBehaviour
 
     private void Start()
     {
+        playerController = GetComponent<PlayerController>();
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
         playerInput = GetComponent<PlayerInput>();
@@ -61,11 +64,11 @@ public class Character : MonoBehaviour
         landing = new LandingState(this, movementSM);
         sprinting = new SprintState(this, movementSM);
         sprintjumping = new SprintJumpState(this, movementSM);
-        combatting = new CombatState(this, movementSM);
+        //combatting = new CombatState(this, movementSM);
         attacking = new AttackState(this, movementSM);
         rolling = new RollState(this, movementSM);
 
-        movementSM.initialized(standing);
+        movementSM.initialized(standing,playerController);
 
         normalColliderHeight = controller.height;
         gravityValue *= gravityMultiplier;
