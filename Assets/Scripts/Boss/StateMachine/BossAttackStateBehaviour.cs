@@ -19,7 +19,7 @@ public class BossAttackStateBehaviour : StateMachineBehaviour
         _data = data;
     }
 
-
+    
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         for(int i = 0, count = _data.Frames.Length; i < count; i++)

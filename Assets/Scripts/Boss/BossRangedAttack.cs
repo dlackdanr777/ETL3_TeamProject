@@ -34,10 +34,7 @@ public class BossRangedAttack : BossAttack
     }
 
 
-    public override void EndAttack()
-    {
-
-    }
+    public override void EndAttack() { }
 
 
     private Vector3 GetSpawnPos()
@@ -45,6 +42,7 @@ public class BossRangedAttack : BossAttack
         Vector3 spawnPos = transform.position + _spawnPos;
         return spawnPos;
     }
+
 
     //회전값을 고려하여 좌표 찾기
     private Vector3 GetAbsoluteSpawnPos()

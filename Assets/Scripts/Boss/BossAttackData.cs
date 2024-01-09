@@ -20,6 +20,10 @@ public enum BossAttackState
 [Serializable]
 public class BossAttackFrameData
 {
+    [Tooltip("공격력 배수")]
+    [SerializeField] private float _damageMul;
+    public float DamageMul => _damageMul;
+
     [Tooltip("공격 활성화 프레임")]
     [SerializeField] private int _startFrame;
     public int StartFrame => _startFrame;
@@ -49,10 +53,6 @@ public class BossAttackData
     [SerializeField] private string _name;
     public string Name => _name;
 
-    [Tooltip("공격력 배수")]
-    [SerializeField] private float _timesDamage;
-    public float TimesDamage => _timesDamage;
-
     [Space]
 
     [Tooltip("최대 사거리")]
@@ -69,12 +69,6 @@ public class BossAttackData
     public BossAttackFrameData[] Frames => _frames;
 
     [Space]
-
-
-
-
-    [Space]
-
     [Tooltip("공격 유형")]
     [SerializeField] private BossAttackState _attackState;
     public BossAttackState AttackState => _attackState;
@@ -88,16 +82,13 @@ public class BossAttackData
 
     public void Start(int index)
     {
-        _frames[index].AttackClass.Init(_boss, _boss.Power * _timesDamage);
+        _frames[index].AttackClass.Init(_boss, _boss.Power * _frames[index].DamageMul);
         _frames[index].AttackClass.StartAttack();
     }
 
     public void End(int index)
     {
-        _frames[index].AttackClass.EndAttack();
-
-
-        
+        _frames[index].AttackClass.EndAttack();    
     }
 
 }
