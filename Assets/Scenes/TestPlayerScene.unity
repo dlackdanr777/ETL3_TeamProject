@@ -4470,7 +4470,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &4030445654843891281
 GameObject:
   m_ObjectHideFlags: 0
@@ -6216,7 +6216,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &5801900968162979456
 GameObject:
   m_ObjectHideFlags: 0
@@ -13087,7 +13087,7 @@ MonoBehaviour:
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
-  m_Camera: {fileID: 658797295}
+  m_Camera: {fileID: 0}
 --- !u!114 &7639332183112881919
 MonoBehaviour:
   m_ObjectHideFlags: 0
