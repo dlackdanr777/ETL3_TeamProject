@@ -25,12 +25,10 @@ public class BossRangedAttack : BossAttack
 
     public override void StartAttack()
     {
-        _currentProjectile = _isAbsoluteSpawnPos ?
-            Instantiate(_projectilePrefab, GetSpawnPos(), Quaternion.identity) :
-            Instantiate(_projectilePrefab, GetSpawnPos(), Quaternion.identity, transform);
+        Vector3 spawnPos = _isAbsoluteSpawnPos ? GetAbsoluteSpawnPos() : GetSpawnPos();
 
+        _currentProjectile = Instantiate(_projectilePrefab, spawnPos, Quaternion.identity);
         _currentProjectile.Init("boss", _damage, _damageInterval);
-        _currentProjectile.transform.parent = null;
 
         Destroy(_currentProjectile.gameObject, _disabledTime);
     }
@@ -45,6 +43,13 @@ public class BossRangedAttack : BossAttack
     private Vector3 GetSpawnPos()
     {
         Vector3 spawnPos = transform.position + _spawnPos;
+        return spawnPos;
+    }
+
+    //회전값을 고려하여 좌표 찾기
+    private Vector3 GetAbsoluteSpawnPos()
+    {       
+        Vector3 spawnPos = transform.position + transform.rotation * _spawnPos;
         return spawnPos;
     }
 
