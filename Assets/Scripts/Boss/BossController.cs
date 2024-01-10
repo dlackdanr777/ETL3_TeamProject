@@ -151,6 +151,12 @@ public class BossController : MonoBehaviour, IHp
     }
 
 
+    public void SetWaitTime(float value)
+    {
+        _waitTimer = value;
+    }
+
+
     public BossAttackData GetPossibleAttackData()
     {
         List<BossAttackData> possibleSkillDataList = new List<BossAttackData>();

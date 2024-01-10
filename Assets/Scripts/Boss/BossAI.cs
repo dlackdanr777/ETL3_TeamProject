@@ -167,8 +167,9 @@ public class BossAI
         bool isEnabled = randInt == 0 && _boss.GetAIState() != BossAIState.Attack;
         if(isEnabled)
         {
+            float guardTime = Random.Range(0, 3f);
             _boss.ChangeAiState(BossAIState.Guard);
-            _boss.SetWaitTime();
+            _boss.SetWaitTime(guardTime);
         }
     }
 
