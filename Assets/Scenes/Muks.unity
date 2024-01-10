@@ -550,7 +550,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.18428122, y: -0.119930305, z: 0.022661408, w: 0.9752659}
+  m_LocalRotation: {x: 0.1842812, y: -0.119930275, z: 0.022661401, w: 0.9752659}
   m_LocalPosition: {x: -0.66, y: 1.68, z: -11.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1271,7 +1271,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1026463912}
-  m_LocalRotation: {x: 0.18428122, y: -0.119930305, z: 0.022661408, w: 0.9752659}
+  m_LocalRotation: {x: 0.1842812, y: -0.119930275, z: 0.022661401, w: 0.9752659}
   m_LocalPosition: {x: -0.66, y: 1.68, z: -11.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -19476,7 +19476,7 @@ MonoBehaviour:
       _finishedFrame: 1000
       _attackClass: {fileID: 268321530}
     _attackState: 5
-  _waitTimeValue: 1
+  _waitTimeValue: 2
   _aiUpdateTimeValue: 1
   _attackWaitTimeValue: 1
   _state: 0

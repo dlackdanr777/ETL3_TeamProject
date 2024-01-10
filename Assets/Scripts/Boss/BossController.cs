@@ -81,6 +81,7 @@ public class BossController : MonoBehaviour, IHp
         InvokeRepeating("AIUpdate", _aiUpdateTimeValue, _aiUpdateTimeValue);
     }
 
+
     private void Init()
     {
         _animator = GetComponent<Animator>();
@@ -105,15 +106,22 @@ public class BossController : MonoBehaviour, IHp
                 }
             }
         }
-
     }
+
 
     private void Update()
     {
         UpdateTimer();
         _animator.SetInteger("State", (int)_state);
 
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            DepleteHp("창묵", 1);
+        }
+
     }
+
 
     private void AIUpdate()
     {
@@ -127,6 +135,7 @@ public class BossController : MonoBehaviour, IHp
             return;
 
         _waitTimer -= Time.deltaTime;
+        Debug.Log(_waitTimer);
     }
 
 
@@ -165,10 +174,18 @@ public class BossController : MonoBehaviour, IHp
         _state = nextState;
     }
 
+
+    public BossAIState GetAIState()
+    {
+        return _state;
+    }
+
+
     public void SetAnimatorAttackValue(BossAttackState nextState)
     {
         _animator.SetInteger("AttackState", (int)nextState);
     }
+
 
     public void RecoverHp(object subject, float value)
     {
@@ -184,6 +201,10 @@ public class BossController : MonoBehaviour, IHp
 
     public void DepleteHp(object subject, float value)
     {
+        //방어중일때는 리턴한다.
+        if (_state == BossAIState.Guard)
+            return;
+
         _hp = Mathf.Clamp(_hp - value, _minHp, _maxHp);
 
         OnHpChanged?.Invoke(subject, value);

@@ -26,6 +26,7 @@ public class BossAI
     public BossAI(BossController boss)
     {
         _boss = boss;
+        _boss.OnHpDepleted += ChangeGuardState;
         NodeInit();
     }
 
@@ -42,7 +43,7 @@ public class BossAI
         List<INode> nodes = new List<INode>();
 
         nodes.Add(WaitConditionNode());
-        nodes.Add(new ActionNode(Idle));
+        nodes.Add(IdleNode());
 
         SelectorNode rootNode = new SelectorNode(nodes);
 
@@ -134,7 +135,16 @@ public class BossAI
         return INode.ENodeState.Success;
     }
 
+    private INode IdleNode()
+    {
+        List<INode> nodes = new List<INode>();
 
+        nodes.Add(new ActionNode(Idle));
+
+        SelectorNode actionNode = new SelectorNode(nodes);
+
+        return new ConditionNode(() => { return _boss.Target == null ? true : false; }, actionNode);
+    }
 
     private INode.ENodeState Idle()
     {
@@ -142,10 +152,24 @@ public class BossAI
         return INode.ENodeState.Success;
     }
 
+    
+
     private INode.ENodeState SetWaitTime()
     {
         _boss.SetWaitTime();
         return INode.ENodeState.Failure;
+    }
+
+
+    private void ChangeGuardState(object subject, float value)
+    {
+        int randInt = Random.Range(0, 4);
+        bool isEnabled = randInt == 0 && _boss.GetAIState() != BossAIState.Attack;
+        if(isEnabled)
+        {
+            _boss.ChangeAiState(BossAIState.Guard);
+            _boss.SetWaitTime();
+        }
     }
 
 }
