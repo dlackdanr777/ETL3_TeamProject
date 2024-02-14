@@ -1,0 +1,12 @@
+Font: Perpetua Titling MT  Style: Light
+Point Size: 656   SP/PD Ratio: 0.8%
+
+Characters included: 95/95
+Missing characters: 0
+Excluded characters: 0
+
+Characters missing from font file:
+----------------------------------------
+
+Characters excluded from packing:
+----------------------------------------
