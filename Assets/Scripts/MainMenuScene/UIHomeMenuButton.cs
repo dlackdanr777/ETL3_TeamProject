@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class UIHomeMenu : MonoBehaviour
+public class UIHomeMenuButton : MonoBehaviour
 {
     [SerializeField] private Button _button;
 

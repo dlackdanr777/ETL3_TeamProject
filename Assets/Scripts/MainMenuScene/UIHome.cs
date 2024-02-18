@@ -7,9 +7,11 @@ using UnityEngine.UI;
 
 public class UIHome : UIView
 {
-    [SerializeField] private UIHomeMenu[] _homeMenus;
+    [SerializeField] private UIHomeMenuButton[] _homeMenus;
 
     [SerializeField] private Image _selectEffect;
+
+    private List<Action> _selectMenuActionList;
 
     private int _homeMenusCount;
 
@@ -30,8 +32,14 @@ public class UIHome : UIView
             _homeMenus[i].Init(() => SelectMenu(menuIndex));
         }
 
+        _selectMenuActionList = new List<Action>
+        {
+            StartGameButtonClicked,
+            MultiplayButtonClicked,
+            SettingsButtonClicked,
+            QuitButtonClicked,
+        };
 
-        RefreshSelectMenu();
         gameObject.SetActive(false);
     }
 
@@ -39,6 +47,7 @@ public class UIHome : UIView
     public override void Show(Action onCompleted = null)
     {
         VisibleState = VisibleState.Appeared;
+        RefreshSelectMenu();
         gameObject.SetActive(true);
     }
 
@@ -51,11 +60,15 @@ public class UIHome : UIView
 
     private void Update()
     {
+        if (!CheckVisibleState())
+            return;
+
         InputVertical();
         InputEnter();
     }
 
 
+    /// <summary>키입력(위아래 화살표)을 감지하여 메뉴를 변경시켜주는 함수</summary>
     private void InputVertical()
     {
         int verticalInput = Mathf.RoundToInt(Input.GetAxisRaw("Vertical"));
@@ -82,7 +95,8 @@ public class UIHome : UIView
         RefreshSelectMenu();
     }
 
-    
+
+    /// <summary>키입력(엔터)을 감지하여 선택된 메뉴로 변경시켜주는 함수</summary>
     private void InputEnter()
     {
         if (!Input.GetKeyDown(KeyCode.Return))
@@ -92,9 +106,12 @@ public class UIHome : UIView
     }
 
 
+    /// <summary>Index를 받아 해당 Index번호를 받은 메뉴를 선택하는 함수</summary>
     private void SelectMenu(int menuIndex)
     {
-        Debug.Log(menuIndex);
+        if (!CheckVisibleState())
+            return;
+
         if(_currentMenuIndex != menuIndex)
         {
             _currentMenuIndex = menuIndex;
@@ -103,9 +120,45 @@ public class UIHome : UIView
 
         else
         {
-            Debug.Log("UI이동");
+            _selectMenuActionList[_currentMenuIndex]?.Invoke();
+        }
+    }
+
+
+    private void StartGameButtonClicked()
+    {
+        Debug.Log("스타트 게임");
+    }
+
+
+    private void MultiplayButtonClicked()
+    {
+        Debug.Log("멀티 플레이");
+    }
+
+
+    private void SettingsButtonClicked()
+    {
+        Debug.Log("세팅");
+    }
+
+
+    private void QuitButtonClicked()
+    {
+        Debug.Log("나가기");
+        Application.Quit();
+    }
+
+
+    private bool CheckVisibleState()
+    {
+        if (VisibleState == VisibleState.Disappearing || VisibleState == VisibleState.Appearing)
+        {
+            Debug.Log("UI가 열리거나 닫히는 중 입니다.");
+            return false;
         }
 
+        return true;
     }
 
 

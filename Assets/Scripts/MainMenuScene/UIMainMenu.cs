@@ -26,10 +26,6 @@ public class UIMainMenu : MonoBehaviour
 
     [SerializeField] private TweenMode _swordTweenMode;
 
-    [Space]
-    [SerializeField] private GameObject _dontTouchArea;
-    public GameObject DontTouchArea => _dontTouchArea;
-
     private UINavigation _uiNav;
 
 
