@@ -1,9 +1,11 @@
 using TMPro;
+using System;
 using UnityEngine;
-using Muks.Tween;
 using UnityEngine.UI;
+using Muks.Tween;
+using Muks.PCUI;
 
-public class UITitle : UIMainMenuChild
+public class UITitle : UIView
 {
     [Header("Button Animation")]
     [SerializeField] private TextMeshProUGUI _pressAniButton;
@@ -27,41 +29,45 @@ public class UITitle : UIMainMenuChild
     private bool _isButtonClicked;
     
 
-    public override void Init(UIMainMenu uiMainMenu)
+    public override void Init(UINavigation uiNav)
     {
-        base.Init(uiMainMenu);
-        _backgroundButton.onClick.AddListener(ExitUI);
+        base.Init(uiNav);
 
-        StartUI();
+        _backgroundButton.onClick.AddListener(() => Hide(() => _uiNav.Show("UIHome")));
     }
 
 
     private void Update()
     {
         if (Input.anyKeyDown)
-            ExitUI();
+            Hide(() => _uiNav.Show("UIHome"));
     }
 
 
-    public override void StartUI()
+    public override void Show(Action onCompleted = null)
     {
-        Tween.TMPAlpha(_pressAniButton.gameObject, _aniButtonTargetAlpha, _aniButtonTargetTime, _aniButtonTweenMode).Loop(LoopType.Yoyo);
+        gameObject.SetActive(true);
+        VisibleState = VisibleState.Appeared;
+
+        Tween.TMPAlpha(_pressAniButton.gameObject, _aniButtonTargetAlpha, _aniButtonTargetTime, _aniButtonTweenMode, onCompleted).Loop(LoopType.Yoyo);
     }
 
 
-    protected override void ExitUI()
+    public override void Hide(Action onCompleted = null)
     {
         if (_isButtonClicked)
             return;
 
         _isButtonClicked = true;
+        VisibleState = VisibleState.Disappearing;
         _pressAniButton.color = new Color(_pressAniButton.color.r, _pressAniButton.color.g, _pressAniButton.color.b, 1);
 
         Tween.Stop(_pressAniButton.gameObject);
         Tween.TMPAlpha(_pressAniButton.gameObject, 0, _changeUiTime, TweenMode.Constant, () =>
         {
-            _uiMainMenu.ChangeUI(MainMenuUiName.UIHome);
+            VisibleState = VisibleState.Disappeared;
             gameObject.SetActive(false);
+            onCompleted?.Invoke();
         });
     }
 }

@@ -1,3 +1,4 @@
+using Muks.PCUI;
 using Muks.Tween;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,13 +9,9 @@ public enum MainMenuUiName
     UIHome
 }
 
-
+[RequireComponent(typeof(UINavigation))]
 public class UIMainMenu : MonoBehaviour
 {
-    [SerializeField] private UIMainMenuChild _uiTitle;
-
-    [SerializeField] private UIMainMenuChild _uiHome;
-
     [Space]
     [Header("Sword Animation")]
     [SerializeField] private Image _swordImage;
@@ -33,26 +30,20 @@ public class UIMainMenu : MonoBehaviour
     [SerializeField] private GameObject _dontTouchArea;
     public GameObject DontTouchArea => _dontTouchArea;
 
+    private UINavigation _uiNav;
+
 
     public void Init()
     {
-        _uiTitle.Init(this);
-        _uiHome.Init(this);
+        _uiNav = GetComponent<UINavigation>();
+        Invoke("ShowTitle", 0.002f);
         StartMainMenu();
     }
 
 
-    public void ChangeUI(MainMenuUiName uiName)
+    private void ShowTitle()
     {
-        switch (uiName)
-        {
-            case MainMenuUiName.UITitle:
-                break;
-
-            case MainMenuUiName.UIHome:
-                _uiHome.StartUI();
-                break;
-        }
+        _uiNav.Show("UITitle");
     }
 
 

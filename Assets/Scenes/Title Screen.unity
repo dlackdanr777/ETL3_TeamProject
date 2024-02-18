@@ -745,6 +745,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43cb5bb96285e847ad1791a7a5df487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  VisibleState: 0
   _pressAniButton: {fileID: 1003769940}
   _aniButtonTargetAlpha: 0.2
   _aniButtonTargetTime: 1.5
@@ -2031,6 +2032,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7946ed9da93e7884c8c29108bd79c51d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  VisibleState: 0
   _homeMenus:
   - {fileID: 702915389}
   - {fileID: 2142899168}
@@ -2122,6 +2124,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1760188268}
+  - component: {fileID: 1760188269}
   - component: {fileID: 1760188267}
   m_Layer: 5
   m_Name: UI MainMenu
@@ -2142,8 +2145,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 087c90c7bca3b5a4c8bb513037233c92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _uiTitle: {fileID: 237812739}
-  _uiHome: {fileID: 1571233567}
   _swordImage: {fileID: 1634105468}
   _swordTargetAlpha: 0.5
   _swordTargetTime: 3
@@ -2174,6 +2175,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1760188269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760188266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8b7718844f954443b787fd6e2921df7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _uiViews:
+  - Name: UITitle
+    UIView: {fileID: 237812739}
+  - Name: UIHome
+    UIView: {fileID: 1571233567}
 --- !u!1 &1967472714
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,9 +1,11 @@
+using Muks.PCUI;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIHome : UIMainMenuChild
+public class UIHome : UIView
 {
     [SerializeField] private UIHomeMenu[] _homeMenus;
 
@@ -16,14 +18,11 @@ public class UIHome : UIMainMenuChild
     private bool _inputEnabled = true;
 
 
-    public override void Init(UIMainMenu uiMainMenu)
+    public override void Init(UINavigation uiNav)
     {
-        base.Init(uiMainMenu);
-        _uiMainMenu = uiMainMenu;
+        base.Init(uiNav);
         _homeMenusCount = _homeMenus.Length;
         _currentMenuIndex = 0;
-
-        RefreshSelectMenu();
 
         for(int i = 0; i < _homeMenusCount; i++)
         {
@@ -31,20 +30,22 @@ public class UIHome : UIMainMenuChild
             _homeMenus[i].Init(() => SelectMenu(menuIndex));
         }
 
+
+        RefreshSelectMenu();
         gameObject.SetActive(false);
     }
 
 
-    public override void StartUI()
+    public override void Show(Action onCompleted = null)
     {
+        VisibleState = VisibleState.Appeared;
         gameObject.SetActive(true);
-        _uiMainMenu.DontTouchArea.SetActive(false);
     }
 
 
-    protected override void ExitUI()
+    public override void Hide(Action onCompleted = null)
     {
-        throw new System.NotImplementedException();
+        VisibleState = VisibleState.Disappeared;
     }
 
 
@@ -112,4 +113,6 @@ public class UIHome : UIMainMenuChild
     {
         _selectEffect.transform.position = _homeMenus[_currentMenuIndex].transform.position + new Vector3(0, 9, 0) ;
     }
+
+
 }
