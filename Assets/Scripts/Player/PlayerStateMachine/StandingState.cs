@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class StandingState : State
 {
+    
     float gravityValue;
     bool jump;
     Vector3 currentVelocity;
@@ -16,10 +17,11 @@ public class StandingState : State
 
     Vector3 cVelocity;
 
-    public StandingState(Character _character, StateMachine _StateMachine) : base(_character, _StateMachine)
+    public StandingState(Character _character, StateMachine _StateMachine,PlayerController _playerController) : base(_character, _StateMachine)
     {
         character = _character;
         stateMachine = _StateMachine;
+        playerController = _playerController;
     }
 
     public override void Enter()
@@ -50,12 +52,14 @@ public class StandingState : State
         {
             sprint = true;
         }
-        if (attackAction.triggered)
+        if (attackAction.triggered&&playerController.Sta>10)
         {
+            playerController.DepleteSta(playerController.Sta, 10);
             attack = true;
         }
-        if (rollAction.triggered)
+        if (rollAction.triggered && playerController.Sta > 10)
         {
+            playerController.DepleteSta(playerController.Sta, 10);
             roll = true;
         }
         input = moveAction.ReadValue<Vector2>();
@@ -70,6 +74,7 @@ public class StandingState : State
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+
         character.animator.SetFloat("speed",input.magnitude,character.speedDampTime,Time.deltaTime);
 
         if (sprint)

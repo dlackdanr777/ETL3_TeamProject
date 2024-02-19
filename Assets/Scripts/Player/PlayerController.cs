@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour,IHp
+public class PlayerController : MonoBehaviour,IHp,IStamina
 {
     Animator animator;
     [SerializeField] private float _maxHp;
@@ -12,18 +12,42 @@ public class PlayerController : MonoBehaviour,IHp
     [SerializeField] private float _minHp;
     public float MinHp => _minHp;
 
-    private float _hp;
+    [SerializeField] private float _hp;
     public float Hp => _hp;
+
+
+    public float MaxSta => _maxSta;
+    [SerializeField] private float _maxSta;
+
+    public float MinSta => _minSta;
+
+    [SerializeField] private float _minSta;
+    public float Sta => _sta;
+
+    [SerializeField] private float _sta;
+
+    public float staminaRecovery;
 
     public event Action<object, float> OnHpChanged;
     public event Action<object, float> OnHpRecoverd;
     public event Action<object, float> OnHpDepleted;
     public event Action OnHpMax;
     public event Action OnHpMin;
+    public event Action<object, float> OnStaChanged;
+    public event Action<object, float> OnStaRecoverd;
+    public event Action<object, float> OnStaDepleted;
+    public event Action OnStaMax;
+    public event Action OnStaMin;
 
-    public void Start()
+    private void Start()
     {
         animator = GetComponent<Animator>();
+        _sta = 0;
+    }
+    
+    private void FixedUpdate()
+    {
+        RecoverSta(_sta, 0.1f);
     }
 
     public void RecoverHp(object subject, float value)
@@ -53,6 +77,24 @@ public class PlayerController : MonoBehaviour,IHp
             OnHpMin?.Invoke();
     }
 
-    
-  
+    public void RecoverSta(object subject, float value)
+    {
+        _sta = Mathf.Clamp(_sta + value, _minSta, _maxSta);
+
+        OnStaChanged?.Invoke(subject, value);
+        OnStaRecoverd?.Invoke(subject, value);
+
+        if(_sta==_maxSta)
+            OnStaMax?.Invoke();
+    }
+
+    public void DepleteSta(object subject, float value)
+    {
+        _sta = Mathf.Clamp(_sta -value, _minSta, _maxSta);
+        OnStaChanged?.Invoke(subject, value);
+        OnStaDepleted?.Invoke(subject, value);
+
+        if (_sta == _maxSta)
+            OnStaMin?.Invoke();
+    }
 }

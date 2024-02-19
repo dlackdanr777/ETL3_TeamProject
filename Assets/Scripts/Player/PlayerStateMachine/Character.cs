@@ -59,13 +59,13 @@ public class Character : MonoBehaviour
         cameraTransform = Camera.main.transform;
 
         movementSM = new StateMachine();
-        standing = new StandingState(this, movementSM);
+        standing = new StandingState(this, movementSM,playerController);
         jumping = new JumpingState(this, movementSM);
         landing = new LandingState(this, movementSM);
-        sprinting = new SprintState(this, movementSM);
+        sprinting = new SprintState(this, movementSM,playerController);
         sprintjumping = new SprintJumpState(this, movementSM);
         //combatting = new CombatState(this, movementSM);
-        attacking = new AttackState(this, movementSM);
+        attacking = new AttackState(this, movementSM,playerController);
         rolling = new RollState(this, movementSM);
 
         movementSM.initialized(standing,playerController);

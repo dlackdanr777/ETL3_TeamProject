@@ -5,10 +5,11 @@ public class AttackState : State
     float clipLength;
     float clipSpeed;
     bool attack;
-    public AttackState(Character _character, StateMachine _stateMachine) : base(_character, _stateMachine)
+    public AttackState(Character _character, StateMachine _stateMachine,PlayerController _playerController) : base(_character, _stateMachine)
     {
         character = _character;
         stateMachine = _stateMachine;
+        playerController = _playerController;
     }
 
     public override void Enter()
@@ -26,9 +27,10 @@ public class AttackState : State
     {
         base.HandleInput();
 
-        if (attackAction.triggered)
+        if (attackAction.triggered&&playerController.Sta>10)
         {
             attack = true;
+            playerController.DepleteSta(playerController.Sta,10);
         }
     }
     public override void LogicUpdate()

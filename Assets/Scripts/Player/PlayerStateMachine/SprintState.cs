@@ -14,10 +14,11 @@ public class SprintState : State
     bool sprintJump;
     Vector3 cVelocity;
 
-    public SprintState(Character _character, StateMachine _StateMachine) : base(_character, _StateMachine)
+    public SprintState(Character _character, StateMachine _StateMachine,PlayerController _playerController) : base(_character, _StateMachine)
     {
         character = _character;    
         stateMachine = _StateMachine;
+        playerController = _playerController;
     }
     public override void Enter()
     {
@@ -76,6 +77,7 @@ public class SprintState : State
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
+        playerController.DepleteSta(playerController.Sta, 2f);
         gravityVelocity.y += gravityValue * Time.deltaTime;
         grounded = character.controller.isGrounded;
         if (grounded && gravityVelocity.y < 0)
