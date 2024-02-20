@@ -27,10 +27,10 @@ public class AttackState : State
     {
         base.HandleInput();
 
-        if (attackAction.triggered&&playerController.Sta>10)
+        if (attackAction.triggered&&playerController.Sta>playerController.attackStamina)
         {
             attack = true;
-            playerController.DepleteSta(playerController.Sta,10);
+            playerController.DepleteSta(playerController.Sta,playerController.attackStamina);
         }
     }
     public override void LogicUpdate()

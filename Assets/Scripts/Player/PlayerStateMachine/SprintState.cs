@@ -60,7 +60,7 @@ public class SprintState : State
 
     public override void LogicUpdate()
     {
-        if(sprint)
+        if(sprint&&playerController.Sta>playerController.runStamina)
         {
             character.animator.SetFloat("speed", input.magnitude + 0.5f, character.speedDampTime, Time.deltaTime);
         }
@@ -77,7 +77,7 @@ public class SprintState : State
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-        playerController.DepleteSta(playerController.Sta, 2f);
+        playerController.DepleteSta(playerController.Sta, playerController.runStamina);
         gravityVelocity.y += gravityValue * Time.deltaTime;
         grounded = character.controller.isGrounded;
         if (grounded && gravityVelocity.y < 0)

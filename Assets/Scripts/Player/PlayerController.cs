@@ -27,6 +27,9 @@ public class PlayerController : MonoBehaviour,IHp,IStamina
     [SerializeField] private float _sta;
 
     public float staminaRecovery;
+    public float attackStamina;
+    public float rollStamina;
+    public float runStamina;
 
     public event Action<object, float> OnHpChanged;
     public event Action<object, float> OnHpRecoverd;
@@ -39,6 +42,7 @@ public class PlayerController : MonoBehaviour,IHp,IStamina
     public event Action OnStaMax;
     public event Action OnStaMin;
 
+
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -47,7 +51,7 @@ public class PlayerController : MonoBehaviour,IHp,IStamina
     
     private void FixedUpdate()
     {
-        RecoverSta(_sta, 0.1f);
+        RecoverSta(_sta, staminaRecovery);
     }
 
     public void RecoverHp(object subject, float value)

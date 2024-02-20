@@ -25,6 +25,8 @@ public class RollState : State
         velocity = Vector3.zero;
         currentVelocity = Vector3.zero;
         gravityVelocity.y = 0f;
+        playerSpeed = character.playerSpeed;
+        
 
     }
 
@@ -54,8 +56,8 @@ public class RollState : State
         {
             gravityVelocity.y = 0f;
         }
-
-        character.controller.Move(currentVelocity * Time.deltaTime * playerSpeed + gravityVelocity * Time.deltaTime);
+        
+        character.controller.Move(currentVelocity * Time.deltaTime * playerSpeed + gravityVelocity * Time.deltaTime*1000);
 
         if (velocity.sqrMagnitude > 0)
         {
