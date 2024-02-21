@@ -119,6 +119,13 @@ namespace Muks.PCUI
         }
 
 
+        /// <summary>현재 최상단에 위치한 UIView를 리턴하는 함수</summary>
+        public UIView GetTopView()
+        {
+            return _activeViewList.First.Value;
+        }
+
+
         /// <summary>열려있는 UI의 VisibleState를 확인 후 bool값을 리턴하는 함수</summary>
         private bool ViewsVisibleStateCheck()
         {

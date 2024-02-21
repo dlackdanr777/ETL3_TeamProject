@@ -32,6 +32,7 @@ namespace Muks.PCUI
             _rectTransform = GetComponent<RectTransform>();
         }
 
+
         /// <summary>UI를 불러낼때 실행되는 함수</summary>
         public abstract void Show(Action onCompleted = null);
 

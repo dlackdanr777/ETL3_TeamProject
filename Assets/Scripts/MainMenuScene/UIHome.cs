@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class UIHome : UIView
 {
-    [SerializeField] private UIHomeMenuButton[] _homeMenus;
+    [SerializeField] private UIButton[] _homeMenus;
 
     [SerializeField] private Image _selectEffect;
 
@@ -61,6 +61,10 @@ public class UIHome : UIView
     private void Update()
     {
         if (!CheckVisibleState())
+            return;
+
+        Debug.Log(_uiNav.GetTopView().name);
+        if (_uiNav.GetTopView() != this)
             return;
 
         InputVertical();
@@ -139,6 +143,7 @@ public class UIHome : UIView
 
     private void SettingsButtonClicked()
     {
+        _uiNav.Show("UISettings");
         Debug.Log("¼¼ÆÃ");
     }
 
