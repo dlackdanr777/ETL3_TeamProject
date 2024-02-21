@@ -36,8 +36,8 @@ public class StandingState : State
         velocity = Vector3.zero;
         currentVelocity = Vector3.zero;
         gravityVelocity.y= 0f;
-
-        playerSpeed=character.playerSpeed;
+        playerController.isHittable = true;
+        playerSpeed =character.playerSpeed;
         grounded = character.controller.isGrounded;
         gravityValue = character.gravityValue;
     }
@@ -52,14 +52,14 @@ public class StandingState : State
         {
             sprint = true;
         }
-        if (attackAction.triggered&&playerController.Sta>10)
+        if (attackAction.triggered&&playerController.Sta>playerController.attackStamina)
         {
-            playerController.DepleteSta(playerController.Sta, 10);
+            playerController.DepleteSta(playerController.Sta, playerController.attackStamina);
             attack = true;
         }
-        if (rollAction.triggered && playerController.Sta > 10)
+        if (rollAction.triggered && playerController.Sta > playerController.rollStamina)
         {
-            playerController.DepleteSta(playerController.Sta, 10);
+            playerController.DepleteSta(playerController.Sta, playerController.rollStamina);
             roll = true;
         }
         input = moveAction.ReadValue<Vector2>();

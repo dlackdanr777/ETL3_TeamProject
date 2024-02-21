@@ -26,6 +26,9 @@ public class PlayerController : MonoBehaviour,IHp,IStamina
 
     [SerializeField] private float _sta;
 
+    public bool isHittable;
+
+
     public float staminaRecovery;
     public float attackStamina;
     public float rollStamina;
@@ -47,8 +50,10 @@ public class PlayerController : MonoBehaviour,IHp,IStamina
     {
         animator = GetComponent<Animator>();
         _sta = 0;
+        isHittable = true;
+
     }
-    
+
     private void FixedUpdate()
     {
         RecoverSta(_sta, staminaRecovery);
@@ -67,18 +72,22 @@ public class PlayerController : MonoBehaviour,IHp,IStamina
 
     public void DepleteHp(object subject, float value)
     {
-        _hp = Mathf.Clamp(_hp - value, _minHp, _maxHp);
-
-        OnHpChanged?.Invoke(subject, value);
-        OnHpDepleted?.Invoke(subject, value);
-
-        if (10 > value)
+        if (isHittable)
         {
-            animator.SetTrigger("hit");
-        }
+            _hp = Mathf.Clamp(_hp - value, _minHp, _maxHp);
 
-        if (_hp == _maxHp)
-            OnHpMin?.Invoke();
+            OnHpChanged?.Invoke(subject, value);
+            OnHpDepleted?.Invoke(subject, value);
+
+            if (10 > value)
+            {
+                animator.SetTrigger("hit");
+            }
+
+            if (_hp == _maxHp)
+                OnHpMin?.Invoke();
+        }
+      
     }
 
     public void RecoverSta(object subject, float value)

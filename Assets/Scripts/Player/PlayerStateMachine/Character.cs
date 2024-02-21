@@ -66,7 +66,7 @@ public class Character : MonoBehaviour
         sprintjumping = new SprintJumpState(this, movementSM);
         //combatting = new CombatState(this, movementSM);
         attacking = new AttackState(this, movementSM,playerController);
-        rolling = new RollState(this, movementSM);
+        rolling = new RollState(this, movementSM,playerController);
 
         movementSM.initialized(standing,playerController);
 
