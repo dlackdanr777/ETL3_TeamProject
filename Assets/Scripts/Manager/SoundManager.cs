@@ -1,3 +1,4 @@
+using Muks.Tween;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,12 +15,21 @@ public enum AudioType
 
 public class SoundManager : SingletonHandler<SoundManager>
 {
+    [Range(0f, 1f)]
     [SerializeField] private float _backgroundVolume;
 
+    [Range(0f, 1f)]
     [SerializeField] private float _effectVolume;
 
     private AudioSource[] _audios;
 
+    private float _backgroundVolumeMul;
+    public float BackgroundVolumeMul => _backgroundVolumeMul;
+
+    private float _effectVolumeMul;
+    public float EffectVolumeMul => _effectVolumeMul;   
+
+    public event Action<float> OnEffectVolumeChanged; 
 
     public override void Awake()
     {
@@ -30,13 +40,17 @@ public class SoundManager : SingletonHandler<SoundManager>
 
     private void Init()
     {
+        _audios = new AudioSource[(int)AudioType.Count];
+
         for (int i = 0, count = (int)AudioType.Count; i < count; i++)
         {
             GameObject obj = new GameObject(Enum.GetName(typeof(AudioType), i));
             obj.transform.parent = transform;
-
             _audios[i] = obj.AddComponent<AudioSource>();
         }
+
+        _backgroundVolumeMul = 1;
+        _effectVolumeMul = 1;
 
         _audios[(int)AudioType.BackgroundAudio].loop = true;
         _audios[(int)AudioType.BackgroundAudio].playOnAwake = true;
@@ -45,6 +59,8 @@ public class SoundManager : SingletonHandler<SoundManager>
         _audios[(int)AudioType.EffectAudio].loop = false;
         _audios[(int)AudioType.EffectAudio].playOnAwake = false;
         _audios[((int)AudioType.EffectAudio)].volume = _effectVolume;
+
+
     }
 
 
@@ -66,11 +82,18 @@ public class SoundManager : SingletonHandler<SoundManager>
 
     public void SetVolume(float value, AudioType type)
     {
-        _audios[(int)type].volume = value;
-
-        if (type == AudioType.EffectAudio)
+        if(type == AudioType.BackgroundAudio)
         {
-            //ISoundEffect.OnVolumeChanged
+            _backgroundVolumeMul = value;
+            _audios[(int)type].volume = _backgroundVolume * value;
+        }
+
+        else if (type == AudioType.EffectAudio)
+        {
+            _effectVolumeMul = value;
+            _audios[(int)type].volume = _effectVolume * value;
+            OnEffectVolumeChanged?.Invoke(value);
         }
     }
 }
+

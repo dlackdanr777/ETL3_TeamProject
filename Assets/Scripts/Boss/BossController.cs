@@ -135,7 +135,6 @@ public class BossController : MonoBehaviour, IHp
             return;
 
         _waitTimer -= Time.deltaTime;
-        Debug.Log(_waitTimer);
     }
 
 
