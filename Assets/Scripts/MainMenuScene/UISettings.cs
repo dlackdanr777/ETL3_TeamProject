@@ -100,12 +100,12 @@ public class UISettings : UIView
             return;
 
         _uiNav.Hide("UISettings");
+        SoundManager.Instance.PlayEffectSound(SoundEffectType.MenuClose);
     }
 
 
     private void SelectMenu(int menuIndex)
     {
-
         for (int i = 0; i < _buttonsCount; i++)
         {
             _buttonCanvas[i].gameObject.SetActive(false);
@@ -119,6 +119,8 @@ public class UISettings : UIView
         Vector3 effectPos = _settingButtons[menuIndex].RectTransform.anchoredPosition;
         effectPos.x -= _settingButtons[menuIndex].RectTransform.sizeDelta.x * 0.5f;
         _selectEffect.anchoredPosition = effectPos;
+
+        SoundManager.Instance.PlayEffectSound(SoundEffectType.ButtonClick);
     }
 
 

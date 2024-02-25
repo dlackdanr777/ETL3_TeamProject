@@ -8,7 +8,6 @@ public abstract class UIMainMenuChild : MonoBehaviour
 {
     protected UIMainMenu _uiMainMenu;
 
-
     public virtual void Init(UIMainMenu uiMainMenu)
     {
         _uiMainMenu = uiMainMenu;

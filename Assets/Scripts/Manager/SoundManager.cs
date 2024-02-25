@@ -13,13 +13,31 @@ public enum AudioType
     Count,
 }
 
+public enum SoundEffectType
+{
+    ButtonClick,
+    MenuOpen,
+    MenuClose,
+    Count
+}
+
+
 public class SoundManager : SingletonHandler<SoundManager>
 {
+    [Header("Volume")]
     [Range(0f, 1f)]
     [SerializeField] private float _backgroundVolume;
 
     [Range(0f, 1f)]
     [SerializeField] private float _effectVolume;
+
+    [Space]
+    [Header("Sounds")]
+    [SerializeField] private AudioClip _buttonClickSound;
+
+    [SerializeField] private AudioClip _menuOpenSound;
+
+    [SerializeField] private AudioClip _menuCloseSound;
 
     private AudioSource[] _audios;
 
@@ -64,19 +82,32 @@ public class SoundManager : SingletonHandler<SoundManager>
     }
 
 
-    public void Play(AudioClip clip, AudioType type)
+    public void PlayBackgroundMusic(AudioClip clip)
+    {
+        _audios[(int)AudioType.BackgroundAudio].clip = clip;
+        _audios[(int)AudioType.BackgroundAudio].Play();
+    }
+
+    public void PlayEffectSound(SoundEffectType type)
     {
         switch (type)
         {
-            case AudioType.BackgroundAudio:
-                _audios[(int)type].clip = clip;
-                _audios[(int)type].Play();
+            case SoundEffectType.ButtonClick:
+                _audios[(int)AudioType.EffectAudio].PlayOneShot(_buttonClickSound);
                 break;
-
-            case AudioType.EffectAudio:
-                _audios[(int)type].PlayOneShot(clip);
+            case SoundEffectType.MenuOpen:
+                _audios[(int)AudioType.EffectAudio].PlayOneShot(_menuOpenSound);
+                break;
+            case SoundEffectType.MenuClose:
+                _audios[(int)AudioType.EffectAudio].PlayOneShot(_menuCloseSound);
                 break;
         }
+    }
+
+
+    public void PlayEffectSound(AudioClip clip)
+    {
+        _audios[(int)AudioType.EffectAudio].PlayOneShot(clip);
     }
 
 

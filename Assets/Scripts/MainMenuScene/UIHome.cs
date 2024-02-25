@@ -96,6 +96,7 @@ public class UIHome : UIView
             ? _currentMenuIndex + _homeMenusCount
             : _currentMenuIndex % _homeMenusCount;
 
+        SoundManager.Instance.PlayEffectSound(SoundEffectType.ButtonClick);
         RefreshSelectMenu();
     }
 
@@ -126,24 +127,29 @@ public class UIHome : UIView
         {
             _selectMenuActionList[_currentMenuIndex]?.Invoke();
         }
+
+        SoundManager.Instance.PlayEffectSound(SoundEffectType.ButtonClick);
     }
 
 
     private void StartGameButtonClicked()
     {
         Debug.Log("스타트 게임");
+        SoundManager.Instance.PlayEffectSound(SoundEffectType.MenuOpen);
     }
 
 
     private void MultiplayButtonClicked()
     {
         Debug.Log("멀티 플레이");
+        SoundManager.Instance.PlayEffectSound(SoundEffectType.MenuOpen);
     }
 
 
     private void SettingsButtonClicked()
     {
         _uiNav.Show("UISettings");
+        SoundManager.Instance.PlayEffectSound(SoundEffectType.MenuOpen);
         Debug.Log("세팅");
     }
 
