@@ -12,6 +12,7 @@ public class StandingState : State
     bool grounded;
     bool sprint;
     bool roll;
+    bool skill;
     float playerSpeed;
     bool attack;
 
@@ -62,6 +63,11 @@ public class StandingState : State
             playerController.DepleteSta(playerController.Sta, playerController.rollStamina);
             roll = true;
         }
+        if (skillAction.triggered && playerController.Sta > playerController.skillStamina)
+        {
+            skill = true;
+        }
+        
         input = moveAction.ReadValue<Vector2>();
         velocity=new Vector3(input.x,0,input.y);
 
@@ -93,6 +99,10 @@ public class StandingState : State
         if (roll)
         {
             stateMachine.ChangeState(character.rolling);
+        }
+        if(skill)
+        {
+            stateMachine.ChangeState(character.skilling);
         }
         
         

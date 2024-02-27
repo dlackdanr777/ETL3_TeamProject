@@ -1,39 +1,39 @@
+
 using System.Collections;
-using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
-public class HitState : State
+public class SkillState : State
 {
-
     float timePassed;
-    float clipLength;
-    float clipSpeed;
-
     Coroutine _afterRoutine;
-    public HitState(Character _character, StateMachine _StateMachine) : base(_character, _StateMachine)
+    public SkillState(Character _character, StateMachine _stateMachine, PlayerController _playerController) : base(_character, _stateMachine)
     {
         character = _character;
-        stateMachine = _StateMachine;
+        stateMachine = _stateMachine;
+        playerController = _playerController;
     }
 
     public override void Enter()
     {
         base.Enter();
+        character.animator.applyRootMotion = true;
         timePassed = 0f;
-        character.animator.SetTrigger("hit");
-        
+        character.animator.SetTrigger("attack");
+        character.animator.SetFloat("speed", 0f);
+
         if (_afterRoutine != null)
+        {
             character.StopCoroutine(_afterRoutine);
+        }
 
         _afterRoutine = character.StartCoroutine(AfterAnimation());
-
     }
 
-    public override void LogicUpdate()
+    public override void Exit()
     {
-        base.LogicUpdate();
-
-
+        base.Exit();
+        character.animator.applyRootMotion = false;
     }
 
     IEnumerator AfterAnimation()
@@ -41,10 +41,11 @@ public class HitState : State
         //character.animator.Play("");
         do
         {
-           
+
             yield return YieldCache.WaitForSeconds(0.2f);
         }
         while (character.animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.8f);
+        
 
         stateMachine.ChangeState(character.standing);
 

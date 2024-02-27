@@ -21,6 +21,7 @@ public class State
     public InputAction drawWeaponAction;
     public InputAction attackAction;
     public InputAction rollAction;
+    public InputAction skillAction;
 
     public State(Character _character,StateMachine _StateMachine)
     {
@@ -34,6 +35,7 @@ public class State
         //drawWeaponAction = character.playerInput.actions["DrawWeapon"];
         attackAction = character.playerInput.actions["Attack"];
         rollAction = character.playerInput.actions["Roll"];
+        skillAction = character.playerInput.actions["Skill"];
 
     }
     public virtual void Enter()
@@ -48,7 +50,7 @@ public class State
     }
     public virtual void LogicUpdate()
     {
-
+        
     }
 
     public virtual void PhysicsUpdate()
