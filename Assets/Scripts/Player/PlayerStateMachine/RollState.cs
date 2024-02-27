@@ -7,9 +7,13 @@ public class RollState : State
     bool rolling;
     bool grounded;
 
+    float rollDistance = 3f;
     float gravityValue;
     float playerSpeed;
     Vector3 currentVelocity;
+
+    Coroutine _afterRoutine;
+    
     public RollState(Character _character, StateMachine _StateMachine, PlayerController _playerController) : base(_character, _StateMachine)
     {
         character = _character;
@@ -29,6 +33,13 @@ public class RollState : State
         playerSpeed = character.playerSpeed;
         playerController.isHittable = false;
 
+        
+        if(_afterRoutine != null)
+        {
+            character.StopCoroutine(_afterRoutine);
+        }
+            
+        _afterRoutine = character.StartCoroutine(AfterAnimation());
     }
 
     public override void HandleInput()
@@ -39,11 +50,11 @@ public class RollState : State
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        playerController.isHittable = false;
-        if (grounded)
-        {
-            stateMachine.ChangeState(character.standing);
-        }
+        //playerController.isHittable = false;
+        //if (grounded)
+        //{
+        //    stateMachine.ChangeState(character.standing);
+        //}
     }
     
 
@@ -74,5 +85,21 @@ public class RollState : State
        // playerController.isHittable = true;
     }
 
+    IEnumerator AfterAnimation()
+    {
+        //character.animator.Play("");
+        do
+        {
+           
+            yield return YieldCache.WaitForSeconds(0.2f);
+        }
+        while (character.animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.8f);
+        character.controller.Move(currentVelocity * Time.deltaTime * playerSpeed + gravityVelocity * Time.deltaTime*rollDistance);
+        
+        stateMachine.ChangeState(character.standing);
 
+        if(_afterRoutine != null)
+            character.StopCoroutine(_afterRoutine);
+        
+    }
 }

@@ -8,6 +8,8 @@ public class HitState : State
     float timePassed;
     float clipLength;
     float clipSpeed;
+
+    Coroutine _afterRoutine;
     public HitState(Character _character, StateMachine _StateMachine) : base(_character, _StateMachine)
     {
         character = _character;
@@ -19,6 +21,11 @@ public class HitState : State
         base.Enter();
         timePassed = 0f;
         character.animator.SetTrigger("hit");
+        
+        if (_afterRoutine != null)
+            character.StopCoroutine(_afterRoutine);
+
+        _afterRoutine = character.StartCoroutine(AfterAnimation());
 
     }
 
@@ -26,16 +33,23 @@ public class HitState : State
     {
         base.LogicUpdate();
 
-        timePassed += Time.deltaTime;
-        clipLength = character.animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
-        clipSpeed = character.animator.GetCurrentAnimatorStateInfo(0).speed;
 
-       
-        if (timePassed >= clipLength / clipSpeed)
+    }
+
+    IEnumerator AfterAnimation()
+    {
+        //character.animator.Play("");
+        do
         {
-            stateMachine.ChangeState(character.standing);
-           //character.animator.SetTrigger("move");
+           
+            yield return YieldCache.WaitForSeconds(0.2f);
         }
+        while (character.animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.8f);
+
+        stateMachine.ChangeState(character.standing);
+
+        if (_afterRoutine != null)
+            character.StopCoroutine(_afterRoutine);
 
     }
 }

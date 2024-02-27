@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour,IHp,IStamina
     public float attackStamina;
     public float rollStamina;
     public float runStamina;
+    public float skillStamina;
 
     public event Action<object, float> OnHpChanged;
     public event Action<object, float> OnHpRecoverd;
@@ -56,7 +57,7 @@ public class PlayerController : MonoBehaviour,IHp,IStamina
 
     private void FixedUpdate()
     {
-        RecoverSta(_sta, staminaRecovery);
+        RecoverSta(_sta, staminaRecovery*Time.deltaTime);
     }
 
     public void RecoverHp(object subject, float value)
@@ -79,7 +80,7 @@ public class PlayerController : MonoBehaviour,IHp,IStamina
             OnHpChanged?.Invoke(subject, value);
             OnHpDepleted?.Invoke(subject, value);
 
-            if (10 > value)
+            if (4 < value)
             {
                 animator.SetTrigger("hit");
             }

@@ -32,6 +32,7 @@ public class Character : MonoBehaviour
     //public CombatState combatting;
     public AttackState attacking;
     public RollState rolling;
+    public SkillState skilling;
 
     public PlayerController playerController;
 
@@ -49,6 +50,9 @@ public class Character : MonoBehaviour
     public Animator animator;
     [HideInInspector]
     public Vector3 playerVelocity;
+
+
+    
 
     private void Start()
     {
@@ -85,4 +89,6 @@ public class Character : MonoBehaviour
     {
         movementSM.currentState.PhysicsUpdate();
     }
+
+    
 }
