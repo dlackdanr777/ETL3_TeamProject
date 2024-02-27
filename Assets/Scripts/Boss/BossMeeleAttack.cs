@@ -35,7 +35,7 @@ public class BossMeeleAttack : BossAttack
         {
             if(other.TryGetComponent(out IHp iHp))
             {
-                iHp.DepleteHp("boss" , _damage);
+                iHp.DepleteHp(_boss.gameObject, _damage);
                 _hitObjects.Add(other.gameObject);
             }
         }

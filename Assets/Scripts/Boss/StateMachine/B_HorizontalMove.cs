@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class B_HorizontalMove : BossStateMachineBehaviour
 {
+    [SerializeField] private float _speedMul = 1;
+
     private float _speed => _boss.MoveSpeed;
     private Rigidbody _rigidbody => _boss.Rigidbody;
 
@@ -31,7 +33,7 @@ public class B_HorizontalMove : BossStateMachineBehaviour
     {
 
         if (_horizontalMove < _randomMoveDirX)
-            _horizontalMove += Time.deltaTime * _speed * _randomMoveDirX;
+            _horizontalMove += Time.deltaTime * _speed * _randomMoveDirX * _speedMul;
         // TODO : 음수 양수 확인해서 잘 나오는지
         if (_randomMoveDirX <= _horizontalMove)
             _horizontalMove = _randomMoveDirX;

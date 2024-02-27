@@ -18159,7 +18159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _power: 5
-  _moveSpeed: 3
+  _moveSpeed: 10
   _rotateSpeed: 2
   _maxHp: 100
   _minHp: 0
@@ -18266,9 +18266,9 @@ MonoBehaviour:
       _finishedFrame: 1000
       _attackClass: {fileID: 2383854296848167876}
     _attackState: 5
-  _waitTimeValue: 2
+  _waitTimeValue: 3
   _aiUpdateTimeValue: 1
-  _attackWaitTimeValue: 1
+  _attackWaitTimeValue: 3
   _state: 0
   _target: {fileID: 0}
 --- !u!1 &7034038627649068806

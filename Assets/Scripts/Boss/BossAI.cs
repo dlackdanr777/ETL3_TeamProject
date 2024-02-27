@@ -12,6 +12,7 @@ public enum BossAIState
     Reconnaissance,
     Attack,
     Guard,
+    Die,
 }
 
 

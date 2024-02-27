@@ -26,7 +26,7 @@ public class BossController : MonoBehaviour, IHp
     public float MinHp => _minHp;
 
     private float _hp;
-    public float Hp => _hp; 
+    public float Hp => _hp;
 
 
     [Space]
@@ -42,7 +42,7 @@ public class BossController : MonoBehaviour, IHp
 
     [SerializeField] private float _attackWaitTimeValue;
     public float AttackWaitTime => _attackWaitTimeValue;
-    
+
     private BossAI _bossAI;
 
     private BossStateMachineBehaviour[] _stateMachines;
@@ -54,7 +54,7 @@ public class BossController : MonoBehaviour, IHp
     private Rigidbody _rigidbody;
 
     public Rigidbody Rigidbody => _rigidbody;
-    
+
     [SerializeField] private BossAIState _state;
 
     [SerializeField] private GameObject _target;
@@ -94,18 +94,20 @@ public class BossController : MonoBehaviour, IHp
             behaviour.Init(this);
         }
 
-        foreach(BossAttackData data in _attackDatas)
+        foreach (BossAttackData data in _attackDatas)
         {
             data.Init(this);
             foreach (BossAttackStateBehaviour behaviour in _attackMachines)
             {
-                if(data.AttackState == behaviour.AttackState)
+                if (data.AttackState == behaviour.AttackState)
                 {
                     behaviour.Init(this, data);
                     break;
                 }
             }
         }
+
+        _hp = _maxHp;
     }
 
 
@@ -117,7 +119,8 @@ public class BossController : MonoBehaviour, IHp
 
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            DepleteHp("창묵", 1);
+            DepleteHp("창묵", 50);
+            Debug.LogFormat("현재 체력은 {0} 입니다.", _hp);
         }
 
     }
@@ -206,9 +209,15 @@ public class BossController : MonoBehaviour, IHp
 
     public void DepleteHp(object subject, float value)
     {
+        if (_hp == _minHp)
+            return;
+
         //방어중일때는 리턴한다.
         if (_state == BossAIState.Guard)
+        {
+            _animator.Play("DefenseHit", -1, 0);
             return;
+        }
 
         _hp = Mathf.Clamp(_hp - value, _minHp, _maxHp);
 
@@ -216,6 +225,10 @@ public class BossController : MonoBehaviour, IHp
         OnHpDepleted?.Invoke(subject, value);
 
         if (_hp == _minHp)
+        {
+            _state = BossAIState.Die;
             OnHpMin?.Invoke();
+        }
+
     }
 }
