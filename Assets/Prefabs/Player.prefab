@@ -4420,6 +4420,7 @@ MonoBehaviour:
   attackStamina: 12
   rollStamina: 15
   runStamina: 1
+  skillStamina: 0
 --- !u!114 &2978267258011068820
 MonoBehaviour:
   m_ObjectHideFlags: 0

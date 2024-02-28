@@ -71,6 +71,7 @@ public class Character : MonoBehaviour
         //combatting = new CombatState(this, movementSM);
         attacking = new AttackState(this, movementSM,playerController);
         rolling = new RollState(this, movementSM,playerController);
+        skilling = new SkillState(this, movementSM,playerController);
 
         movementSM.initialized(standing,playerController);
 

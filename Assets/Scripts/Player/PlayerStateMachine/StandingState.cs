@@ -33,6 +33,7 @@ public class StandingState : State
         sprint = false;
         roll = false;
         attack = false;
+        skill = false;
         input = Vector2.zero;
         velocity = Vector3.zero;
         currentVelocity = Vector3.zero;

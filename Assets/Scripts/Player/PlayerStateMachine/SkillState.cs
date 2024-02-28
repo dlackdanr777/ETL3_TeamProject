@@ -19,7 +19,7 @@ public class SkillState : State
         base.Enter();
         character.animator.applyRootMotion = true;
         timePassed = 0f;
-        character.animator.SetTrigger("attack");
+        character.animator.SetTrigger("skill");
         character.animator.SetFloat("speed", 0f);
 
         if (_afterRoutine != null)
