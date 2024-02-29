@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Random = UnityEngine.Random;
-
+using System.Runtime.InteropServices.WindowsRuntime;
 
 [RequireComponent(typeof(Animator), typeof(Rigidbody))]
 public class BossController : MonoBehaviour, IHp
@@ -62,6 +62,7 @@ public class BossController : MonoBehaviour, IHp
 
     public float TargetDistance =>
         Vector3.Distance(new Vector3(_target.transform.position.x, 0, _target.transform.position.z), new Vector3(transform.position.x, 0, transform.position.z));
+
 
     public event Action<object, float> OnHpChanged;
     public event Action<object, float> OnHpRecoverd;

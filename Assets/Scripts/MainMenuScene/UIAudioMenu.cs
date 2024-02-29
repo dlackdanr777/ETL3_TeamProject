@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class UIAudioMenu : MonoBehaviour
 {
+    [SerializeField] private Slider _masterSlider;
+
     [SerializeField] private Slider _musicSlider;
 
     [SerializeField] private Slider _gameSoundSlider;
@@ -17,8 +19,15 @@ public class UIAudioMenu : MonoBehaviour
 
     public void Init()
     {
+        _masterSlider.onValueChanged.AddListener(OnMasterSliderValueChanged);
         _musicSlider.onValueChanged.AddListener(OnMusicSliderValueChanged);
         _gameSoundSlider.onValueChanged.AddListener(OnGameSoundSliderValueChanged);
+    }
+
+
+    private void OnMasterSliderValueChanged(float value)
+    {
+        SoundManager.Instance.SetVolume(value, AudioType.Master);
     }
 
 

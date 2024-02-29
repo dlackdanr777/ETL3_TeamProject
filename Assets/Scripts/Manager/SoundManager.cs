@@ -1,13 +1,11 @@
 using Muks.Tween;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public enum AudioType
 {
+    Master,
     BackgroundAudio,
     EffectAudio,
     Count,
@@ -24,6 +22,9 @@ public enum SoundEffectType
 
 public class SoundManager : SingletonHandler<SoundManager>
 {
+    [Header("Scripts")]
+    [SerializeField] AudioMixer _audioMixer;
+
     [Header("Volume")]
     [Range(0f, 1f)]
     [SerializeField] private float _backgroundVolume;
@@ -60,7 +61,7 @@ public class SoundManager : SingletonHandler<SoundManager>
     {
         _audios = new AudioSource[(int)AudioType.Count];
 
-        for (int i = 0, count = (int)AudioType.Count; i < count; i++)
+        for (int i = (int)AudioType.BackgroundAudio, count = (int)AudioType.Count; i < count; i++)
         {
             GameObject obj = new GameObject(Enum.GetName(typeof(AudioType), i));
             obj.transform.parent = transform;
@@ -73,11 +74,12 @@ public class SoundManager : SingletonHandler<SoundManager>
         _audios[(int)AudioType.BackgroundAudio].loop = true;
         _audios[(int)AudioType.BackgroundAudio].playOnAwake = true;
         _audios[(int)AudioType.BackgroundAudio].volume = _backgroundVolume;
+        _audios[(int)AudioType.BackgroundAudio].outputAudioMixerGroup = _audioMixer.FindMatchingGroups("Master")[1];
 
         _audios[(int)AudioType.EffectAudio].loop = false;
         _audios[(int)AudioType.EffectAudio].playOnAwake = false;
         _audios[((int)AudioType.EffectAudio)].volume = _effectVolume;
-
+        _audios[(int)AudioType.EffectAudio].outputAudioMixerGroup = _audioMixer.FindMatchingGroups("Master")[2];
 
     }
 
@@ -87,6 +89,7 @@ public class SoundManager : SingletonHandler<SoundManager>
         _audios[(int)AudioType.BackgroundAudio].clip = clip;
         _audios[(int)AudioType.BackgroundAudio].Play();
     }
+
 
     public void PlayEffectSound(SoundEffectType type)
     {
@@ -113,17 +116,21 @@ public class SoundManager : SingletonHandler<SoundManager>
 
     public void SetVolume(float value, AudioType type)
     {
-        if(type == AudioType.BackgroundAudio)
-        {
-            _backgroundVolumeMul = value;
-            _audios[(int)type].volume = _backgroundVolume * value;
-        }
+        float volume = value != 0 ? Mathf.Log10(value) * 20 : -80;
 
-        else if (type == AudioType.EffectAudio)
+        switch (type)
         {
-            _effectVolumeMul = value;
-            _audios[(int)type].volume = _effectVolume * value;
-            OnEffectVolumeChanged?.Invoke(value);
+            case AudioType.Master:
+                _audioMixer.SetFloat("Master", volume);
+                break;
+
+            case AudioType.BackgroundAudio:
+                _audioMixer.SetFloat("BackgroundMusic", volume);
+                break;
+
+            case AudioType.EffectAudio:
+                _audioMixer.SetFloat("SoundEffect", volume);
+                break;
         }
     }
 }

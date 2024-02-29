@@ -14,7 +14,7 @@ public interface ISoundEffect
     }
 
 
-    public virtual void Init()
+    public virtual void SoundInit()
     {
         TmpVolume = AudioSource.volume;
         AudioSource.volume = TmpVolume * SoundManager.Instance.EffectVolumeMul;
@@ -22,7 +22,7 @@ public interface ISoundEffect
     }
 
 
-    public virtual void Destory()
+    public virtual void SoundDestory()
     {
         SoundManager.Instance.OnEffectVolumeChanged -= OnVolumeChanged;
     }
