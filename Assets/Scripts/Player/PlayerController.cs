@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour,IHp,IStamina
     [SerializeField] private float _sta;
 
     public bool isHittable;
+    bool isHit;
 
 
     public float staminaRecovery;

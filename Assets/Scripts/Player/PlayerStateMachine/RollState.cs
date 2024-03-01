@@ -7,13 +7,14 @@ public class RollState : State
     bool rolling;
     bool grounded;
 
-    float rollDistance = 3f;
+    float rollDistance = 100f;
     float gravityValue;
     float playerSpeed;
     Vector3 currentVelocity;
 
     Coroutine _afterRoutine;
-    
+    Vector3 cVelocity;
+
     public RollState(Character _character, StateMachine _StateMachine, PlayerController _playerController) : base(_character, _StateMachine)
     {
         character = _character;
@@ -46,6 +47,10 @@ public class RollState : State
     {
         base.HandleInput();
         input = moveAction.ReadValue<Vector2>();
+        velocity = new Vector3(input.x, 0, input.y);
+
+        velocity = velocity.x * character.cameraTransform.right.normalized + velocity.z * character.cameraTransform.forward.normalized;
+        velocity.y = 0f;
     }
     public override void LogicUpdate()
     {
@@ -69,8 +74,8 @@ public class RollState : State
         {
             gravityVelocity.y = 0f;
         }
-        
-        character.controller.Move(currentVelocity * Time.deltaTime * playerSpeed + gravityVelocity * Time.deltaTime*1000);
+        currentVelocity = Vector3.SmoothDamp(currentVelocity, velocity, ref cVelocity, character.velocityDampTime);
+       // character.controller.Move(currentVelocity * Time.deltaTime * playerSpeed + gravityVelocity * Time.deltaTime*1000);
 
         if (velocity.sqrMagnitude > 0)
         {
@@ -90,11 +95,11 @@ public class RollState : State
         //character.animator.Play("");
         do
         {
-           
-            yield return YieldCache.WaitForSeconds(0.2f);
+            character.controller.Move(currentVelocity*rollDistance*Time.deltaTime);
+            yield return YieldCache.WaitForSeconds(0.1f);
         }
-        while (character.animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.8f);
-        character.controller.Move(currentVelocity * Time.deltaTime * playerSpeed + gravityVelocity * Time.deltaTime*rollDistance);
+        while (character.animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.2f);
+       
         
         stateMachine.ChangeState(character.standing);
 
