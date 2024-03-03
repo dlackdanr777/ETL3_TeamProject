@@ -56,7 +56,6 @@ public class UIMultiPlayLogin : UIView
         _canvasGroup.blocksRaycasts = false;
 
         Tween.RectTransfromAnchoredPosition(gameObject, _tmpPos - _movePos, _showDuration, _showTweenMode);
-        //Tween.TransformMove(gameObject, _tmpPos - _movePos, _showDuration, _showTweenMode);
         Tween.CanvasGroupAlpha(gameObject, _startAlpha, _showDuration, _showTweenMode, () =>
         {
             VisibleState = VisibleState.Disappeared;

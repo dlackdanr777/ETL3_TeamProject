@@ -1,6 +1,8 @@
+using ExitGames.Client.Photon;
 using Muks.PCUI;
 using Photon.Pun;
 using Photon.Realtime;
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -9,6 +11,8 @@ using UnityEngine.UI;
 [RequireComponent(typeof(UINavigation))]
 public class UIMultiplayLobby : MonoBehaviourPunCallbacks
 {
+    [SerializeField] private UIRoom _uiRoom;
+
     [SerializeField] private Button _joinRoomButton;
 
     [SerializeField] private Button _createRoomButton;
@@ -35,7 +39,8 @@ public class UIMultiplayLobby : MonoBehaviourPunCallbacks
         _createRoomButton.onClick.AddListener(OnCreateRoomButtonClicked);
         _userNameText.text = PhotonNetwork.NickName;
 
-        _uiNav = GetComponent<UINavigation>();  
+        _uiNav = GetComponent<UINavigation>();
+        _uiRoom.Init();
     }
 
 
@@ -114,13 +119,13 @@ public class UIMultiplayLobby : MonoBehaviourPunCallbacks
     }
 
 
-
     public void OnClickJoinRoom()
     {
         // 방 참여
         if (string.IsNullOrWhiteSpace(_selectRoomName))
         {
             Debug.Log("선택한 룸이 없습니다.");
+            return;
         }
 
         PhotonNetwork.JoinRoom(_selectRoomName);
@@ -140,6 +145,7 @@ public class UIMultiplayLobby : MonoBehaviourPunCallbacks
         base.OnJoinedRoom();
 
         Debug.Log("방 입장 성공");
+        _uiRoom.Show();
     }
 
 
@@ -155,12 +161,6 @@ public class UIMultiplayLobby : MonoBehaviourPunCallbacks
         base.OnCreateRoomFailed(returnCode, message);
         Debug.Log("방 생성 실패" + message);
     }
-
-
-    private void JoinRandomRoom()
-    {
-        PhotonNetwork.JoinRandomRoom();
-    } // 참여 버튼 클릭시 호출되는 함수
 
 
     private void OnCreateRoomButtonClicked()
