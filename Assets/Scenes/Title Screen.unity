@@ -4745,32 +4745,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6121727807756416093, guid: 1352bb25bc7182741a6899bb7f4b039e,
-        type: 3}
-      propertyPath: _audioMixer
-      value: 
-      objectReference: {fileID: 24100000, guid: 36c90b79ebb4b48429b6ac260d74ba38,
-        type: 2}
-    - target: {fileID: 6121727807756416093, guid: 1352bb25bc7182741a6899bb7f4b039e,
-        type: 3}
-      propertyPath: _menuOpenSound
-      value: 
-      objectReference: {fileID: 8300000, guid: bd48d0a8822e6094d984413463ce979d, type: 3}
-    - target: {fileID: 6121727807756416093, guid: 1352bb25bc7182741a6899bb7f4b039e,
-        type: 3}
-      propertyPath: _menuCloseSound
-      value: 
-      objectReference: {fileID: 8300000, guid: d9753630d1a36b743ba0b6550e50aff1, type: 3}
-    - target: {fileID: 6121727807756416093, guid: 1352bb25bc7182741a6899bb7f4b039e,
-        type: 3}
-      propertyPath: _backgroundVolume
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6121727807756416093, guid: 1352bb25bc7182741a6899bb7f4b039e,
-        type: 3}
-      propertyPath: _buttonClickSound
-      value: 
-      objectReference: {fileID: 8300000, guid: cad11a4481c77fe4aabeb5563cb0bd6c, type: 3}
     - target: {fileID: 7470679326450349181, guid: 1352bb25bc7182741a6899bb7f4b039e,
         type: 3}
       propertyPath: m_Name

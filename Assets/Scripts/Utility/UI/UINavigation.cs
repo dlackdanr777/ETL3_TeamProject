@@ -121,6 +121,9 @@ namespace Muks.PCUI
         /// <summary>현재 최상단에 위치한 UIView를 리턴하는 함수</summary>
         public UIView GetTopView()
         {
+            if (_activeViewList.Count == 0)
+                return null;
+
             return _activeViewList.First.Value;
         }
 

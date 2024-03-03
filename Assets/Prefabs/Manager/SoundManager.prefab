@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6121727807756416093
 MonoBehaviour:
@@ -44,5 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e756c175ed239914997745dd9e0ad933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _backgroundVolume: 0.5
+  _audioMixer: {fileID: 24100000, guid: 36c90b79ebb4b48429b6ac260d74ba38, type: 2}
+  _backgroundVolume: 0.7
   _effectVolume: 0.5
+  _buttonClickSound: {fileID: 8300000, guid: cad11a4481c77fe4aabeb5563cb0bd6c, type: 3}
+  _menuOpenSound: {fileID: 8300000, guid: bd48d0a8822e6094d984413463ce979d, type: 3}
+  _menuCloseSound: {fileID: 8300000, guid: d9753630d1a36b743ba0b6550e50aff1, type: 3}

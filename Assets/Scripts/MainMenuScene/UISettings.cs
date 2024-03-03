@@ -31,7 +31,7 @@ public class UISettings : UIView
 
     private Vector3 _tmpPos;
 
-    private Vector3 _movePos => new Vector3(0, 10, 0);
+    private Vector3 _movePos => new Vector3(0, 50, 0);
 
     private bool _inputEnabled = true;
 
@@ -40,7 +40,7 @@ public class UISettings : UIView
     {
         base.Init(uiNav);
         _canvasGroup = GetComponent<CanvasGroup>();
-        _tmpPos = transform.position;
+        _tmpPos = _rectTransform.anchoredPosition;
 
         _currentMenuIndex = 0;
         _buttonsCount = _settingButtons.Length;
@@ -58,11 +58,11 @@ public class UISettings : UIView
     {
         VisibleState = VisibleState.Disappearing;
 
-        transform.position = _tmpPos;
+        _rectTransform.anchoredPosition = _tmpPos;
         _canvasGroup.alpha = _targetAlpha;
         _canvasGroup.blocksRaycasts = false;
 
-        Tween.TransformMove(gameObject, _tmpPos - _movePos, _showDuration, _showTweenMode);
+        Tween.RectTransfromAnchoredPosition(gameObject, _tmpPos - _movePos, _showDuration, _showTweenMode);
         Tween.CanvasGroupAlpha(gameObject, _startAlpha, _showDuration, _showTweenMode, () =>
         {
             VisibleState = VisibleState.Disappeared;
@@ -80,11 +80,11 @@ public class UISettings : UIView
         gameObject.SetActive(true);
         SelectMenu(0);
 
-        transform.position = _tmpPos + _movePos;
+        _rectTransform.anchoredPosition = _tmpPos + _movePos;
         _canvasGroup.alpha = _startAlpha;
         _canvasGroup.blocksRaycasts = false;
 
-        Tween.TransformMove(gameObject, _tmpPos, _showDuration, _showTweenMode);
+        Tween.RectTransfromAnchoredPosition(gameObject, _tmpPos, _showDuration, _showTweenMode);
         Tween.CanvasGroupAlpha(gameObject, _targetAlpha, _showDuration, _showTweenMode, () =>
         {
             VisibleState = VisibleState.Appeared;
