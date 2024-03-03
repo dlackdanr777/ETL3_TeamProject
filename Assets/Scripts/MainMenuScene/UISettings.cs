@@ -1,28 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Muks.PCUI;
 using System;
 using Muks.Tween;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(CanvasGroup))]
 public class UISettings : UIView
 {
+    [Space]
     [Header("ShowUI Animation Setting")]
     [SerializeField] private float _startAlpha = 0;
     [SerializeField] private float _targetAlpha = 1;
     [SerializeField] private float _showDuration;
     [SerializeField] private TweenMode _showTweenMode;
 
-    [Header("Button")]
+    [Space]
+    [Header("Components")]
+    [SerializeField] private RectTransform _selectEffect;
     [SerializeField] private UIButton[] _settingButtons;
     [SerializeField] private TextMeshProUGUI[] _buttonText;
     [SerializeField] private GameObject[] _buttonCanvas;
-
-
-    [SerializeField] private RectTransform _selectEffect;
+    [SerializeField] private Button _exitButton;
 
     private int _buttonsCount;
 
@@ -30,12 +29,18 @@ public class UISettings : UIView
 
     private CanvasGroup _canvasGroup;
 
+    private Vector3 _tmpPos;
+
+    private Vector3 _movePos => new Vector3(0, 10, 0);
+
     private bool _inputEnabled = true;
+
 
     public override void Init(UINavigation uiNav)
     {
         base.Init(uiNav);
         _canvasGroup = GetComponent<CanvasGroup>();
+        _tmpPos = transform.position;
 
         _currentMenuIndex = 0;
         _buttonsCount = _settingButtons.Length;
@@ -44,6 +49,8 @@ public class UISettings : UIView
             int index = i;
             _settingButtons[i].Init(() => SelectMenu(index));
         }
+
+        _exitButton.onClick.AddListener(OnExitButtonClicked);
     }
 
 
@@ -51,9 +58,11 @@ public class UISettings : UIView
     {
         VisibleState = VisibleState.Disappearing;
 
+        transform.position = _tmpPos;
         _canvasGroup.alpha = _targetAlpha;
         _canvasGroup.blocksRaycasts = false;
 
+        Tween.TransformMove(gameObject, _tmpPos - _movePos, _showDuration, _showTweenMode);
         Tween.CanvasGroupAlpha(gameObject, _startAlpha, _showDuration, _showTweenMode, () =>
         {
             VisibleState = VisibleState.Disappeared;
@@ -70,9 +79,12 @@ public class UISettings : UIView
         VisibleState = VisibleState.Appearing;
         gameObject.SetActive(true);
         SelectMenu(0);
+
+        transform.position = _tmpPos + _movePos;
         _canvasGroup.alpha = _startAlpha;
         _canvasGroup.blocksRaycasts = false;
 
+        Tween.TransformMove(gameObject, _tmpPos, _showDuration, _showTweenMode);
         Tween.CanvasGroupAlpha(gameObject, _targetAlpha, _showDuration, _showTweenMode, () =>
         {
             VisibleState = VisibleState.Appeared;
@@ -150,4 +162,12 @@ public class UISettings : UIView
 
         SelectMenu(_currentMenuIndex);
     }
+
+
+    private void OnExitButtonClicked()
+    {
+        _uiNav.Hide("UIMultiPlayLogin");
+        SoundManager.Instance.PlayEffectSound(SoundEffectType.MenuClose);
+    }
+
 }

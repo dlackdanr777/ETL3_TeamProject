@@ -77,7 +77,6 @@ namespace Muks.PCUI
                     _activeViewList.AddFirst(uiView);
                 }
 
-                Debug.Log("¿­¸²");
                 uiView.transform.SetAsLastSibling();
             }
         }

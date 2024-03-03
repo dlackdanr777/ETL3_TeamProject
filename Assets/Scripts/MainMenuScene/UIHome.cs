@@ -63,7 +63,6 @@ public class UIHome : UIView
         if (!CheckVisibleState())
             return;
 
-        Debug.Log(_uiNav.GetTopView().name);
         if (_uiNav.GetTopView() != this)
             return;
 
@@ -142,15 +141,16 @@ public class UIHome : UIView
     private void MultiplayButtonClicked()
     {
         Debug.Log("멀티 플레이");
+        _uiNav.Show("UIMultiPlayLogin");
         SoundManager.Instance.PlayEffectSound(SoundEffectType.MenuOpen);
     }
 
 
     private void SettingsButtonClicked()
     {
+        Debug.Log("세팅");
         _uiNav.Show("UISettings");
         SoundManager.Instance.PlayEffectSound(SoundEffectType.MenuOpen);
-        Debug.Log("세팅");
     }
 
 
