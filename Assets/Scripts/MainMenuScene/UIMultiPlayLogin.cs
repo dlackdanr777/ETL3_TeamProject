@@ -108,6 +108,8 @@ public class UIMultiPlayLogin : UIView
 
     private void OnConnectButtonClicked()
     {
+        SoundManager.Instance.PlayEffectSound(SoundEffectType.ButtonClick);
+
         string nickName = _nameInputField.text;
 
         //만약 닉네임 칸이 비어있거나 띄어쓰기만 있다면?

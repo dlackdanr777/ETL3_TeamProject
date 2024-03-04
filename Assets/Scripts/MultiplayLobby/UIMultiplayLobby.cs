@@ -87,6 +87,16 @@ public class UIMultiplayLobby : MonoBehaviourPunCallbacks
     {
         foreach (RoomInfo info in roomList)
         {
+            Debug.Log(info.PlayerCount);
+            if (info.PlayerCount <= 0)
+            {
+
+                if(_dicRoomInfo.ContainsKey(info.Name))
+                    _dicRoomInfo.Remove(info.Name); //삭제
+
+                continue;
+            }
+                
             //dicRoomInfo에 info 의 방이름으로 되어있는 key값이 존재하는가
             if (_dicRoomInfo.ContainsKey(info.Name))
             {

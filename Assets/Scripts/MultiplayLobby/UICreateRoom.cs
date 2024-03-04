@@ -51,7 +51,7 @@ public class UICreateRoom : UIView
     public override void Hide(Action onCompleted = null)
     {
         VisibleState = VisibleState.Disappearing;
-
+        SoundManager.Instance.PlayEffectSound(SoundEffectType.MenuClose);
         _rectTransform.anchoredPosition = _tmpPos;
         _canvasGroup.alpha = _targetAlpha;
         _canvasGroup.blocksRaycasts = false;
@@ -72,6 +72,7 @@ public class UICreateRoom : UIView
     {
         VisibleState = VisibleState.Appearing;
         gameObject.SetActive(true);
+        SoundManager.Instance.PlayEffectSound(SoundEffectType.MenuOpen);
 
         _buttonInteractabledToRoomName = false;
         _buttonInteractabledToMaxPlayer = false;
@@ -118,6 +119,7 @@ public class UICreateRoom : UIView
     // 생성 버튼 클릭시 호출되는 함수
     private void OnClickCreateRoom()
     {
+
         //방 옵션
         RoomOptions options = new RoomOptions();
         options.MaxPlayers = int.Parse(_maxPlayerInput.text);
@@ -135,6 +137,7 @@ public class UICreateRoom : UIView
 
     private void CreateRoomButtonClicked()
     {
+        SoundManager.Instance.PlayEffectSound(SoundEffectType.ButtonClick);
         _uiNav.Hide("UICreateRoom");
 
         //방 옵션
@@ -182,6 +185,7 @@ public class UICreateRoom : UIView
 
     private void OnExitButtonClicked()
     {
+        SoundManager.Instance.PlayEffectSound(SoundEffectType.ButtonClick);
         _uiNav.Hide("UICreateRoom");
     }
 

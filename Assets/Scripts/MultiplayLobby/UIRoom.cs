@@ -7,6 +7,7 @@ using System;
 using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
+using TMPro;
 
 public class UIRoom : MonoBehaviourPunCallbacks
 {
@@ -18,7 +19,8 @@ public class UIRoom : MonoBehaviourPunCallbacks
 
     [Space]
     [Header("Components")]
-    [SerializeField] private UIMultiplayLobby _uiLobby;
+    [SerializeField] private TextMeshProUGUI _roomNameText;
+    [SerializeField] private TextMeshProUGUI _playerNumText;
     [SerializeField] private Button _startButton;
     [SerializeField] private Button _exitButton;
     [SerializeField] private Transform _playerLayout;
@@ -51,7 +53,7 @@ public class UIRoom : MonoBehaviourPunCallbacks
 
     public void Hide(Action onCompleted = null)
     {
-
+        SoundManager.Instance.PlayEffectSound(SoundEffectType.MenuClose);
         _rectTransform.anchoredPosition = _tmpPos;
         _canvasGroup.alpha = _targetAlpha;
         _canvasGroup.blocksRaycasts = false;
@@ -70,6 +72,8 @@ public class UIRoom : MonoBehaviourPunCallbacks
     public void Show(Action onCompleted = null)
     {
         gameObject.SetActive(true);
+        _roomNameText.text = PhotonNetwork.CurrentRoom.Name;
+        UpdatePlayerNum();
 
         _rectTransform.anchoredPosition = _tmpPos + _movePos;
         _canvasGroup.alpha = _startAlpha;
@@ -119,6 +123,7 @@ public class UIRoom : MonoBehaviourPunCallbacks
         }
 
         OnStartButtonEnabled();
+        UpdatePlayerNum();
     }
 
 
@@ -135,11 +140,22 @@ public class UIRoom : MonoBehaviourPunCallbacks
     }
 
 
+    private void UpdatePlayerNum()
+    {
+        int maxPlayer = PhotonNetwork.CurrentRoom.MaxPlayers;
+        int currentPlayer = PhotonNetwork.CurrentRoom.PlayerCount;
+        _playerNumText.text = currentPlayer + "/" + maxPlayer;
+    }
+
+
     private void OnExitButtonClicked()
     {
+        SoundManager.Instance.PlayEffectSound(SoundEffectType.ButtonClick);
         if (PhotonNetwork.InRoom)
+        {
             PhotonNetwork.LeaveRoom();
-
+        }
+    
         Hide();
     }
 
