@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.TextCore.Text;
 
 public class Character : MonoBehaviour
 {
@@ -33,7 +34,7 @@ public class Character : MonoBehaviour
     public AttackState attacking;
     public RollState rolling;
     public SkillState skilling;
-
+    public HitState hitting;
     public PlayerController playerController;
 
     [HideInInspector]
@@ -51,7 +52,7 @@ public class Character : MonoBehaviour
     [HideInInspector]
     public Vector3 playerVelocity;
 
-
+ 
     
 
     private void Start()
@@ -72,11 +73,14 @@ public class Character : MonoBehaviour
         attacking = new AttackState(this, movementSM,playerController);
         rolling = new RollState(this, movementSM,playerController);
         skilling = new SkillState(this, movementSM,playerController);
-
+        hitting = new HitState(this, movementSM);
         movementSM.initialized(standing,playerController);
 
         normalColliderHeight = controller.height;
         gravityValue *= gravityMultiplier;
+
+        playerController.OnHpDepleted += OnHitStateChange;
+
     }
 
     private void Update()
@@ -91,5 +95,16 @@ public class Character : MonoBehaviour
         movementSM.currentState.PhysicsUpdate();
     }
 
-    
+    public void OnHitStateChange(object subject, float value)
+    {
+        if (4 < value)
+        {
+            movementSM.ChangeState(hitting);
+            Debug.Log("Èý");
+            GameObject target = subject as GameObject;
+            gameObject.transform.LookAt(target.transform);
+        }
+    }
+
+
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.Dependencies.NCalc;
@@ -9,6 +10,7 @@ public class State
     public Character character;
     public StateMachine stateMachine;
     public PlayerController playerController;
+    
 
     protected Vector3 gravityVelocity;
     protected Vector3 velocity;
@@ -27,7 +29,6 @@ public class State
     {
         character = _character;
         stateMachine = _StateMachine;
-
         moveAction = character.playerInput.actions["Move"];
         lookAction = character.playerInput.actions["Look"];
         jumpAction = character.playerInput.actions["Jump"];
@@ -50,7 +51,7 @@ public class State
     }
     public virtual void LogicUpdate()
     {
-        
+       
     }
 
     public virtual void PhysicsUpdate()
@@ -61,6 +62,6 @@ public class State
     {
 
     }
+    
 
-  
 }

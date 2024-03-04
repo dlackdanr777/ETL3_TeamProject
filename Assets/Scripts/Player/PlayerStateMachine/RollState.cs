@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class RollState : State
 {
-    bool rolling;
+    
     bool grounded;
 
-    float rollDistance = 100f;
+    float rollDistance = 15f;
     float gravityValue;
     float playerSpeed;
     Vector3 currentVelocity;
-
+    Vector3 rollDirection;
     Coroutine _afterRoutine;
     Vector3 cVelocity;
 
@@ -34,8 +34,9 @@ public class RollState : State
         playerSpeed = character.playerSpeed;
         playerController.isHittable = false;
 
-        
-        if(_afterRoutine != null)
+        rollDirection = character.transform.forward.normalized;
+        rollDirection.y = 0;
+        if (_afterRoutine != null)
         {
             character.StopCoroutine(_afterRoutine);
         }
@@ -50,6 +51,7 @@ public class RollState : State
         velocity = new Vector3(input.x, 0, input.y);
 
         velocity = velocity.x * character.cameraTransform.right.normalized + velocity.z * character.cameraTransform.forward.normalized;
+
         velocity.y = 0f;
     }
     public override void LogicUpdate()
@@ -69,12 +71,12 @@ public class RollState : State
         playerController.isHittable = false;
         gravityVelocity.y += gravityValue * Time.deltaTime;
         grounded = character.controller.isGrounded;
-
+        
         if (grounded && gravityVelocity.y < 0)
         {
             gravityVelocity.y = 0f;
         }
-        currentVelocity = Vector3.SmoothDamp(currentVelocity, velocity, ref cVelocity, character.velocityDampTime);
+        //currentVelocity = Vector3.SmoothDamp(currentVelocity, velocity, ref cVelocity, character.velocityDampTime);
        // character.controller.Move(currentVelocity * Time.deltaTime * playerSpeed + gravityVelocity * Time.deltaTime*1000);
 
         if (velocity.sqrMagnitude > 0)
@@ -95,11 +97,12 @@ public class RollState : State
         //character.animator.Play("");
         do
         {
-            character.controller.Move(currentVelocity*rollDistance*Time.deltaTime);
+
+            character.controller.Move(rollDirection * rollDistance * Time.deltaTime);
             yield return YieldCache.WaitForSeconds(0.1f);
         }
-        while (character.animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.2f);
-       
+        while (character.animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f);
+
         
         stateMachine.ChangeState(character.standing);
 

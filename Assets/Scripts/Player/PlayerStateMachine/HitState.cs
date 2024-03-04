@@ -9,11 +9,13 @@ public class HitState : State
     float clipLength;
     float clipSpeed;
 
+
     Coroutine _afterRoutine;
     public HitState(Character _character, StateMachine _StateMachine) : base(_character, _StateMachine)
     {
         character = _character;
         stateMachine = _StateMachine;
+       
     }
 
     public override void Enter()

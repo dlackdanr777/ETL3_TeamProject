@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour,IHp,IStamina
+public class PlayerController : MonoBehaviour,IHp,IStamina,ISoundEffect
 {
     Animator animator;
     [SerializeField] private float _maxHp;
@@ -23,6 +23,10 @@ public class PlayerController : MonoBehaviour,IHp,IStamina
 
     [SerializeField] private float _minSta;
     public float Sta => _sta;
+
+    public AudioSource AudioSource => throw new NotImplementedException();
+
+    public float TmpVolume { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
     [SerializeField] private float _sta;
 
