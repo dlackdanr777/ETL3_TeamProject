@@ -19,23 +19,34 @@ public class DamageDealer : MonoBehaviour
     {
         if (canDealDamage)
         {
+
+          
             RaycastHit hit;
 
             int layerMask = 1 << 11;
             if (Physics.Raycast(transform.position, -transform.up, out hit, weaponLength, layerMask))
             {
+
+                GameObject obj = hasDealtDamage.Find(x => x == hit.transform.gameObject);
+
+                if (obj == null)
+                {
+                    if (hit.transform.gameObject.TryGetComponent(out IHp iHp))
+                    {
+                        iHp.DepleteHp(gameObject, weaponDamage);
+                        hasDealtDamage.Add(hit.transform.gameObject);
+                    }
+                }
                 //if (hit.transform.TryGetComponent(out Enemy enemy) && !hasDealtDamage.Contains(hit.transform.gameObject))
                 //{
-                //    enemy.TakeDamage(weaponDamage);
-                //    enemy.HitVFX(hit.point);
                 //    hasDealtDamage.Add(hit.transform.gameObject);
                 //}
 
-                if(!hasDealtDamage.Contains(hit.transform.gameObject))
-                {
-                    Debug.Log("damage");
-                    hasDealtDamage.Add(hit.transform.gameObject);
-                }
+                //if (!hasDealtDamage.Contains(hit.transform.gameObject))
+                //{
+                //    Debug.Log("damage");
+                //    hasDealtDamage.Add(hit.transform.gameObject);
+                //}
             }
         }
     }
