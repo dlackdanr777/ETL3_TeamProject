@@ -18043,8 +18043,8 @@ GameObject:
   - component: {fileID: 9148960925585635659}
   - component: {fileID: 1618748683631313299}
   m_Layer: 11
-  m_Name: DarkKnight
-  m_TagString: Untagged
+  m_Name: Boss
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18073,7 +18073,7 @@ Transform:
   - {fileID: 1999586063038952301}
   - {fileID: 6727570216984752486}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &3718017003556246873
 Animator:
@@ -18106,7 +18106,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 1000
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -18159,10 +18159,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _power: 5
-  _moveSpeed: 10
+  _moveSpeed: 15
   _rotateSpeed: 2
   _maxHp: 100
   _minHp: 0
+  _explorationScope: 50
+  _explorationTime: 10
   _attackDatas:
   - _name: "\uADFC\uC811 \uACF5\uACA9 1"
     _maxRange: 5
@@ -18222,7 +18224,7 @@ MonoBehaviour:
       _attackClass: {fileID: 5527897533021643121}
     _attackState: 4
   - _name: "\uC6D0\uAC70\uB9AC \uACF5\uACA91-2"
-    _maxRange: 0
+    _maxRange: 10
     _minRange: 0
     _frames:
     - _damageMul: 0.1
@@ -18268,7 +18270,7 @@ MonoBehaviour:
     _attackState: 5
   _waitTimeValue: 3
   _aiUpdateTimeValue: 1
-  _attackWaitTimeValue: 3
+  _attackWaitTimeValue: 0
   _state: 0
   _target: {fileID: 0}
 --- !u!1 &7034038627649068806

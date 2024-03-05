@@ -28,6 +28,11 @@ public class BossController : MonoBehaviour, IHp
     private float _hp;
     public float Hp => _hp;
 
+    [Tooltip("보스 탐색 범위")]
+    [SerializeField] private float _explorationScope;
+
+    [Tooltip("보스 탐색 갱신 시간")]
+    [SerializeField] private float _explorationTime;
 
     [Space]
     [Header("Attack")]
@@ -60,9 +65,10 @@ public class BossController : MonoBehaviour, IHp
     [SerializeField] private GameObject _target;
     public GameObject Target => _target;
 
+    private float _currentExplorationTimer;
+
     public float TargetDistance =>
         Vector3.Distance(new Vector3(_target.transform.position.x, 0, _target.transform.position.z), new Vector3(transform.position.x, 0, transform.position.z));
-
 
     public event Action<object, float> OnHpChanged;
     public event Action<object, float> OnHpRecoverd;
@@ -71,6 +77,8 @@ public class BossController : MonoBehaviour, IHp
     public event Action OnHpMin;
 
     private float _waitTimer;
+
+    private Coroutine _findTargetRoutine;
 
 
     void Start()
@@ -102,8 +110,8 @@ public class BossController : MonoBehaviour, IHp
             {
                 if (data.AttackState == behaviour.AttackState)
                 {
+                    Debug.Log(behaviour.name + ", " + data.AttackState);
                     behaviour.Init(this, data);
-                    break;
                 }
             }
         }
@@ -114,9 +122,13 @@ public class BossController : MonoBehaviour, IHp
 
     private void Update()
     {
-        UpdateTimer();
         _animator.SetInteger("State", (int)_state);
 
+        if (_state == BossAIState.Die)
+            return;
+
+        UpdateTimer();
+        UpdateFindTarget();
 
         if (Input.GetKeyDown(KeyCode.Z))
         {
@@ -129,6 +141,12 @@ public class BossController : MonoBehaviour, IHp
 
     private void AIUpdate()
     {
+        if (_state == BossAIState.Die)
+        {
+            CancelInvoke("AIUpdate");
+            return;
+        }
+
         _bossAI.AIUpdate();
     }
 
@@ -194,6 +212,56 @@ public class BossController : MonoBehaviour, IHp
     {
         _animator.SetInteger("AttackState", (int)nextState);
     }
+
+
+    /// <summary>일정 주기로 타겟을 탐색하는 함수</summary> 
+    public void UpdateFindTarget()
+    {
+        _currentExplorationTimer -= Time.deltaTime;
+
+        if(_currentExplorationTimer <= 0)
+        {
+            FindTarget(0.02f);
+            _currentExplorationTimer = _explorationTime;
+        }
+    }
+
+    /// <summary>플레이어컨트롤러 컴포넌트를 보유한 타겟을 확인해 Target변수를 변경하는 함수</summary>
+    public void FindTarget(float time)
+    {
+        if (_findTargetRoutine != null)
+            StopCoroutine(_findTargetRoutine);
+
+        _findTargetRoutine = StartCoroutine(FindTargetRoutine(time));
+    }
+
+
+    private IEnumerator FindTargetRoutine(float time)
+    {
+        yield return YieldCache.WaitForSeconds(time);
+
+        Debug.Log("탐색중");
+        _currentExplorationTimer = _explorationTime;
+
+        Collider[] hitCollider = Physics.OverlapSphere(transform.position, _explorationScope);
+        PlayerController player = null;
+        List<PlayerController> playerList = new List<PlayerController>();
+
+        for (int i = 0, count = hitCollider.Length; i < count; i++)
+        {
+            if (hitCollider[i].TryGetComponent(out player))
+            {
+                playerList.Add(player);
+            }
+        }
+
+        if (playerList.Count == 0)
+            yield break;
+
+        int targetPlayerIndex = Random.Range(0, playerList.Count);
+        _target = playerList[targetPlayerIndex].gameObject;
+    }
+
 
 
     public void RecoverHp(object subject, float value)

@@ -46,6 +46,8 @@ namespace Muks.Photon
             {
                 Destroy(gameObject);
             }
+
+            PhotonNetwork.AutomaticallySyncScene = true;
         }
 
 

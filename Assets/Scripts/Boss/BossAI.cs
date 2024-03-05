@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>보스의 현재 상태</summary>
@@ -23,6 +21,8 @@ public class BossAI
     private BossController _boss;
 
     private BossAttackData _currentAttackData;
+
+    private float _reconnaissanceTimer;
 
     public BossAI(BossController boss)
     {
@@ -110,7 +110,6 @@ public class BossAI
     }
 
 
-    private float _reconnaissanceTimer;
     private INode.ENodeState Reconnaissance()
     {
         _boss.ChangeAiState(BossAIState.Reconnaissance);
@@ -133,6 +132,7 @@ public class BossAI
         _boss.ChangeAiState(BossAIState.Attack);
         _boss.SetAnimatorAttackValue(_currentAttackData.AttackState);
         _reconnaissanceTimer = 0;
+        _boss.FindTarget(3);
         return INode.ENodeState.Success;
     }
 

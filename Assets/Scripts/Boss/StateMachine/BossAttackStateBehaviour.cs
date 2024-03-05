@@ -22,7 +22,7 @@ public class BossAttackStateBehaviour : StateMachineBehaviour
     
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        for(int i = 0, count = _data.Frames.Length; i < count; i++)
+        for (int i = 0, count = _data.Frames.Length; i < count; i++)
         {
             _data.Frames[i].SetIsStarted = false;
             _data.Frames[i].SetIsFinished = false;

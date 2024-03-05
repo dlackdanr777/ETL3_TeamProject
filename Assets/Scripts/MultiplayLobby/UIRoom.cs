@@ -46,6 +46,7 @@ public class UIRoom : MonoBehaviourPunCallbacks
         _tmpPos = _rectTransform.anchoredPosition;
 
         _exitButton.onClick.AddListener(OnExitButtonClicked);
+        _startButton.onClick.AddListener(OnStartButtonClicked);
 
         gameObject.SetActive(false);
     }
@@ -145,6 +146,13 @@ public class UIRoom : MonoBehaviourPunCallbacks
         int maxPlayer = PhotonNetwork.CurrentRoom.MaxPlayers;
         int currentPlayer = PhotonNetwork.CurrentRoom.PlayerCount;
         _playerNumText.text = currentPlayer + "/" + maxPlayer;
+    }
+
+
+    private void OnStartButtonClicked()
+    {
+        _canvasGroup.blocksRaycasts = false;
+        PhotonNetwork.LoadLevel("BoosLevel_Multi");
     }
 
 
