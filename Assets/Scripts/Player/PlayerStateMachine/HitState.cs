@@ -38,6 +38,13 @@ public class HitState : State
 
     }
 
+    public override void PhysicsUpdate()
+    {
+        base.PhysicsUpdate();
+        character.animator.SetFloat("speed", 0f);
+        velocity = Vector3.zero;
+    }
+
     IEnumerator AfterAnimation()
     {
         //character.animator.Play("");
@@ -46,7 +53,7 @@ public class HitState : State
            
             yield return YieldCache.WaitForSeconds(0.2f);
         }
-        while (character.animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.8f);
+        while (character.animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.2f);
 
         stateMachine.ChangeState(character.standing);
 
