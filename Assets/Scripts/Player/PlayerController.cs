@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour,IHp,IStamina,ISoundEffect
     public float rollStamina;
     public float runStamina;
     public float skillStamina;
+    public float skillDamage;
 
     public event Action<object, float> OnHpChanged;
     public event Action<object, float> OnHpRecoverd;
