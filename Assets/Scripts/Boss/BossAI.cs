@@ -22,7 +22,6 @@ public class BossAI
 
     private BossAttackData _currentAttackData;
 
-    private float _reconnaissanceTimer;
 
     public BossAI(BossController boss)
     {
@@ -34,7 +33,6 @@ public class BossAI
 
     public void AIUpdate()
     {
-        Debug.Log(_currentAttackData);
         _bt.Operate();
     }
 
@@ -63,7 +61,7 @@ public class BossAI
 
         SelectorNode actionNode = new SelectorNode(nodes);
 
-        return new ConditionNode(_boss.CheckWaitTime, actionNode);
+        return new ConditionNode(_boss.CheckStateChangeEnabled, actionNode);
     }
 
     private INode TrackingNode()
@@ -103,7 +101,7 @@ public class BossAI
 
     private INode.ENodeState CheckReconnaissance()
     {
-        if (_reconnaissanceTimer < _boss.AttackWaitTime)
+        if (!_boss.CheckAttackWaitTime())
             return INode.ENodeState.Success;
 
         return INode.ENodeState.Failure;
@@ -113,7 +111,7 @@ public class BossAI
     private INode.ENodeState Reconnaissance()
     {
         _boss.ChangeAiState(BossAIState.Reconnaissance);
-        _reconnaissanceTimer += _boss.AIUpdateTime;
+            _boss.DepleteAttackTime(_boss.AIUpdateTime);
 
         return INode.ENodeState.Success;
     }
@@ -131,7 +129,7 @@ public class BossAI
     {
         _boss.ChangeAiState(BossAIState.Attack);
         _boss.SetAnimatorAttackValue(_currentAttackData.AttackState);
-        _reconnaissanceTimer = 0;
+        _boss.SetAttackTime();
         _boss.FindTarget(3);
         return INode.ENodeState.Success;
     }
@@ -151,14 +149,6 @@ public class BossAI
     {
         _boss.ChangeAiState(BossAIState.Idle);
         return INode.ENodeState.Success;
-    }
-
-    
-
-    private INode.ENodeState SetWaitTime()
-    {
-        _boss.SetWaitTime();
-        return INode.ENodeState.Failure;
     }
 
 

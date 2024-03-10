@@ -68,10 +68,15 @@ public class BossAttackData
     [SerializeField] private BossAttackFrameData[] _frames;
     public BossAttackFrameData[] Frames => _frames;
 
+
     [Space]
     [Tooltip("공격 유형")]
     [SerializeField] private BossAttackState _attackState;
     public BossAttackState AttackState => _attackState;
+
+    [Tooltip("보스 상태가 아래 공격 유형으로 변화 가능한지 확인")]
+    [SerializeField] private bool _stateChangeEnabled;
+    public bool StateChangeEnabled => _stateChangeEnabled;
 
 
     private BossController _boss;

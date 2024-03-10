@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Random = UnityEngine.Random;
-using System.Runtime.InteropServices.WindowsRuntime;
+
 
 [RequireComponent(typeof(Animator), typeof(Rigidbody))]
 public class BossController : MonoBehaviour, IHp
@@ -46,7 +46,9 @@ public class BossController : MonoBehaviour, IHp
     public float AIUpdateTime => _aiUpdateTimeValue;
 
     [SerializeField] private float _attackWaitTimeValue;
-    public float AttackWaitTime => _attackWaitTimeValue;
+
+    [SerializeField] private float _attackWaitTimer;
+
 
     private BossAI _bossAI;
 
@@ -60,7 +62,7 @@ public class BossController : MonoBehaviour, IHp
 
     public Rigidbody Rigidbody => _rigidbody;
 
-    [SerializeField] private BossAIState _state;
+    [SerializeField] protected BossAIState _state;
 
     [SerializeField] private GameObject _target;
     public GameObject Target => _target;
@@ -81,7 +83,7 @@ public class BossController : MonoBehaviour, IHp
     private Coroutine _findTargetRoutine;
 
 
-    void Start()
+    protected virtual void Start()
     {
         _bossAI = new BossAI(this);
 
@@ -117,6 +119,7 @@ public class BossController : MonoBehaviour, IHp
         }
 
         _hp = _maxHp;
+        _attackWaitTimer = _attackWaitTimeValue;
     }
 
 
@@ -160,9 +163,39 @@ public class BossController : MonoBehaviour, IHp
     }
 
 
-    public bool CheckWaitTime()
+    public bool CheckStateChangeEnabled()
     {
-        return _waitTimer <= 0;
+        bool isWaitTimeEnd = _waitTimer <= 0;
+        bool changeStateEnabled = _state == BossAIState.Idle || _state == BossAIState.Tracking 
+            || _state == BossAIState.Reconnaissance || _state == BossAIState.Guard;
+
+        Debug.Log(isWaitTimeEnd && changeStateEnabled);
+        return isWaitTimeEnd && changeStateEnabled;
+    }
+
+
+    /// <summary>공격 대기 시간이 전부 지났나 확인하는 함수</summary>
+    public bool CheckAttackWaitTime()
+    {
+        if (_attackWaitTimer <= 0)
+            return true;
+
+        return false;
+    }
+
+
+    /// <summary>공격 대기 시간을 설정 하는 함수</summary>
+    public void SetAttackTime()
+    {
+        _attackWaitTimer = _attackWaitTimeValue;
+    }
+
+
+
+    /// <summary>공격 대기 타이머를 감소 시키는 함수</summary>
+    public void DepleteAttackTime(float value)
+    {
+        _attackWaitTimer -= _attackWaitTimer <= 0 ? 0 : value;
     }
 
 
@@ -183,7 +216,7 @@ public class BossController : MonoBehaviour, IHp
         List<BossAttackData> possibleSkillDataList = new List<BossAttackData>();
         foreach (BossAttackData data in _attackDatas)
         {
-            bool isWithInRange = TargetDistance <= data.MaxRange && data.MinRange <= TargetDistance;
+            bool isWithInRange = TargetDistance <= data.MaxRange && data.MinRange <= TargetDistance && data.StateChangeEnabled;
             if (isWithInRange)
                 possibleSkillDataList.Add(data);
         }
@@ -196,7 +229,7 @@ public class BossController : MonoBehaviour, IHp
     }
 
 
-    public void ChangeAiState(BossAIState nextState)
+    public virtual void ChangeAiState(BossAIState nextState)
     {
         _state = nextState;
     }
@@ -226,6 +259,7 @@ public class BossController : MonoBehaviour, IHp
         }
     }
 
+
     /// <summary>플레이어컨트롤러 컴포넌트를 보유한 타겟을 확인해 Target변수를 변경하는 함수</summary>
     public void FindTarget(float time)
     {
@@ -240,7 +274,6 @@ public class BossController : MonoBehaviour, IHp
     {
         yield return YieldCache.WaitForSeconds(time);
 
-        Debug.Log("탐색중");
         _currentExplorationTimer = _explorationTime;
 
         Collider[] hitCollider = Physics.OverlapSphere(transform.position, _explorationScope);
@@ -261,7 +294,6 @@ public class BossController : MonoBehaviour, IHp
         int targetPlayerIndex = Random.Range(0, playerList.Count);
         _target = playerList[targetPlayerIndex].gameObject;
     }
-
 
 
     public void RecoverHp(object subject, float value)
