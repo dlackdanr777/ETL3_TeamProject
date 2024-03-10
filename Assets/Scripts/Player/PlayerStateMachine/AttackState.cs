@@ -15,7 +15,7 @@ public class AttackState : State
     public override void Enter()
     {
         base.Enter();
-
+        playerController.moveable = false;
         attack = false;
         character.animator.applyRootMotion = true;
         timePassed = 0f;

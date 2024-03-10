@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour,IHp,IStamina,ISoundEffect
     [SerializeField] private float _sta;
 
     public bool isHittable;
+    public bool moveable;
     bool isHit;
 
 

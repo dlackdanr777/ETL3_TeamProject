@@ -4416,11 +4416,13 @@ MonoBehaviour:
   _minSta: 0
   _sta: 0
   isHittable: 0
+  moveable: 0
   staminaRecovery: 10
   attackStamina: 12
   rollStamina: 15
   runStamina: 1
   skillStamina: 0
+  skillDamage: 0
 --- !u!114 &2978267258011068820
 MonoBehaviour:
   m_ObjectHideFlags: 0

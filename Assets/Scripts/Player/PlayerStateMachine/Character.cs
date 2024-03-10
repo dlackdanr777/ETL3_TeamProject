@@ -73,7 +73,7 @@ public class Character : MonoBehaviour
         attacking = new AttackState(this, movementSM,playerController);
         rolling = new RollState(this, movementSM,playerController);
         skilling = new SkillState(this, movementSM,playerController);
-        hitting = new HitState(this, movementSM);
+        hitting = new HitState(this, movementSM,playerController);
         movementSM.initialized(standing,playerController);
 
         normalColliderHeight = controller.height;

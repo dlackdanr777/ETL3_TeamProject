@@ -21,6 +21,7 @@ public class SkillState : State
         timePassed = 0f;
         character.animator.SetTrigger("skill");
         character.animator.SetFloat("speed", 0f);
+        playerController.moveable = false;
 
         if (_afterRoutine != null)
         {
@@ -29,7 +30,10 @@ public class SkillState : State
 
         _afterRoutine = character.StartCoroutine(AfterAnimation());
     }
-
+    public override void PhysicsUpdate()
+    {
+        base.PhysicsUpdate();
+    }
     public override void Exit()
     {
         base.Exit();
@@ -38,10 +42,11 @@ public class SkillState : State
 
     IEnumerator AfterAnimation()
     {
-        //character.animator.Play("");
+        
         do
         {
-
+            character.animator.SetTrigger("skill");
+            character.animator.SetFloat("speed", 0f);
             yield return YieldCache.WaitForSeconds(0.2f);
         }
         while (character.animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.8f);

@@ -39,6 +39,7 @@ public class StandingState : State
         currentVelocity = Vector3.zero;
         gravityVelocity.y= 0f;
         playerController.isHittable = true;
+        playerController.moveable = true;
         playerSpeed =character.playerSpeed;
         grounded = character.controller.isGrounded;
         gravityValue = character.gravityValue;
@@ -121,7 +122,11 @@ public class StandingState : State
             gravityVelocity.y = 0f;
         }
         currentVelocity = Vector3.SmoothDamp(currentVelocity, velocity, ref cVelocity, character.velocityDampTime);
-        character.controller.Move(currentVelocity*Time.deltaTime*playerSpeed+gravityVelocity*Time.deltaTime);
+        if (playerController.moveable)
+        {
+            character.controller.Move(currentVelocity * Time.deltaTime * playerSpeed + gravityVelocity * Time.deltaTime);
+        }
+            
 
         if (velocity.sqrMagnitude > 0)
         {
