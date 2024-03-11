@@ -112,7 +112,6 @@ public class BossController : MonoBehaviour, IHp
             {
                 if (data.AttackState == behaviour.AttackState)
                 {
-                    Debug.Log(behaviour.name + ", " + data.AttackState);
                     behaviour.Init(this, data);
                 }
             }
@@ -169,7 +168,6 @@ public class BossController : MonoBehaviour, IHp
         bool changeStateEnabled = _state == BossAIState.Idle || _state == BossAIState.Tracking 
             || _state == BossAIState.Reconnaissance || _state == BossAIState.Guard;
 
-        Debug.Log(isWaitTimeEnd && changeStateEnabled);
         return isWaitTimeEnd && changeStateEnabled;
     }
 
@@ -216,9 +214,11 @@ public class BossController : MonoBehaviour, IHp
         List<BossAttackData> possibleSkillDataList = new List<BossAttackData>();
         foreach (BossAttackData data in _attackDatas)
         {
+            
             bool isWithInRange = TargetDistance <= data.MaxRange && data.MinRange <= TargetDistance && data.StateChangeEnabled;
             if (isWithInRange)
                 possibleSkillDataList.Add(data);
+
         }
 
         if (possibleSkillDataList.Count == 0)

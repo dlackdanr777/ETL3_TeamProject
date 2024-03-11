@@ -7,7 +7,7 @@ public class RollState : State
     
     bool grounded;
 
-    float rollDistance = 2.5f;
+    float rollDistance = 10f;
     float gravityValue;
     Vector3 rollDirection;
     Coroutine _afterRoutine;
@@ -23,14 +23,14 @@ public class RollState : State
     public override void Enter()
     {
         base.Enter();
-        
+        character.animator.applyRootMotion = true;
         gravityValue = character.gravityValue;
         character.animator.SetTrigger("roll");
         gravityVelocity.y = 0f;
         playerController.isHittable = false;
         playerController.moveable = false;
 
-        rollDirection = character.transform.forward.normalized;
+        rollDirection = character.transform.forward;
         rollDirection.y = 0;
         if (_afterRoutine != null)
         {
@@ -49,7 +49,6 @@ public class RollState : State
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
     }
     
 
@@ -75,24 +74,16 @@ public class RollState : State
     public override void Exit()
     {
         base.Exit();
+        character.animator.applyRootMotion = false;
     }
 
     IEnumerator AfterAnimation()
     {
-        Vector3 targetRollDirection = rollDirection * rollDistance; // 목표 구르는 방향을 설정합니다.
-        float smoothTime = 0.15f; // 구르는 방향을 부드럽게 조정할 시간을 설정합니다.
-        Vector3 currentVelocity = Vector3.zero; // 현재 속도를 초기화합니다.
-
         do
         {
-            // 현재 구르는 방향을 목표 구르는 방향으로 부드럽게 이동시킵니다.
-            rollDirection = Vector3.SmoothDamp(rollDirection, targetRollDirection, ref currentVelocity, smoothTime);
-
-            character.controller.Move(rollDirection * Time.deltaTime); // 캐릭터를 이동시킵니다.
-
-            yield return YieldCache.WaitForSeconds(0.001f); // 잠시 대기합니다.
+            yield return YieldCache.WaitForSeconds(0.02f); // 잠시 대기합니다.
         }
-        while (character.animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f);
+        while (character.animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1);
 
         stateMachine.ChangeState(character.standing); // 구르는 애니메이션이 끝나면 캐릭터의 상태를 변경합니다.
 

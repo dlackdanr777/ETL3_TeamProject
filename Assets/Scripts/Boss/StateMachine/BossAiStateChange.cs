@@ -9,7 +9,6 @@ public class BossAiStateChange : BossStateMachineBehaviour
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Debug.Log("Á¾·á");
         _boss.ChangeAiState(_changeState);
     }
 

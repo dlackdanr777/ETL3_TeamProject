@@ -47,6 +47,7 @@ public class StandingState : State
     public override void HandleInput()
     {
         base.HandleInput();
+
         if (jumpAction.triggered)
         {
             jump = true;

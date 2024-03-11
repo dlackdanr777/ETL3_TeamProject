@@ -35,15 +35,27 @@ public class HitState : State
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
-
+        playerController.moveable = false;
+        character.animator.applyRootMotion = true;
     }
+
+
 
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
         character.animator.SetFloat("speed", 0f);
-        velocity = Vector3.zero;
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        playerController.moveable = true;
+        character.animator.applyRootMotion = false;
+
+        if (_afterRoutine != null)
+            character.StopCoroutine(_afterRoutine);
+
     }
 
     IEnumerator AfterAnimation()
@@ -52,15 +64,11 @@ public class HitState : State
         do
         {
             character.animator.SetFloat("speed", 0f);
-            velocity = Vector3.zero;
-            yield return YieldCache.WaitForSeconds(0.01f);
+            yield return YieldCache.WaitForSeconds(0.1f);
         }
-        while (character.animator.GetCurrentAnimatorStateInfo(0).normalizedTime <1.0f);
+        while (character.animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.9f);
 
         stateMachine.ChangeState(character.standing);
-
-        if (_afterRoutine != null)
-            character.StopCoroutine(_afterRoutine);
 
     }
 }

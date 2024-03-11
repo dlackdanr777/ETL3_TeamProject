@@ -1622,6 +1622,16 @@ PrefabInstance:
       propertyPath: _hp
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 2244647164703090789, guid: 6a52463bb392c3f40a9e3efe772d2889,
+        type: 3}
+      propertyPath: runStamina
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2244647164703090789, guid: 6a52463bb392c3f40a9e3efe772d2889,
+        type: 3}
+      propertyPath: attackStamina
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2978267258011068820, guid: 6a52463bb392c3f40a9e3efe772d2889,
         type: 3}
       propertyPath: jumpHeight
@@ -2496,7 +2506,7 @@ PrefabInstance:
     - target: {fileID: 8800596256936212562, guid: 560a21fca26526b4abd211300d078d4e,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11710,7 +11720,32 @@ PrefabInstance:
     - target: {fileID: 1618748683631313299, guid: b49190e1a0ffdaf4b9e703c4eff1514a,
         type: 3}
       propertyPath: _moveSpeed
-      value: 15
+      value: 1.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1618748683631313299, guid: b49190e1a0ffdaf4b9e703c4eff1514a,
+        type: 3}
+      propertyPath: _attackWaitTimeValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1618748683631313299, guid: b49190e1a0ffdaf4b9e703c4eff1514a,
+        type: 3}
+      propertyPath: _attackDatas.Array.data[0]._stateChangeEnabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1618748683631313299, guid: b49190e1a0ffdaf4b9e703c4eff1514a,
+        type: 3}
+      propertyPath: _attackDatas.Array.data[1]._stateChangeEnabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1618748683631313299, guid: b49190e1a0ffdaf4b9e703c4eff1514a,
+        type: 3}
+      propertyPath: _attackDatas.Array.data[2]._stateChangeEnabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1618748683631313299, guid: b49190e1a0ffdaf4b9e703c4eff1514a,
+        type: 3}
+      propertyPath: _attackDatas.Array.data[4]._stateChangeEnabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7004168298014803672, guid: b49190e1a0ffdaf4b9e703c4eff1514a,
         type: 3}
