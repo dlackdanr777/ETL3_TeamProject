@@ -46,7 +46,7 @@ PrefabInstance:
     - target: {fileID: 9038990596893119239, guid: b49190e1a0ffdaf4b9e703c4eff1514a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9038990596893119239, guid: b49190e1a0ffdaf4b9e703c4eff1514a,
         type: 3}
@@ -208,6 +208,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 281b55efa0210d14ba61c85a0180b17a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!198 &4839206655485270547 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8336585458268565193, guid: b49190e1a0ffdaf4b9e703c4eff1514a,
+    type: 3}
+  m_PrefabInstance: {fileID: 3502059563374294234}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5794963939749087233 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6985656547487415515, guid: b49190e1a0ffdaf4b9e703c4eff1514a,
@@ -357,9 +363,7 @@ MonoBehaviour:
   _waitTimeValue: 2
   _aiUpdateTimeValue: 1
   _attackWaitTimeValue: 3
-  _attackWaitTimer: 0
-  _state: 0
-  _target: {fileID: 0}
+  _hitParticle: {fileID: 4839206655485270547}
   _view: {fileID: 328160758306702978}
 --- !u!114 &328160758306702978
 MonoBehaviour:

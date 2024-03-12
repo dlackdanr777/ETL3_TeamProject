@@ -31,14 +31,14 @@ public class CinemachineCamera : MonoBehaviour
     }
 
 
-    private void Update()
+    protected virtual void Update()
     {
         CameraControll();
         UpdateCameraShake();
     }
 
 
-    protected virtual void CameraControll()
+    private void CameraControll()
     {
         MouseX += Input.GetAxisRaw("Mouse X") * _rotateSpeed * Time.deltaTime;
 

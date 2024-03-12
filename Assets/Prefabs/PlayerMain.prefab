@@ -4449,6 +4449,7 @@ MonoBehaviour:
   airControl: 0.1
   _camera: {fileID: 0}
   playerController: {fileID: 2244647164703090789}
+  _hitParticle: {fileID: 0}
   gravityValue: -9.81
   normalColliderHeight: 0
   controller: {fileID: 0}

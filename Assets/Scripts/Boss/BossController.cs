@@ -47,7 +47,12 @@ public class BossController : MonoBehaviour, IHp
 
     [SerializeField] private float _attackWaitTimeValue;
 
-    [SerializeField] private float _attackWaitTimer;
+    private float _attackWaitTimer;
+
+
+    [Space]
+    [Header("Effects")]
+    [SerializeField] private ParticleSystem _hitParticle;
 
 
     private BossAI _bossAI;
@@ -62,9 +67,9 @@ public class BossController : MonoBehaviour, IHp
 
     public Rigidbody Rigidbody => _rigidbody;
 
-    [SerializeField] protected BossAIState _state;
+    protected BossAIState _state;
 
-    [SerializeField] private GameObject _target;
+    private GameObject _target;
     public GameObject Target => _target;
 
     private float _currentExplorationTimer;
@@ -313,6 +318,8 @@ public class BossController : MonoBehaviour, IHp
         if (_hp == _minHp)
             return;
 
+        _hitParticle.Play();
+
         //방어중일때는 리턴한다.
         if (_state == BossAIState.Guard)
         {
@@ -324,7 +331,7 @@ public class BossController : MonoBehaviour, IHp
 
         OnHpChanged?.Invoke(subject, value);
         OnHpDepleted?.Invoke(subject, value);
-
+        Debug.Log("맞음 _hp");
         if (_hp == _minHp)
         {
             _state = BossAIState.Die;

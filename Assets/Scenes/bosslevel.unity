@@ -11263,55 +11263,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1618748683631313299, guid: b49190e1a0ffdaf4b9e703c4eff1514a,
-        type: 3}
-      propertyPath: _target
-      value: 
-      objectReference: {fileID: 1971494482}
-    - target: {fileID: 1618748683631313299, guid: b49190e1a0ffdaf4b9e703c4eff1514a,
-        type: 3}
-      propertyPath: _moveSpeed
-      value: 1.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1618748683631313299, guid: b49190e1a0ffdaf4b9e703c4eff1514a,
-        type: 3}
-      propertyPath: _attackWaitTimeValue
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1618748683631313299, guid: b49190e1a0ffdaf4b9e703c4eff1514a,
-        type: 3}
-      propertyPath: _attackDatas.Array.data[0]._stateChangeEnabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1618748683631313299, guid: b49190e1a0ffdaf4b9e703c4eff1514a,
-        type: 3}
-      propertyPath: _attackDatas.Array.data[1]._stateChangeEnabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1618748683631313299, guid: b49190e1a0ffdaf4b9e703c4eff1514a,
-        type: 3}
-      propertyPath: _attackDatas.Array.data[2]._stateChangeEnabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1618748683631313299, guid: b49190e1a0ffdaf4b9e703c4eff1514a,
-        type: 3}
-      propertyPath: _attackDatas.Array.data[4]._stateChangeEnabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7004168298014803672, guid: b49190e1a0ffdaf4b9e703c4eff1514a,
         type: 3}
       propertyPath: m_Name
       value: DarkKnight
-      objectReference: {fileID: 0}
-    - target: {fileID: 7004168298014803672, guid: b49190e1a0ffdaf4b9e703c4eff1514a,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7004168298014803672, guid: b49190e1a0ffdaf4b9e703c4eff1514a,
-        type: 3}
-      propertyPath: m_TagString
-      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 9038990596893119239, guid: b49190e1a0ffdaf4b9e703c4eff1514a,
         type: 3}
@@ -12273,12 +12228,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1928242097}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1971494482 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4834109633919517887, guid: 98ba2d33fe691c7449894b41c254c904,
-    type: 3}
-  m_PrefabInstance: {fileID: 2254863614157067528}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1975365376
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13130,6 +13079,31 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 548370069693685777, guid: 98ba2d33fe691c7449894b41c254c904,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 548399797580993529, guid: 98ba2d33fe691c7449894b41c254c904,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 548895090454315765, guid: 98ba2d33fe691c7449894b41c254c904,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 549136299990389345, guid: 98ba2d33fe691c7449894b41c254c904,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 549138125349741973, guid: 98ba2d33fe691c7449894b41c254c904,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1187595212086635804, guid: 98ba2d33fe691c7449894b41c254c904,
         type: 3}
       propertyPath: m_Name

@@ -41,6 +41,7 @@ public class Character : MonoBehaviour
     public SkillState skilling;
     public HitState hitting;
     public PlayerController playerController;
+    public ParticleSystem _hitParticle;
 
     [HideInInspector]
     public float gravityValue = -9.81f;
@@ -104,9 +105,10 @@ public class Character : MonoBehaviour
         if (4 < value)
         {
             movementSM.ChangeState(hitting);
-            Debug.Log("Èý");
             GameObject target = subject as GameObject;
             gameObject.transform.LookAt(target.transform);
+
+            _hitParticle.Play();
         }
     }
 
