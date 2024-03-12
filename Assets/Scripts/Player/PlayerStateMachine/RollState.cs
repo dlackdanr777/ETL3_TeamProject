@@ -30,8 +30,10 @@ public class RollState : State
         playerController.isHittable = false;
         playerController.moveable = false;
 
-        rollDirection = character.transform.forward;
-        rollDirection.y = 0;
+
+        input = moveAction.ReadValue<Vector2>();
+        velocity = new Vector3(input.x, 0, input.y);
+
         if (_afterRoutine != null)
         {
             character.StopCoroutine(_afterRoutine);
@@ -75,19 +77,14 @@ public class RollState : State
     {
         base.Exit();
         character.animator.applyRootMotion = false;
+
+        if (_afterRoutine != null)
+            character.StopCoroutine(_afterRoutine);
     }
 
     IEnumerator AfterAnimation()
     {
-        do
-        {
-            yield return YieldCache.WaitForSeconds(0.02f); // 잠시 대기합니다.
-        }
-        while (character.animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1);
-
-        stateMachine.ChangeState(character.standing); // 구르는 애니메이션이 끝나면 캐릭터의 상태를 변경합니다.
-
-        if (_afterRoutine != null)
-            character.StopCoroutine(_afterRoutine);
+        yield return YieldCache.WaitForSeconds(1.3f * 0.8f);
+        stateMachine.ChangeState(character.standing); // 구르는 애니메이션이 끝나면 캐릭터의 상태를 변경합니다.   
     }
 }

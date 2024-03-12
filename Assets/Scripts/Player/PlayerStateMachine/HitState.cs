@@ -60,15 +60,7 @@ public class HitState : State
 
     IEnumerator AfterAnimation()
     {
-        
-        do
-        {
-            character.animator.SetFloat("speed", 0f);
-            yield return YieldCache.WaitForSeconds(0.1f);
-        }
-        while (character.animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.9f);
-
+        yield return YieldCache.WaitForSeconds(1.1f);
         stateMachine.ChangeState(character.standing);
-
     }
 }

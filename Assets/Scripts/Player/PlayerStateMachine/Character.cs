@@ -86,8 +86,8 @@ public class Character : MonoBehaviour
     private void Update()
     {
         movementSM.currentState.HandleInput();
-
         movementSM.currentState.LogicUpdate();
+        Debug.Log(movementSM.currentState);
     }
 
     private void FixedUpdate()
