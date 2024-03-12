@@ -68,7 +68,10 @@ public class RollState : State
 
         if (velocity.sqrMagnitude > 0)
         {
-            character.transform.rotation = Quaternion.Slerp(character.transform.rotation, Quaternion.LookRotation(velocity), character.rotationDampTime);
+            Vector3 forward = character.Camera.transform.forward;
+            forward.y = 0;
+            Vector3 dir = Quaternion.LookRotation(velocity) * forward;
+            character.transform.rotation = Quaternion.Slerp(character.transform.rotation,Quaternion.LookRotation(dir), character.rotationDampTime);
         }
 
 

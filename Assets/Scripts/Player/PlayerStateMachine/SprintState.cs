@@ -10,6 +10,7 @@ public class SprintState : State
 
     bool grounded;
     bool sprint;
+    bool roll;
     float playerSpeed;
     bool sprintJump;
     Vector3 cVelocity;
@@ -25,6 +26,7 @@ public class SprintState : State
         base.Enter();
 
         sprint = false;
+        roll = false;
         sprintJump = false;
         input = Vector2.zero;
         velocity = Vector3.zero;
@@ -54,6 +56,9 @@ public class SprintState : State
             sprint = true;
         }
 
+        if (rollAction.triggered)
+            roll = true;
+
         if (jumpAction.triggered)
         {
             sprintJump = true;
@@ -70,9 +75,14 @@ public class SprintState : State
         {
             stateMachine.ChangeState(character.standing);
         }
+
         if (sprintJump)
         {
             stateMachine.ChangeState(character.sprintjumping);
+        }
+        if (roll)
+        {
+            stateMachine.ChangeState(character.rolling);
         }
     }
 

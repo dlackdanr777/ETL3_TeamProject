@@ -24,6 +24,11 @@ public class Character : MonoBehaviour
     [Range(0f, 1f)]
     public float airControl = 0.5f;
 
+    [Space]
+    [Header("Components")]
+    [SerializeField] private Camera _camera;
+    public Camera Camera => _camera;
+
     public StateMachine movementSM;
     public StandingState standing;
     public JumpingState jumping;
@@ -87,7 +92,6 @@ public class Character : MonoBehaviour
     {
         movementSM.currentState.HandleInput();
         movementSM.currentState.LogicUpdate();
-        Debug.Log(movementSM.currentState);
     }
 
     private void FixedUpdate()

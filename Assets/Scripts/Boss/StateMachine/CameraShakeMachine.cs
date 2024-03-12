@@ -42,7 +42,7 @@ public class CameraShakeMachine : StateMachineBehaviour
 
     private AnimationClip _clip;
 
-    private CinemachineCamera _camera => CinemachineCamera.Instance;
+    private CinemachineCamera[] _cameras;
 
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -65,13 +65,23 @@ public class CameraShakeMachine : StateMachineBehaviour
         {
             if (_shakeData[i].StartFrame <= _currentFrame && !_shakeData[i].GetIsStarted)
             {
-                _camera.CameraShake(_shakeData[i].Duration, _shakeData[i].Amplitude, _shakeData[i].Frequency);
+                _cameras = FindObjectsOfType<CinemachineCamera>();
+                Debug.Log(_cameras.Length);
+                for(int j = 0, countJ = _cameras.Length; j < countJ; j++)
+                {
+                    _cameras[j].CameraShake(_shakeData[i].Duration, _shakeData[i].Amplitude, _shakeData[i].Frequency);
+                }
+
                 _shakeData[i].SetIsStarted = true;
             }
 
             else if (_shakeData[i].FinishedFrame <= _currentFrame && !_shakeData[i].GetIsFinished)
             {
-                _camera.StopShake();
+                _cameras = FindObjectsOfType<CinemachineCamera>();
+                for (int j = 0, countJ = _cameras.Length; j < countJ; j++)
+                {
+                    _cameras[j].StopShake();
+                }
                 _shakeData[i].SetIsFinished = true;
             }
         }
