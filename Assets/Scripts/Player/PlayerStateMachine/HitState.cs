@@ -22,9 +22,11 @@ public class HitState : State
     {
         base.Enter();
         timePassed = 0f;
-        character.animator.SetTrigger("hit");
         playerController.moveable = false;
-        
+
+        character.ChangeState(CharacterState.Hit);
+        character.ChangeApplyRootMotion(true);
+
         if (_afterRoutine != null)
             character.StopCoroutine(_afterRoutine);
 
@@ -36,7 +38,6 @@ public class HitState : State
     {
         base.LogicUpdate();
         playerController.moveable = false;
-        character.animator.applyRootMotion = true;
     }
 
 
@@ -51,7 +52,7 @@ public class HitState : State
     {
         base.Exit();
         playerController.moveable = true;
-        character.animator.applyRootMotion = false;
+        character.ChangeApplyRootMotion(false);
 
         if (_afterRoutine != null)
             character.StopCoroutine(_afterRoutine);

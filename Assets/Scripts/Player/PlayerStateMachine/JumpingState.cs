@@ -27,7 +27,7 @@ public class JumpingState : State
         gravityVelocity.y = 0;
 
         character.animator.SetFloat("speed", 0);
-        character.animator.SetTrigger("jump");
+        character.ChangeState(CharacterState.Jump);
         Jump();
     }
     public override void HandleInput()
@@ -40,9 +40,8 @@ public class JumpingState : State
         base.LogicUpdate();
 
         if (grounded)
-        {
             stateMachine.ChangeState(character.landing);
-        }
+
     }
 
 

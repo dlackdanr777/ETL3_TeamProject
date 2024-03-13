@@ -17,45 +17,39 @@ public class SkillState : State
     public override void Enter()
     {
         base.Enter();
-        character.animator.applyRootMotion = true;
         timePassed = 0f;
-        character.animator.SetTrigger("skill");
         character.animator.SetFloat("speed", 0f);
+        character.ChangeState(CharacterState.Skill);
+        character.ChangeApplyRootMotion(true);
+
         playerController.moveable = false;
 
         if (_afterRoutine != null)
-        {
             character.StopCoroutine(_afterRoutine);
-        }
 
         _afterRoutine = character.StartCoroutine(AfterAnimation());
     }
+
+
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
     }
+
+
     public override void Exit()
     {
         base.Exit();
-        character.animator.applyRootMotion = false;
-    }
-
-    IEnumerator AfterAnimation()
-    {
-        
-        do
-        {
-            character.animator.SetTrigger("skill");
-            character.animator.SetFloat("speed", 0f);
-            yield return YieldCache.WaitForSeconds(0.2f);
-        }
-        while (character.animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.8f);
-        
-
-        stateMachine.ChangeState(character.standing);
+        character.ChangeApplyRootMotion(false);
 
         if (_afterRoutine != null)
             character.StopCoroutine(_afterRoutine);
+    }
 
+
+    IEnumerator AfterAnimation()
+    {
+        yield return YieldCache.WaitForSeconds(1.9f);
+        stateMachine.ChangeState(character.standing);
     }
 }

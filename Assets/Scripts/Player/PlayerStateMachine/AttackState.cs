@@ -20,10 +20,11 @@ public class AttackState : State
         playerController.moveable = false;
         attack = false;
         roll = false;
-        character.animator.applyRootMotion = true;
         timePassed = 0f;
-        character.animator.SetTrigger("attack");
+        character.CurrentAttackCount += 1;
         character.animator.SetFloat("speed", 0f);
+        character.ChangeState(CharacterState.Attack);
+        character.ChangeApplyRootMotion(true);
 
         input = moveAction.ReadValue<Vector2>();
         velocity = new Vector3(input.x, 0, input.y);
@@ -51,18 +52,20 @@ public class AttackState : State
         clipLength = character.animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
         clipSpeed = character.animator.GetCurrentAnimatorStateInfo(0).speed;
 
-        if (timePassed >= (clipLength / clipSpeed) * 0.35f && attack)
+        if (timePassed >= (clipLength / clipSpeed) * 0.35f && attack && character.CurrentAttackCount <= 4)
         {
             stateMachine.ChangeState(character.attacking);
         }
         if (timePassed >= clipLength / clipSpeed)
         {
+            character.CurrentAttackCount = 0;
             stateMachine.ChangeState(character.standing);
-            character.animator.SetTrigger("move");
+
         }
 
         if (roll)
         {
+            character.CurrentAttackCount = 0;
             stateMachine.ChangeState(character.rolling);
         }
 
@@ -87,8 +90,6 @@ public class AttackState : State
         base.Exit();
         attack = false;
         roll = false;
-        character.animator.applyRootMotion = false;
-
-        character.animator.ResetTrigger("attack");
+        character.ChangeApplyRootMotion(false);
     }
 }

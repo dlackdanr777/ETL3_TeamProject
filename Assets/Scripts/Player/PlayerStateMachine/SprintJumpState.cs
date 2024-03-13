@@ -16,26 +16,24 @@ public class SprintJumpState : State
     public override void Enter()
     {
         base.Enter();
-        character.animator.applyRootMotion = true;
-        timePassed = 0f;
-        character.animator.SetTrigger("sprintJump");
 
+        timePassed = 0f;
+        character.ChangeState(CharacterState.SprintJump);
+        character.ChangeApplyRootMotion(true);
         jumpTime = 1f;
     }
 
     public override void Exit() 
     {
         base.Exit();
-        character.animator.applyRootMotion = false;
+        character.ChangeApplyRootMotion(false);
     }
     public override void LogicUpdate()
     {
         base.LogicUpdate();
         if(timePassed>jumpTime)
-        {
-            character.animator.SetTrigger("move");
             stateMachine.ChangeState(character.sprinting);
-        }
+
         timePassed += Time.deltaTime;
     }
 

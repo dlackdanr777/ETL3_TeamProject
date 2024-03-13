@@ -23,22 +23,19 @@ public class RollState : State
     public override void Enter()
     {
         base.Enter();
-        character.animator.applyRootMotion = true;
         gravityValue = character.gravityValue;
-        character.animator.SetTrigger("roll");
         gravityVelocity.y = 0f;
         playerController.isHittable = false;
         playerController.moveable = false;
-
-
         input = moveAction.ReadValue<Vector2>();
         velocity = new Vector3(input.x, 0, input.y);
 
+        character.ChangeState(CharacterState.Roll);
+        character.ChangeApplyRootMotion(true);
+
         if (_afterRoutine != null)
-        {
             character.StopCoroutine(_afterRoutine);
-        }
-            
+
         _afterRoutine = character.StartCoroutine(AfterAnimation());
     }
 
@@ -79,7 +76,7 @@ public class RollState : State
     public override void Exit()
     {
         base.Exit();
-        character.animator.applyRootMotion = false;
+        character.ChangeApplyRootMotion(false);
 
         if (_afterRoutine != null)
             character.StopCoroutine(_afterRoutine);

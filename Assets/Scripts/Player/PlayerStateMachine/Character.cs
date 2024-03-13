@@ -1,8 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.TextCore.Text;
+
+public enum CharacterState
+{
+    IdleAndMove,
+    Jump,
+    SprintJump,
+    Landing,
+    Sprint,
+    Roll,
+    Attack,
+    Skill,
+    Hit,
+    Die,
+}
+
 
 public class Character : MonoBehaviour
 {
@@ -58,8 +70,25 @@ public class Character : MonoBehaviour
     [HideInInspector]
     public Vector3 playerVelocity;
 
- 
-    
+    protected CharacterState _state;
+
+    //플레이어의 공격 횟수를 카운트하는 변수
+    private int _currentAttackCount;
+    public int CurrentAttackCount
+    {
+        get 
+        {
+            return _currentAttackCount;
+        }
+
+        set
+        {
+
+            _currentAttackCount = value;
+            animator.SetInteger("AttackCount", _currentAttackCount);
+            Debug.Log(_currentAttackCount);
+        }
+    }
 
     private void Start()
     {
@@ -93,6 +122,7 @@ public class Character : MonoBehaviour
     {
         movementSM.currentState.HandleInput();
         movementSM.currentState.LogicUpdate();
+        animator.SetInteger("State", (int)_state);
     }
 
     private void FixedUpdate()
@@ -113,4 +143,13 @@ public class Character : MonoBehaviour
     }
 
 
+    public virtual void ChangeState(CharacterState state)
+    {
+        _state = state;
+    }
+
+    public virtual void ChangeApplyRootMotion(bool value)
+    {
+        animator.applyRootMotion = value;
+    }
 }

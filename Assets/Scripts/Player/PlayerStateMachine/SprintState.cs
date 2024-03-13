@@ -36,6 +36,8 @@ public class SprintState : State
         playerSpeed = character.sprintSpeed;
         grounded = character.controller.isGrounded;
         gravityValue = character.gravityValue;
+
+        character.ChangeState(CharacterState.IdleAndMove);
     }
 
     public override void HandleInput()

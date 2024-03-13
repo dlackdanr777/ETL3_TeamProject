@@ -43,6 +43,8 @@ public class StandingState : State
         playerSpeed =character.playerSpeed;
         grounded = character.controller.isGrounded;
         gravityValue = character.gravityValue;
+
+        character.ChangeState(CharacterState.IdleAndMove);
     }
     public override void HandleInput()
     {
@@ -83,7 +85,7 @@ public class StandingState : State
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        character.animator.SetFloat("speed",input.magnitude,character.speedDampTime,Time.deltaTime);
+        character.animator.SetFloat("speed", input.magnitude,character.speedDampTime,Time.deltaTime);
 
         if (sprint)
         {
@@ -96,7 +98,6 @@ public class StandingState : State
         if (attack)
         {
             stateMachine.ChangeState(character.attacking);
-            character.animator.SetTrigger("attack");
         }
         if (roll)
         {
@@ -140,7 +141,7 @@ public class StandingState : State
         base.Exit();
 
         gravityVelocity.y = 0f;
-        character.playerVelocity=new Vector3(input.x,0,input.y);
+        character.playerVelocity = new Vector3(input.x, 0, input.y);
 
         if(velocity.sqrMagnitude > 0)
         {

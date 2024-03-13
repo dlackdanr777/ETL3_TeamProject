@@ -15,18 +15,16 @@ public class LandingState : State
     {
         base.Enter();
         timePassed = 0f;
-        character.animator.SetTrigger("land");
-        landingTime=0.5f;
+        landingTime = 0.5f;
+        character.ChangeState(CharacterState.Landing);
     }
 
     public override void LogicUpdate()
     {
         base.LogicUpdate();
         if (timePassed > landingTime)
-        {
-            character.animator.SetTrigger("move");
             stateMachine.ChangeState(character.standing);
-        }
+
         timePassed += Time.deltaTime;
     }
 }
