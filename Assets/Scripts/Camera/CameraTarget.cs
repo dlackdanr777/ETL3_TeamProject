@@ -4,14 +4,23 @@ using UnityEngine;
 
 public class CameraTarget : MonoBehaviour
 {
-    [SerializeField] private Transform target;
+
     [SerializeField] private Vector3 _followOffset;
+    [SerializeField] private Transform _target;
 
     private Vector3 _currentVelocity = new Vector3(10, 10, 10);
+
     void Update()
     {
-        Vector3 targetPos = target.position + _followOffset;
-        transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref _currentVelocity, 0.2f);
+        if (_target == null)
+            return;
 
+        Vector3 targetPos = _target.position + _followOffset;
+        transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref _currentVelocity, 0.2f);
+    }
+
+    public void Init(Transform target)
+    {
+        _target = target;
     }
 }

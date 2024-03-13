@@ -8,6 +8,18 @@ public class MultiCharacter : Character
 {
     [SerializeField] private PhotonView _view;
 
+    protected override void Start()
+    {
+        base.Start();
+
+        if (!_view.IsMine)
+            return;
+
+        _cameraTarget = FindAnyObjectByType<CameraTarget>();
+        _cameraTarget.Init(transform);
+        cameraTransform = Camera.main.transform;
+    }
+
 
     protected override void Update()
     {

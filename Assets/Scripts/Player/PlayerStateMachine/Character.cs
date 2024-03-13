@@ -36,10 +36,8 @@ public class Character : MonoBehaviour
     [Range(0f, 1f)]
     public float airControl = 0.5f;
 
-    [Space]
-    [Header("Components")]
-    [SerializeField] private Camera _camera;
-    public Camera Camera => _camera;
+    [SerializeField] protected CameraTarget _cameraTarget;
+    public CameraTarget CameraTarget => _cameraTarget;
 
     public StateMachine movementSM;
     public StandingState standing;
@@ -90,7 +88,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         playerController = GetComponent<PlayerController>();
         controller = GetComponent<CharacterController>();
@@ -115,7 +113,6 @@ public class Character : MonoBehaviour
         gravityValue *= gravityMultiplier;
 
         playerController.OnHpDepleted += OnHitStateChange;
-
     }
 
     protected virtual void Update()
