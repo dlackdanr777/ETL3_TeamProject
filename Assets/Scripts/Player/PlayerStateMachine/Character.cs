@@ -118,7 +118,7 @@ public class Character : MonoBehaviour
 
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         movementSM.currentState.HandleInput();
         movementSM.currentState.LogicUpdate();
@@ -143,10 +143,12 @@ public class Character : MonoBehaviour
     }
 
 
+
     public virtual void ChangeState(CharacterState state)
     {
         _state = state;
     }
+
 
     public virtual void ChangeApplyRootMotion(bool value)
     {

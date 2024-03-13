@@ -23,7 +23,6 @@ public class MultiBossController : BossController
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            Debug.Log("다른애들한테도 보내");
             _view.RPC("ChangeStateMulti", RpcTarget.All, nextState);
         }
 
@@ -33,7 +32,6 @@ public class MultiBossController : BossController
     [PunRPC]
     private void ChangeStateMulti(BossAIState nextState)
     {
-        Debug.Log("받았어");
         _state = nextState;
     }
 }
