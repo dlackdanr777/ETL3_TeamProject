@@ -4437,7 +4437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e46fe80ef535ad48ba9db843f5db17e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 2.5
+  playerSpeed: 1.5
   sprintSpeed: 7
   jumpHeight: 1
   gravityMultiplier: 2
@@ -4447,7 +4447,7 @@ MonoBehaviour:
   velocityDampTime: 0.2
   rotationDampTime: 0.2
   airControl: 0.1
-  _camera: {fileID: 0}
+  _cameraTarget: {fileID: 0}
   playerController: {fileID: 2244647164703090789}
   _hitParticle: {fileID: 0}
   gravityValue: -9.81

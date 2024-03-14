@@ -166,7 +166,7 @@ public class UISettings : UIView
 
     private void OnExitButtonClicked()
     {
-        _uiNav.Hide("UIMultiPlayLogin");
+        _uiNav.Hide("UISettings");
         SoundManager.Instance.PlayEffectSound(SoundEffectType.MenuClose);
     }
 
