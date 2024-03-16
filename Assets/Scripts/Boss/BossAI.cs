@@ -26,7 +26,7 @@ public class BossAI
     public BossAI(BossController boss)
     {
         _boss = boss;
-        _boss.OnHpDepleted += ChangeGuardState;
+        //_boss.OnHpDepleted += ChangeGuardState;
         NodeInit();
     }
 

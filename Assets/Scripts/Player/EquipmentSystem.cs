@@ -8,13 +8,14 @@ public class EquipmentSystem : MonoBehaviour
     [SerializeField] GameObject weapon;
     [SerializeField] GameObject weaponSheath;
 
-    GameObject currentWeaponInhand;
+    protected GameObject currentWeaponInhand;
     GameObject currentWeaponInhandSheath;
 
-    private void Start()
+    protected virtual void Start()
     {
         currentWeaponInhand = Instantiate(weapon, weaponHolder.transform);
     }
+
 
     public void DrawWeapon()
     {
@@ -29,10 +30,13 @@ public class EquipmentSystem : MonoBehaviour
         Destroy(currentWeaponInhand);
     }
     
+
     public void StartDealDamage()
     {
         currentWeaponInhand.GetComponentInChildren<DamageDealer>().StartDealDamage();
     }
+
+
     public void EndDealDamage()
     {
         currentWeaponInhand.GetComponentInChildren<DamageDealer>().EndDealDamage();

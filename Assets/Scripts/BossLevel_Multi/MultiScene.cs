@@ -25,6 +25,9 @@ public class MultiScene : MonoBehaviour
 
     private void Start()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
         GameObject obj = PhotonNetwork.Instantiate("Player(Multi)", _spawnPos[_index].position, Quaternion.identity);
         Character player = obj.GetComponent<Character>();
         UIPlayer uiPlayer = Instantiate(_uiPlayerPrefab);

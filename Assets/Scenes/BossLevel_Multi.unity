@@ -13376,7 +13376,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mainVitualCamera: {fileID: 2496071656020862205}
   _rotateTarget: {fileID: 287733263236898928}
-  _rotateSpeed: 500
+  _rotateSpeed: 300
   _shakeAmplitude: 1.2
   _shakeFrequency: 2
 --- !u!1 &1599307275795050760

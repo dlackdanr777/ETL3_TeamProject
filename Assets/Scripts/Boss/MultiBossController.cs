@@ -30,9 +30,8 @@ public class MultiBossController : BossController
 
     public override void DepleteHp(object subject, float value)
     {
-        Debug.Log("¸ÂÀ½");
-        //_view.RPC("DepleteHpMulti", RpcTarget.All, value);
-        base.DepleteHp(subject, value);
+        _view.RPC("DepleteHpMulti", RpcTarget.All, value);
+
     }
 
 
@@ -46,7 +45,7 @@ public class MultiBossController : BossController
     [PunRPC]
     private void DepleteHpMulti(float value)
     {
-
+        base.DepleteHp(null, value);
     }
 
 }

@@ -328,23 +328,12 @@ public class BossController : MonoBehaviour, IHp
 
         _hitParticle.Play();
 
-        //방어중일때는 리턴한다.
-        if (_state == BossAIState.Guard)
-        {
-            //오브젝트 타입 매개변수로 받은 변수의 타입이 게임 오브젝트 일 경우 그 오브젝트를 바라보도록 설정
-            if(subject.GetType() == typeof(GameObject))
-                _target = subject as GameObject;
-
-            _animator.Play("DefenseHit", -1, 0);
-            return;
-        }
-
         _hp = Mathf.Clamp(_hp - value, _minHp, _maxHp);
 
         OnHpChanged?.Invoke(subject, value);
         OnHpDepleted?.Invoke(subject, value);
 
-        if (_hp == _minHp)
+        if (_hp <= _minHp)
         {
             ChangeAiState(BossAIState.Die);
             _rigidbody.isKinematic = true;

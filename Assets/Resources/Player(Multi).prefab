@@ -8188,7 +8188,7 @@ GameObject:
   - component: {fileID: 4972536969118208626}
   - component: {fileID: 7666113332344692280}
   - component: {fileID: 3324510744443697809}
-  - component: {fileID: 1993283395502530322}
+  - component: {fileID: 4471482025209233642}
   - component: {fileID: 4915597422974087765}
   - component: {fileID: 5301285115355376819}
   - component: {fileID: 4950880809433295398}
@@ -8397,7 +8397,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   playerVelocity: {x: 0, y: 0, z: 0}
   _view: {fileID: 5301285115355376819}
---- !u!114 &1993283395502530322
+--- !u!114 &4471482025209233642
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8406,12 +8406,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4444315447365310143}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a06caed6c0a40324caf41aa67c27df66, type: 3}
+  m_Script: {fileID: 11500000, guid: abbb7cb60cbeded438ad685cc8f7b648, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   weaponHolder: {fileID: 2043591208333167516}
-  weapon: {fileID: 7921338865303790825, guid: b6eb4301b3886b141a597ad761bee08f, type: 3}
+  weapon: {fileID: 7921338865303790825, guid: 59563110abe15ec4a894b9aa35f73841, type: 3}
   weaponSheath: {fileID: 2864675059349440383}
+  _view: {fileID: 5301285115355376819}
 --- !u!82 &4915597422974087765
 AudioSource:
   m_ObjectHideFlags: 0

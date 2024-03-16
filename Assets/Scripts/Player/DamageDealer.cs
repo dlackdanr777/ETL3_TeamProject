@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,12 +16,17 @@ public class DamageDealer : MonoBehaviour
         hasDealtDamage = new List<GameObject>();
     }
 
-    void Update()
+
+    public virtual void Init(PhotonView view)
+    {
+
+    }
+
+
+    protected virtual void Update()
     {
         if (canDealDamage)
-        {
-
-          
+        {      
             RaycastHit hit;
 
             int layerMask = 1 << 11;
