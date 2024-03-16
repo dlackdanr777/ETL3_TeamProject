@@ -4,6 +4,13 @@ using UnityEngine;
 [RequireComponent(typeof(PhotonView))]
 public class MultiScene : MonoBehaviour
 {
+    [Space]
+    [Header("Player UI")]
+    [SerializeField] private UIPlayer _uiPlayerPrefab;
+
+
+    [Space]
+    [Header("Player Spawn Position")]
     [SerializeField] private Transform[] _spawnPos;
 
     private PhotonView _view;
@@ -18,7 +25,10 @@ public class MultiScene : MonoBehaviour
 
     private void Start()
     {
-        PhotonNetwork.Instantiate("Player(Multi)", _spawnPos[_index].position, Quaternion.identity);
+        GameObject obj = PhotonNetwork.Instantiate("Player(Multi)", _spawnPos[_index].position, Quaternion.identity);
+        Character player = obj.GetComponent<Character>();
+        UIPlayer uiPlayer = Instantiate(_uiPlayerPrefab);
+        uiPlayer.Init(player);
 
         _view.RPC("AddIndex", RpcTarget.All);
     }

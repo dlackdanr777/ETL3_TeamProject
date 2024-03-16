@@ -41,7 +41,6 @@ public class State
     }
     public virtual void Enter()
     {
-        Debug.Log("enter state: " + this.ToString());
         
     }
 

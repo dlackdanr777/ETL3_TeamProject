@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2130867664944804301}
   - component: {fileID: 4267057200908412190}
   - component: {fileID: 1987382911723971035}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Attack6-1 Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,6 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71ffd3c1e57a9d54c962d597f8b28107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hitLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!136 &1987382911723971035
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -81,6 +84,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8050162103503336465, guid: 2a0f7fb09e2a84148a59d5eec78e5b01,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8050162103503336479, guid: 2a0f7fb09e2a84148a59d5eec78e5b01,
         type: 3}
@@ -132,6 +140,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8050162103616435954, guid: 2a0f7fb09e2a84148a59d5eec78e5b01,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 8050162103962794433, guid: 2a0f7fb09e2a84148a59d5eec78e5b01,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -171,6 +184,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8050162103962794436, guid: 2a0f7fb09e2a84148a59d5eec78e5b01,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8050162104058630443, guid: 2a0f7fb09e2a84148a59d5eec78e5b01,
         type: 3}
@@ -247,10 +265,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: Effect_08_FlameEruption
       objectReference: {fileID: 0}
+    - target: {fileID: 8050162104058630444, guid: 2a0f7fb09e2a84148a59d5eec78e5b01,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 8050162105319037056, guid: 2a0f7fb09e2a84148a59d5eec78e5b01,
         type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8050162105319037057, guid: 2a0f7fb09e2a84148a59d5eec78e5b01,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8050162105319037071, guid: 2a0f7fb09e2a84148a59d5eec78e5b01,
         type: 3}

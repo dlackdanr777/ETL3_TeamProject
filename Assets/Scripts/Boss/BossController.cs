@@ -10,6 +10,9 @@ public class BossController : MonoBehaviour, IHp
 {
     [Header("Ability")]
 
+    [SerializeField] private string _name;
+    public string Name => _name;
+
     [SerializeField] private float _power;
     public float Power => _power;
 
@@ -34,9 +37,11 @@ public class BossController : MonoBehaviour, IHp
     [Tooltip("보스 탐색 갱신 시간")]
     [SerializeField] private float _explorationTime;
 
+
     [Space]
     [Header("Attack")]
     [SerializeField] private BossAttackData[] _attackDatas;
+
 
     [Space]
     [Header("AI")]
@@ -54,6 +59,10 @@ public class BossController : MonoBehaviour, IHp
     [Header("Effects")]
     [SerializeField] private ParticleSystem _hitParticle;
 
+
+    [Space]
+    [Header("UI")]
+    [SerializeField] private UIBoss _uiBossPrefab;
 
     private BossAI _bossAI;
 
@@ -95,6 +104,9 @@ public class BossController : MonoBehaviour, IHp
         Init();
         SetWaitTime();
         InvokeRepeating("AIUpdate", _aiUpdateTimeValue, _aiUpdateTimeValue);
+
+        UIBoss uiBoss = Instantiate(_uiBossPrefab);
+        uiBoss.Init(this);
     }
 
 
@@ -136,13 +148,7 @@ public class BossController : MonoBehaviour, IHp
 
         UpdateTimer();
         UpdateFindTarget();
-
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            DepleteHp("창묵", 50);
-            Debug.LogFormat("현재 체력은 {0} 입니다.", _hp);
-        }
-
+        _rigidbody.velocity = Vector3.zero;
     }
 
 
@@ -214,6 +220,8 @@ public class BossController : MonoBehaviour, IHp
     }
 
 
+
+    /// <summary>보스 공격 데이터중 조건을 만족한 데이터들 중 한가지를 랜덤으로 반환하는 함수</summary>
     public BossAttackData GetPossibleAttackData()
     {
         List<BossAttackData> possibleSkillDataList = new List<BossAttackData>();
@@ -305,7 +313,7 @@ public class BossController : MonoBehaviour, IHp
     {
         _hp = Mathf.Clamp(_hp + value, _minHp, _maxHp);
 
-        OnHpChanged?.Invoke(subject, value);
+        OnHpChanged?.Invoke(subject, _hp);
         OnHpRecoverd?.Invoke(subject, value);
 
         if (_hp == _maxHp)
@@ -313,7 +321,7 @@ public class BossController : MonoBehaviour, IHp
     }
 
 
-    public void DepleteHp(object subject, float value)
+    public virtual void DepleteHp(object subject, float value)
     {
         if (_hp == _minHp)
             return;
@@ -323,6 +331,10 @@ public class BossController : MonoBehaviour, IHp
         //방어중일때는 리턴한다.
         if (_state == BossAIState.Guard)
         {
+            //오브젝트 타입 매개변수로 받은 변수의 타입이 게임 오브젝트 일 경우 그 오브젝트를 바라보도록 설정
+            if(subject.GetType() == typeof(GameObject))
+                _target = subject as GameObject;
+
             _animator.Play("DefenseHit", -1, 0);
             return;
         }
@@ -331,10 +343,11 @@ public class BossController : MonoBehaviour, IHp
 
         OnHpChanged?.Invoke(subject, value);
         OnHpDepleted?.Invoke(subject, value);
-        Debug.Log("맞음 _hp");
+
         if (_hp == _minHp)
         {
-            _state = BossAIState.Die;
+            ChangeAiState(BossAIState.Die);
+            _rigidbody.isKinematic = true;
             OnHpMin?.Invoke();
         }
 

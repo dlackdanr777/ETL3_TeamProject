@@ -26,8 +26,6 @@ public class AttackState : State
         character.ChangeState(CharacterState.Attack);
         character.ChangeApplyRootMotion(true);
 
-        input = moveAction.ReadValue<Vector2>();
-        velocity = new Vector3(input.x, 0, input.y);
     }
 
     public override void HandleInput()
@@ -40,8 +38,11 @@ public class AttackState : State
             playerController.DepleteSta(playerController.Sta,playerController.attackStamina);
         }
 
-        if (rollAction.triggered)
+        if (rollAction.triggered && playerController.Sta > playerController.rollStamina)
+        {
+            playerController.DepleteSta(playerController.Sta, playerController.rollStamina);
             roll = true;
+        }
     }
     public override void LogicUpdate()
     {
@@ -75,14 +76,10 @@ public class AttackState : State
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
+        Vector3 forward = character.CameraTarget.transform.forward;
+        forward.y = 0;
+        character.transform.rotation = Quaternion.Slerp(character.transform.rotation, Quaternion.LookRotation(forward), character.rotationDampTime);
 
-        if (velocity.sqrMagnitude > 0)
-        {
-            Vector3 forward = character.CameraTarget.transform.forward;
-            forward.y = 0;
-            Vector3 dir = Quaternion.LookRotation(velocity) * forward;
-            character.transform.rotation = Quaternion.Slerp(character.transform.rotation, Quaternion.LookRotation(dir), character.rotationDampTime);
-        }
     }
 
     public override void Exit()

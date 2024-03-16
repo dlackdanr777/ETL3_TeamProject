@@ -4448,6 +4448,7 @@ MonoBehaviour:
   rotationDampTime: 0.2
   airControl: 0.1
   _cameraTarget: {fileID: 0}
+  _uiPlayerPrefab: {fileID: 0}
   playerController: {fileID: 2244647164703090789}
   _hitParticle: {fileID: 0}
   gravityValue: -9.81

@@ -25,7 +25,14 @@ public class MultiBossController : BossController
         {
             _view.RPC("ChangeStateMulti", RpcTarget.All, nextState);
         }
+    }
 
+
+    public override void DepleteHp(object subject, float value)
+    {
+        Debug.Log("¸ÂÀ½");
+        //_view.RPC("DepleteHpMulti", RpcTarget.All, value);
+        base.DepleteHp(subject, value);
     }
 
 
@@ -34,4 +41,12 @@ public class MultiBossController : BossController
     {
         _state = nextState;
     }
+
+
+    [PunRPC]
+    private void DepleteHpMulti(float value)
+    {
+
+    }
+
 }

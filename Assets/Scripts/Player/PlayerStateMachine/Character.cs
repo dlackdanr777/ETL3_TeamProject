@@ -36,8 +36,11 @@ public class Character : MonoBehaviour
     [Range(0f, 1f)]
     public float airControl = 0.5f;
 
+    [Space]
+    [Header("Components")]
     [SerializeField] protected CameraTarget _cameraTarget;
     public CameraTarget CameraTarget => _cameraTarget;
+
 
     public StateMachine movementSM;
     public StandingState standing;
@@ -81,10 +84,8 @@ public class Character : MonoBehaviour
 
         set
         {
-
             _currentAttackCount = value;
             animator.SetInteger("AttackCount", _currentAttackCount);
-            Debug.Log(_currentAttackCount);
         }
     }
 
@@ -115,6 +116,7 @@ public class Character : MonoBehaviour
         playerController.OnHpDepleted += OnHitStateChange;
     }
 
+
     protected virtual void Update()
     {
         movementSM.currentState.HandleInput();
@@ -122,23 +124,25 @@ public class Character : MonoBehaviour
         animator.SetInteger("State", (int)_state);
     }
 
-    private void FixedUpdate()
+
+    protected virtual void FixedUpdate()
     {
         movementSM.currentState.PhysicsUpdate();
     }
+
 
     public void OnHitStateChange(object subject, float value)
     {
         if (4 < value)
         {
             movementSM.ChangeState(hitting);
+            CurrentAttackCount = 0;
             GameObject target = subject as GameObject;
             gameObject.transform.LookAt(target.transform);
 
             _hitParticle.Play();
         }
     }
-
 
 
     public virtual void ChangeState(CharacterState state)

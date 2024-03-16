@@ -58,8 +58,11 @@ public class SprintState : State
             sprint = true;
         }
 
-        if (rollAction.triggered)
+        if (rollAction.triggered && playerController.Sta > playerController.rollStamina)
+        {
+            playerController.DepleteSta(playerController.Sta, playerController.rollStamina);
             roll = true;
+        }
 
         if (jumpAction.triggered)
         {

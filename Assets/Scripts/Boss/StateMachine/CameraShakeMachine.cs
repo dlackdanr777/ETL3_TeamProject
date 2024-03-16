@@ -66,7 +66,6 @@ public class CameraShakeMachine : StateMachineBehaviour
             if (_shakeData[i].StartFrame <= _currentFrame && !_shakeData[i].GetIsStarted)
             {
                 _cameras = FindObjectsOfType<CinemachineCamera>();
-                Debug.Log(_cameras.Length);
                 for(int j = 0, countJ = _cameras.Length; j < countJ; j++)
                 {
                     _cameras[j].CameraShake(_shakeData[i].Duration, _shakeData[i].Amplitude, _shakeData[i].Frequency);

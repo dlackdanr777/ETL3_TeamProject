@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5024346403794501198}
   - component: {fileID: 3102278153180879388}
   - component: {fileID: -1524820680272955430}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Attack6-2 Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,3 +136,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71ffd3c1e57a9d54c962d597f8b28107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hitLayer:
+    serializedVersion: 2
+    m_Bits: 0

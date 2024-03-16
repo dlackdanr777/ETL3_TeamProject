@@ -18106,8 +18106,8 @@ Rigidbody:
   m_GameObject: {fileID: 7004168298014803672}
   serializedVersion: 4
   m_Mass: 1000
-  m_Drag: 0
-  m_AngularDrag: 1
+  m_Drag: 0.5
+  m_AngularDrag: 10
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -18123,7 +18123,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!136 &9148960925585635659
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -18144,7 +18144,7 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 1.929701
+  m_Height: 1.9
   m_Direction: 1
   m_Center: {x: 0, y: 1.0020596, z: 0}
 --- !u!114 &1618748683631313299
@@ -18159,6 +18159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1b854c5a8de150438ee0d6cad9a8468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _name: 
   _power: 5
   _moveSpeed: 1.8
   _rotateSpeed: 2
@@ -18169,7 +18170,7 @@ MonoBehaviour:
   _attackDatas:
   - _name: "\uADFC\uC811 \uACF5\uACA9 1"
     _maxRange: 5
-    _minRange: 3
+    _minRange: 0
     _frames:
     - _damageMul: 1
       _startFrame: 67
@@ -18178,8 +18179,8 @@ MonoBehaviour:
     _attackState: 0
     _stateChangeEnabled: 1
   - _name: "\uADFC\uC811 \uACF5\uACA9 2"
-    _maxRange: 5
-    _minRange: 0
+    _maxRange: 10
+    _minRange: 3
     _frames:
     - _damageMul: 1
       _startFrame: 58
@@ -18215,15 +18216,15 @@ MonoBehaviour:
     _maxRange: 20
     _minRange: 13
     _frames:
-    - _damageMul: 0.3
+    - _damageMul: 0.5
       _startFrame: 0
       _finishedFrame: 35
       _attackClass: {fileID: 5527897533021643121}
-    - _damageMul: 0.3
+    - _damageMul: 0.5
       _startFrame: 40
       _finishedFrame: 75
       _attackClass: {fileID: 5527897533021643121}
-    - _damageMul: 0.3
+    - _damageMul: 0.5
       _startFrame: 80
       _finishedFrame: 115
       _attackClass: {fileID: 5527897533021643121}
@@ -18279,6 +18280,8 @@ MonoBehaviour:
   _aiUpdateTimeValue: 1
   _attackWaitTimeValue: 1
   _hitParticle: {fileID: 8336585458268565193}
+  _uiBossPrefab: {fileID: 1260565293285785109, guid: b8c02c8546b691741b431b43ce7742bb,
+    type: 3}
 --- !u!1 &7034038627649068806
 GameObject:
   m_ObjectHideFlags: 0

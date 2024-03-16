@@ -51,7 +51,7 @@ PrefabInstance:
     - target: {fileID: 9038990596893119239, guid: b49190e1a0ffdaf4b9e703c4eff1514a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -108.231316
+      value: -114.84
       objectReference: {fileID: 0}
     - target: {fileID: 9038990596893119239, guid: b49190e1a0ffdaf4b9e703c4eff1514a,
         type: 3}
@@ -61,7 +61,7 @@ PrefabInstance:
     - target: {fileID: 9038990596893119239, guid: b49190e1a0ffdaf4b9e703c4eff1514a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -157.88586
+      value: -177.54
       objectReference: {fileID: 0}
     - target: {fileID: 9038990596893119239, guid: b49190e1a0ffdaf4b9e703c4eff1514a,
         type: 3}
@@ -244,6 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01e98049ad2bb964eb55abb75f2f7ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _name: Dark Knight
   _power: 5
   _moveSpeed: 1.8
   _rotateSpeed: 2
@@ -364,6 +365,8 @@ MonoBehaviour:
   _aiUpdateTimeValue: 1
   _attackWaitTimeValue: 3
   _hitParticle: {fileID: 4839206655485270547}
+  _uiBossPrefab: {fileID: 1260565293285785109, guid: b8c02c8546b691741b431b43ce7742bb,
+    type: 3}
   _view: {fileID: 328160758306702978}
 --- !u!114 &328160758306702978
 MonoBehaviour:

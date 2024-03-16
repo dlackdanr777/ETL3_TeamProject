@@ -25,8 +25,6 @@ public class Projectile : MonoBehaviour, IAttack
 
     public void Init(object subject, float damageValue, float damageInterval)
     {
-        Debug.LogFormat("{0}의 공격력은 {1} 입니다.", subject, damageValue);
-
         _subject = subject;
         _damageValue = damageValue;
         _damageInterval = damageInterval;
@@ -35,8 +33,8 @@ public class Projectile : MonoBehaviour, IAttack
 
     public void AttackTarget(IHp iHp, float aomunt)
     {
-        iHp.DepleteHp(_subject, aomunt);
 
+        iHp.DepleteHp(_subject, aomunt);
         OnTargetDamaged?.Invoke();
     }
 

@@ -32,6 +32,15 @@ public class MultiCharacter : Character
     }
 
 
+    protected override void FixedUpdate()
+    {
+        if (!_view.IsMine)
+            return;
+
+        base.FixedUpdate();
+    }
+
+
 
     public override void ChangeState(CharacterState state)
     {
@@ -43,7 +52,7 @@ public class MultiCharacter : Character
     public override void ChangeApplyRootMotion(bool value)
     {
         base.ChangeApplyRootMotion(value);
-        _view.RPC("MultiChangeApplyRootMotion", RpcTarget.All, value);
+        _view.RPC("MultiChangeApplyRootMotion", RpcTarget.Others, false);
     }
 
 

@@ -152,7 +152,7 @@ public class UIRoom : MonoBehaviourPunCallbacks
     private void OnStartButtonClicked()
     {
         _canvasGroup.blocksRaycasts = false;
-        PhotonNetwork.LoadLevel("BoosLevel_Multi");
+        PhotonNetwork.LoadLevel("BossLevel_Multi");
     }
 
 
