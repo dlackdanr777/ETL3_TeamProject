@@ -123,6 +123,7 @@ public class UIMultiPlayLogin : UIView
 
         _connectButton.interactable = false;
         PhotonManager.Instance.MasterServerConnect(_nameInputField.text);
+        LoadingSceneManager.LoadScene("MultiplayLobby");
     }
 
 

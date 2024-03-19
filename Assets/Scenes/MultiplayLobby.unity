@@ -3908,8 +3908,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: MUK
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0b9c0f1fb6942da4f98f97babbb8b64c, type: 2}
-  m_sharedMaterial: {fileID: 4344782264322957408, guid: 0b9c0f1fb6942da4f98f97babbb8b64c,
+  m_fontAsset: {fileID: 11400000, guid: 3ba8c54d4ca42d54b946c0d518466c03, type: 2}
+  m_sharedMaterial: {fileID: -4462828567073266565, guid: 3ba8c54d4ca42d54b946c0d518466c03,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -5219,8 +5219,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Room Name
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0b9c0f1fb6942da4f98f97babbb8b64c, type: 2}
-  m_sharedMaterial: {fileID: 4344782264322957408, guid: 0b9c0f1fb6942da4f98f97babbb8b64c,
+  m_fontAsset: {fileID: 11400000, guid: 3ba8c54d4ca42d54b946c0d518466c03, type: 2}
+  m_sharedMaterial: {fileID: -4462828567073266565, guid: 3ba8c54d4ca42d54b946c0d518466c03,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -5639,8 +5639,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u200B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0b9c0f1fb6942da4f98f97babbb8b64c, type: 2}
-  m_sharedMaterial: {fileID: 4344782264322957408, guid: 0b9c0f1fb6942da4f98f97babbb8b64c,
+  m_fontAsset: {fileID: 11400000, guid: 3ba8c54d4ca42d54b946c0d518466c03, type: 2}
+  m_sharedMaterial: {fileID: -4462828567073266565, guid: 3ba8c54d4ca42d54b946c0d518466c03,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -5665,8 +5665,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

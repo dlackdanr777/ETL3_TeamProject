@@ -133,14 +133,13 @@ public class UIHome : UIView
 
     private void StartGameButtonClicked()
     {
-        Debug.Log("스타트 게임");
         SoundManager.Instance.PlayEffectSound(SoundEffectType.MenuOpen);
+        LoadingSceneManager.LoadScene("BossLevel");
     }
 
 
     private void MultiplayButtonClicked()
     {
-        Debug.Log("멀티 플레이");
         _uiNav.Show("UIMultiPlayLogin");
         SoundManager.Instance.PlayEffectSound(SoundEffectType.MenuOpen);
     }
@@ -148,7 +147,6 @@ public class UIHome : UIView
 
     private void SettingsButtonClicked()
     {
-        Debug.Log("세팅");
         _uiNav.Show("UISettings");
         SoundManager.Instance.PlayEffectSound(SoundEffectType.MenuOpen);
     }
@@ -156,7 +154,6 @@ public class UIHome : UIView
 
     private void QuitButtonClicked()
     {
-        Debug.Log("나가기");
         Application.Quit();
     }
 

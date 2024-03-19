@@ -6,12 +6,21 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/FirstLoading.unity
+    guid: 5b8f2cdcd4f46494981d8b9c51025bf6
+  - enabled: 1
     path: Assets/Scenes/Title Screen.unity
     guid: ca985f289377f0e47b64fa0a72ab99bb
+  - enabled: 1
+    path: Assets/Scenes/LoadingScene.unity
+    guid: 163252172cd7a174ca6b464680103929
   - enabled: 1
     path: Assets/Scenes/MultiplayLobby.unity
     guid: aebbbc1349dda8147bca01fdab753381
   - enabled: 1
     path: Assets/Scenes/BossLevel_Multi.unity
     guid: 0d9833a9a56b05f439ea0f81b8626668
+  - enabled: 1
+    path: Assets/Scenes/BossLevel.unity
+    guid: 7c4d2b50cd39f484ebd15686d9831e8f
   m_configObjects: {}

@@ -77,11 +77,6 @@ namespace Muks.Photon
             base.OnJoinedLobby();
 
             //로비 씬으로 이동
-            PhotonNetwork.LoadLevel("MultiplayLobby");
-
-            print("로비 진입 성공");
-
-            Debug.Log(PhotonNetwork.NickName);
         }
     }
 
