@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour,IHp,IStamina,ISoundEffect
+public class PlayerController : MonoBehaviour,IHp,IStamina
 {
     Animator animator;
     [SerializeField] private float _maxHp;

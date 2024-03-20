@@ -12333,6 +12333,7 @@ MonoBehaviour:
   _player: {fileID: 405003318732671975}
   _uiPlayerPrefab: {fileID: 3276429942259291785, guid: 048cecc7e76f3bc4dae7590a92a63f81,
     type: 3}
+  _backgroundAudio: {fileID: 8300000, guid: 8c300e3b702c8104ca3181e07fe47a16, type: 3}
 --- !u!4 &1961211506
 Transform:
   m_ObjectHideFlags: 0

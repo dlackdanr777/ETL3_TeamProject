@@ -68,4 +68,11 @@ public class MultiCharacter : Character
     {
         animator.applyRootMotion = value;
     }
+
+
+    protected override void OnAnimatorMove()
+    {
+        if(_view.IsMine)
+            base.OnAnimatorMove();
+    }
 }

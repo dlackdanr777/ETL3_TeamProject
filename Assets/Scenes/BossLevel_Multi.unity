@@ -1098,6 +1098,7 @@ MonoBehaviour:
   - {fileID: 385589904}
   - {fileID: 131333111}
   - {fileID: 1593507971}
+  _backgroundAudio: {fileID: 8300000, guid: 8c300e3b702c8104ca3181e07fe47a16, type: 3}
 --- !u!114 &218956658
 MonoBehaviour:
   m_ObjectHideFlags: 0

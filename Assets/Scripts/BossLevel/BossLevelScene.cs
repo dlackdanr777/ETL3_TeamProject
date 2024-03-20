@@ -9,6 +9,10 @@ public class BossLevelScene : MonoBehaviour
     [SerializeField] private Character _player;
     [SerializeField] private UIPlayer _uiPlayerPrefab;
 
+    [Space]
+    [Header("Audio Clips")]
+    [SerializeField] private AudioClip _backgroundAudio;
+
 
     void Start()
     {
@@ -17,5 +21,7 @@ public class BossLevelScene : MonoBehaviour
 
         UIPlayer uiPlayer = Instantiate(_uiPlayerPrefab);
         uiPlayer.Init(_player);
+
+        SoundManager.Instance.PlayBackgroundMusic(_backgroundAudio);
     }
 }

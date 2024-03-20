@@ -13,6 +13,10 @@ public class MultiScene : MonoBehaviour
     [Header("Player Spawn Position")]
     [SerializeField] private Transform[] _spawnPos;
 
+    [Space]
+    [Header("Audio Clips")]
+    [SerializeField] private AudioClip _backgroundAudio;
+
     private PhotonView _view;
     private int _index;
 
@@ -34,6 +38,8 @@ public class MultiScene : MonoBehaviour
         uiPlayer.Init(player);
 
         _view.RPC("AddIndex", RpcTarget.All);
+
+        SoundManager.Instance.PlayBackgroundMusic(_backgroundAudio);
     }
 
 

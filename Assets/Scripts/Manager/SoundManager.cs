@@ -1,5 +1,7 @@
 using Muks.Tween;
 using System;
+using System.Collections;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -22,7 +24,7 @@ public enum SoundEffectType
 
 public class SoundManager : SingletonHandler<SoundManager>
 {
-    [Header("Scripts")]
+    [Header("Components")]
     [SerializeField] AudioMixer _audioMixer;
 
     [Header("Volume")]
@@ -33,12 +35,13 @@ public class SoundManager : SingletonHandler<SoundManager>
     [SerializeField] private float _effectVolume;
 
     [Space]
-    [Header("Sounds")]
+    [Header("AudioClips")]
     [SerializeField] private AudioClip _buttonClickSound;
 
     [SerializeField] private AudioClip _menuOpenSound;
 
     [SerializeField] private AudioClip _menuCloseSound;
+
 
     private AudioSource[] _audios;
 
@@ -46,7 +49,13 @@ public class SoundManager : SingletonHandler<SoundManager>
     public float BackgroundVolumeMul => _backgroundVolumeMul;
 
     private float _effectVolumeMul;
-    public float EffectVolumeMul => _effectVolumeMul;   
+    public float EffectVolumeMul => _effectVolumeMul;
+
+    //배경 음악 변경시 볼륨 업, 다운 기능을 위한 변수
+    private Coroutine _changeAudioRoutine;
+    private Coroutine _stopBackgroundAudioRoutine;
+    private Coroutine _stopEffectAudioRoutine;
+
 
     public event Action<float> OnEffectVolumeChanged; 
 
@@ -84,10 +93,28 @@ public class SoundManager : SingletonHandler<SoundManager>
     }
 
 
-    public void PlayBackgroundMusic(AudioClip clip)
+    public void PlayBackgroundMusic(AudioClip clip, float duration = 1, bool isLoop = true)
     {
-        _audios[(int)AudioType.BackgroundAudio].clip = clip;
+        if (_changeAudioRoutine != null)
+            StopCoroutine(_changeAudioRoutine);
+
+        _audios[(int)AudioType.BackgroundAudio].loop = isLoop;
         _audios[(int)AudioType.BackgroundAudio].Play();
+        if (duration == 0)
+        {
+            _audios[(int)AudioType.BackgroundAudio].volume = _backgroundVolume;
+            _audios[(int)AudioType.BackgroundAudio].clip = clip;
+            return;
+        }
+
+        _changeAudioRoutine = StartCoroutine(IEChangeBackgroundAudio(clip, duration));
+    }
+
+
+    public void PlayEffectSound(AudioClip clip)
+    {
+        _audios[(int)AudioType.EffectAudio].volume = _effectVolume;
+        _audios[(int)AudioType.EffectAudio].PlayOneShot(clip);
     }
 
 
@@ -108,9 +135,18 @@ public class SoundManager : SingletonHandler<SoundManager>
     }
 
 
-    public void PlayEffectSound(AudioClip clip)
+    public void StopBackgroundAudio(float duration = 0)
     {
-        _audios[(int)AudioType.EffectAudio].PlayOneShot(clip);
+        if (_stopBackgroundAudioRoutine != null)
+            StopCoroutine(_stopBackgroundAudioRoutine);
+
+        if (duration == 0)
+        {
+            _audios[(int)AudioType.BackgroundAudio].Stop();
+            return;
+        }
+
+        _stopBackgroundAudioRoutine = StartCoroutine(IEStopBackgroundAudio(duration));
     }
 
 
@@ -132,6 +168,70 @@ public class SoundManager : SingletonHandler<SoundManager>
                 _audioMixer.SetFloat("SoundEffect", volume);
                 break;
         }
+    }
+
+
+    private IEnumerator IEStopBackgroundAudio(float duration)
+    {
+        float maxVolume = _audios[(int)AudioType.BackgroundAudio].volume;
+        float changeDuration = duration;
+        float timer = 0;
+
+        while (timer < changeDuration)
+        {
+            timer += 0.02f;
+            _audios[(int)AudioType.BackgroundAudio].volume = Mathf.Lerp(maxVolume, 0, timer / changeDuration);
+
+            yield return YieldCache.WaitForSeconds(0.02f);
+        }
+
+        _audios[(int)AudioType.BackgroundAudio].Stop();
+    }
+
+
+    private IEnumerator IEChangeBackgroundAudio(AudioClip clip, float duration)
+    {
+        float maxVolume = _backgroundVolume;
+        float changeDuration = duration * 0.5f;
+        float timer = 0;
+
+        while (timer < changeDuration)
+        {
+            timer += 0.02f;
+            _audios[(int)AudioType.BackgroundAudio].volume = Mathf.Lerp(maxVolume, 0, timer / changeDuration);
+            yield return YieldCache.WaitForSeconds(0.02f);
+        }
+
+        _audios[(int)AudioType.BackgroundAudio].clip = clip;
+        _audios[(int)AudioType.BackgroundAudio].volume = 0;
+        _audios[(int)AudioType.BackgroundAudio].Play();
+
+        timer = 0;
+        while (timer < changeDuration)
+        {
+            timer += 0.02f;
+            _audios[(int)AudioType.BackgroundAudio].volume = Mathf.Lerp(0, maxVolume, timer / changeDuration);
+
+            yield return YieldCache.WaitForSeconds(0.02f);
+        }
+    }
+
+
+    private IEnumerator IEStopEffectAudio(float duration)
+    {
+        float maxVolume = _audios[(int)AudioType.EffectAudio].volume;
+        float changeDuration = duration;
+        float timer = 0;
+
+        while (timer < changeDuration)
+        {
+            timer += 0.02f;
+            _audios[(int)AudioType.EffectAudio].volume = Mathf.Lerp(maxVolume, 0, timer / changeDuration);
+
+            yield return YieldCache.WaitForSeconds(0.02f);
+        }
+
+        _audios[(int)AudioType.BackgroundAudio].Stop();
     }
 }
 

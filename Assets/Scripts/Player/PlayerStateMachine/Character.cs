@@ -73,6 +73,8 @@ public class Character : MonoBehaviour
 
     protected CharacterState _state;
 
+    private Vector3 _tmpPos;
+
     //플레이어의 공격 횟수를 카운트하는 변수
     private int _currentAttackCount;
     public int CurrentAttackCount
@@ -127,7 +129,20 @@ public class Character : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
+        _tmpPos = transform.position;
+
         movementSM.currentState.PhysicsUpdate();
+
+        RaycastHit[] hit = Physics.RaycastAll(transform.position + transform.up, transform.forward, 0.6f);
+
+        for(int i =0, count = hit.Length; i < count; i++)
+        {
+            if (hit[i].transform.gameObject == gameObject)
+                continue;
+
+            transform.position = _tmpPos;
+            return;
+        }
     }
 
 
@@ -154,5 +169,23 @@ public class Character : MonoBehaviour
     public virtual void ChangeApplyRootMotion(bool value)
     {
         animator.applyRootMotion = value;
+    }
+
+
+    protected virtual void OnAnimatorMove()
+    {
+        RaycastHit[] hit = Physics.RaycastAll(transform.position + transform.up, transform.forward, 0.6f);
+
+        for (int i = 0, count = hit.Length; i < count; i++)
+        {
+            if (hit[i].transform.gameObject == gameObject)
+                continue;
+
+            transform.position = _tmpPos;
+            return;
+        }
+
+        Vector3 movement = animator.deltaPosition;
+        controller.Move(movement);
     }
 }

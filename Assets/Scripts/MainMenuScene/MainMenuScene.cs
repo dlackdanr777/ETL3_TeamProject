@@ -6,7 +6,7 @@ public class MainMenuScene : MonoBehaviour
 {
     [SerializeField] private UIMainMenu _uiMainMenu;
 
-    [Header("Sound")]
+    [Header("Audio Clips")]
     [SerializeField] private AudioClip _backgroundMusic;
 
 
@@ -18,7 +18,7 @@ public class MainMenuScene : MonoBehaviour
 
     private void Start()
     {
-        SoundManager.Instance.PlayBackgroundMusic(_backgroundMusic);
+        SoundManager.Instance.PlayBackgroundMusic(_backgroundMusic, 2);
     }
 
 }

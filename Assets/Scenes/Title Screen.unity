@@ -9745,7 +9745,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _uiMainMenu: {fileID: 1760188267}
-  _backgroundMusic: {fileID: 8300000, guid: ccd770f2a9847b74a816c3a1d18d6df9, type: 3}
+  _backgroundMusic: {fileID: 8300000, guid: 7538ae0e7378eb34d9f80c7f28817a03, type: 3}
 --- !u!4 &1699866219
 Transform:
   m_ObjectHideFlags: 0
