@@ -4,6 +4,14 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
+
+public enum PlayerSoundType
+{
+    FootStepWalk,
+    FootStepRun,
+}
+
+
 public class PlayerController : MonoBehaviour,IHp,IStamina
 {
     Animator animator;
@@ -29,6 +37,16 @@ public class PlayerController : MonoBehaviour,IHp,IStamina
     public float TmpVolume { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
     [SerializeField] private float _sta;
+
+
+    [Space]
+    [Header("Components")]
+    [SerializeField] private AudioSource _footStepSource;
+
+    [Space]
+    [Header("Audio Clips")]
+    [SerializeField] private AudioClip _walkSound;
+    [SerializeField] private AudioClip _runSound;
 
     public bool isHittable;
     public bool moveable;
@@ -117,5 +135,22 @@ public class PlayerController : MonoBehaviour,IHp,IStamina
 
         if (_sta == _maxSta)
             OnStaMin?.Invoke();
+    }
+
+
+    public void PlaySound(PlayerSoundType type)
+    {
+        switch (type)
+        {
+            case PlayerSoundType.FootStepWalk:
+                _footStepSource.clip = _walkSound;
+                _footStepSource.Play();
+                break;
+
+            case PlayerSoundType.FootStepRun:
+                _footStepSource.clip = _runSound;
+                _footStepSource.Play();
+                break;
+        }
     }
 }
