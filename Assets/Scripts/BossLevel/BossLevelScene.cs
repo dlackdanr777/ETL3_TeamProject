@@ -16,8 +16,7 @@ public class BossLevelScene : MonoBehaviour
 
     void Start()
     {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        GameManager.Instance.LockCursor();
 
         UIPlayer uiPlayer = Instantiate(_uiPlayerPrefab);
         uiPlayer.Init(_player);

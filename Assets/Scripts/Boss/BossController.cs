@@ -64,6 +64,7 @@ public class BossController : MonoBehaviour, IHp
     [Header("UI")]
     [SerializeField] private UIBoss _uiBossPrefab;
 
+
     private BossAI _bossAI;
 
     private BossStateMachineBehaviour[] _stateMachines;
@@ -148,7 +149,6 @@ public class BossController : MonoBehaviour, IHp
 
         UpdateTimer();
         UpdateFindTarget();
-        _rigidbody.velocity = Vector3.zero;
     }
 
 
@@ -335,6 +335,7 @@ public class BossController : MonoBehaviour, IHp
 
         if (_hp <= _minHp)
         {
+            CancelInvoke("AIUpdate");
             ChangeAiState(BossAIState.Die);
             _rigidbody.isKinematic = true;
             OnHpMin?.Invoke();

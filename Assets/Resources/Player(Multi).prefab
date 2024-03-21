@@ -8356,6 +8356,9 @@ MonoBehaviour:
   _maxSta: 200
   _minSta: 0
   _sta: 0
+  _footStepSource: {fileID: 0}
+  _walkSound: {fileID: 0}
+  _runSound: {fileID: 0}
   isHittable: 0
   moveable: 0
   staminaRecovery: 20

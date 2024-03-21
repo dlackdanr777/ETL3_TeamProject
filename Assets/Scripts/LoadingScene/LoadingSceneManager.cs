@@ -1,4 +1,5 @@
 using Photon.Pun;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -24,6 +25,9 @@ public class LoadingSceneManager : MonoBehaviour
 
     private static string _nextScene;
 
+    /// <summary>씬이 변경될때 시작하는 대리자</summary>
+    public static event Action OnLoadSceneHandler;
+
 
     private void Start()
     {
@@ -34,6 +38,7 @@ public class LoadingSceneManager : MonoBehaviour
 
     public static void LoadScene(string sceneName)
     {
+        OnLoadSceneHandler?.Invoke();
         _nextScene = sceneName;
         SceneManager.LoadScene("LoadingScene");
     }

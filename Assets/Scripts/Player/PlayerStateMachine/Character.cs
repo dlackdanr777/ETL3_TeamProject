@@ -121,7 +121,9 @@ public class Character : MonoBehaviour
 
     protected virtual void Update()
     {
-        movementSM.currentState.HandleInput();
+        if (GameManager.Instance.IsCursorLocked)
+            movementSM.currentState.HandleInput();
+
         movementSM.currentState.LogicUpdate();
         animator.SetInteger("State", (int)_state);
     }

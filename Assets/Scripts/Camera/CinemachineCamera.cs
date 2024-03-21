@@ -33,7 +33,9 @@ public class CinemachineCamera : MonoBehaviour
 
     protected virtual void Update()
     {
-        CameraControll();
+        if(GameManager.Instance.IsCursorLocked)
+            CameraControll();
+
         UpdateCameraShake();
     }
 

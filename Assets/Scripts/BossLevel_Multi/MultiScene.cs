@@ -29,8 +29,8 @@ public class MultiScene : MonoBehaviour
 
     private void Start()
     {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        LoadingSceneManager.OnLoadSceneHandler += OnSceneChanged;
+        GameManager.Instance.LockCursor();
 
         GameObject obj = PhotonNetwork.Instantiate("Player(Multi)", _spawnPos[_index].position, Quaternion.identity);
         Character player = obj.GetComponent<Character>();
@@ -48,5 +48,15 @@ public class MultiScene : MonoBehaviour
     {
         _index++;
         Debug.Log(_index);
+    }
+
+
+    private void OnSceneChanged()
+    {
+        if(PhotonNetwork.InLobby)
+            PhotonNetwork.LeaveLobby();
+
+
+        LoadingSceneManager.OnLoadSceneHandler -= OnSceneChanged;
     }
 }
