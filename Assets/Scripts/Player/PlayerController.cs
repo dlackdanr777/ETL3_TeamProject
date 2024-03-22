@@ -8,7 +8,12 @@ using UnityEngine;
 public enum PlayerSoundType
 {
     FootStepWalk,
-    FootStepRun,
+    Dash,
+    Hit,
+    Attack1,
+    Attack2,
+    Attack3,
+    Attack4,
 }
 
 
@@ -42,12 +47,21 @@ public class PlayerController : MonoBehaviour,IHp,IStamina
     [Space]
     [Header("Components")]
     [SerializeField] private AudioSource _footStepSource;
+    [SerializeField] private AudioSource _weaponSource;
+    [SerializeField] private AudioSource _bodySource;
 
     [Space]
     [Header("Audio Clips")]
     [SerializeField] private AudioClip _walkSound;
-    [SerializeField] private AudioClip _runSound;
+    [SerializeField] private AudioClip _dashSound;
+    [SerializeField] private AudioClip[] _hitSounds;
+    [SerializeField] private AudioClip _attack1Sound;
+    [SerializeField] private AudioClip _attack2Sound;
+    [SerializeField] private AudioClip _attack3Sound;
+    [SerializeField] private AudioClip _attack4Sound;
 
+
+    [Space]
     public bool isHittable;
     public bool moveable;
     bool isHit;
@@ -147,10 +161,39 @@ public class PlayerController : MonoBehaviour,IHp,IStamina
                 _footStepSource.Play();
                 break;
 
-            case PlayerSoundType.FootStepRun:
-                _footStepSource.clip = _runSound;
+            case PlayerSoundType.Dash:
+                _footStepSource.clip = _dashSound;
                 _footStepSource.Play();
                 break;
+
+            case PlayerSoundType.Hit:
+                int randInt = UnityEngine.Random.Range(0, _hitSounds.Length);
+                _bodySource.clip = _hitSounds[randInt];
+                _bodySource.Play();
+                break;
+
+            case PlayerSoundType.Attack1:
+                _weaponSource.clip = _attack1Sound;
+                _weaponSource.Play();
+                break;
+
+            case PlayerSoundType.Attack2:
+                _weaponSource.clip = _attack2Sound;
+                _weaponSource.Play();
+                break;
+
+            case PlayerSoundType.Attack3:
+                _weaponSource.clip = _attack3Sound;
+                _weaponSource.Play();
+                break;
+
+            case PlayerSoundType.Attack4:
+                _weaponSource.clip = _attack4Sound;
+                _weaponSource.Play();
+                break;
+
+
+
         }
     }
 }

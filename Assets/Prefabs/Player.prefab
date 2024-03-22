@@ -151,7 +151,7 @@ Transform:
   - {fileID: 1677759298612431772}
   - {fileID: 5547068951289995955}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4056853100495244900
 GameObject:
@@ -564,6 +564,12 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 5309440705766705080}
+    - target: {fileID: 5501168505480870080, guid: 6a52463bb392c3f40a9e3efe772d2889,
+        type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 2465367415986961573, guid: 36c90b79ebb4b48429b6ac260d74ba38,
+        type: 2}
     - target: {fileID: 6210212164840356952, guid: 6a52463bb392c3f40a9e3efe772d2889,
         type: 3}
       propertyPath: m_RootOrder

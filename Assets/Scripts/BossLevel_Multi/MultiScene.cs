@@ -47,7 +47,6 @@ public class MultiScene : MonoBehaviour
     private void AddIndex()
     {
         _index++;
-        Debug.Log(_index);
     }
 
 
