@@ -1348,6 +1348,7 @@ MonoBehaviour:
   _boss: {fileID: 1459357475}
   _target: {fileID: 290719869}
   _canvasGroup: {fileID: 290719871}
+  _changeSceneName: MultiplayLobby
 --- !u!225 &290719871
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -10866,6 +10867,11 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2274280290044663704, guid: 7833ad1a211208a4dbee8201abe9058b,
+        type: 3}
+      propertyPath: _soundController
+      value: 
+      objectReference: {fileID: 1459357476}
     - target: {fileID: 5614056416236414941, guid: 7833ad1a211208a4dbee8201abe9058b,
         type: 3}
       propertyPath: m_RootOrder
@@ -10926,6 +10932,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss(MultiPlay)
       objectReference: {fileID: 0}
+    - target: {fileID: 5947497110451839404, guid: 7833ad1a211208a4dbee8201abe9058b,
+        type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5947497110451839404, guid: 7833ad1a211208a4dbee8201abe9058b,
+        type: 3}
+      propertyPath: reverbZoneMixCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10941,6 +10957,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01e98049ad2bb964eb55abb75f2f7ae8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1459357476 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5431530931995060068, guid: 7833ad1a211208a4dbee8201abe9058b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1459357474}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba0c7d16873c9404c8e595eb2cb43e19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1482672317

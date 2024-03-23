@@ -11409,6 +11409,7 @@ MonoBehaviour:
   _boss: {fileID: 1766488045}
   _target: {fileID: 1664573155}
   _canvasGroup: {fileID: 1664573156}
+  _changeSceneName: Title Screen
 --- !u!1001 &1676842680
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12166,11 +12167,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1618748683631313299, guid: b49190e1a0ffdaf4b9e703c4eff1514a,
-        type: 3}
-      propertyPath: _name
-      value: Dark Knight
-      objectReference: {fileID: 0}
     - target: {fileID: 7004168298014803672, guid: b49190e1a0ffdaf4b9e703c4eff1514a,
         type: 3}
       propertyPath: m_Name
@@ -14138,6 +14134,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7078065268604072106}
     m_Modifications:
+    - target: {fileID: 2978267258011068820, guid: 6a52463bb392c3f40a9e3efe772d2889,
+        type: 3}
+      propertyPath: sprintSpeed
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 2978267258011068820, guid: 6a52463bb392c3f40a9e3efe772d2889,
         type: 3}
       propertyPath: _cameraTarget

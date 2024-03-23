@@ -56,9 +56,9 @@ public class BossController : MonoBehaviour, IHp
 
 
     [Space]
-    [Header("Effects")]
+    [Header("Components")]
+    [SerializeField] private CharacterSoundController _soundController;
     [SerializeField] private ParticleSystem _hitParticle;
-
 
     [Space]
     [Header("UI")]
@@ -144,6 +144,9 @@ public class BossController : MonoBehaviour, IHp
     {
         _animator.SetInteger("State", (int)_state);
 
+        if(_hp == _minHp)
+            ChangeAiState(BossAIState.Die);
+
         if (_state == BossAIState.Die)
             return;
 
@@ -176,7 +179,7 @@ public class BossController : MonoBehaviour, IHp
     public bool CheckStateChangeEnabled()
     {
         bool isWaitTimeEnd = _waitTimer <= 0;
-        bool changeStateEnabled = _state == BossAIState.Idle || _state == BossAIState.Tracking 
+        bool changeStateEnabled = _state == BossAIState.Idle || _state == BossAIState.Tracking
             || _state == BossAIState.Reconnaissance || _state == BossAIState.Guard;
 
         return isWaitTimeEnd && changeStateEnabled;
@@ -227,7 +230,7 @@ public class BossController : MonoBehaviour, IHp
         List<BossAttackData> possibleSkillDataList = new List<BossAttackData>();
         foreach (BossAttackData data in _attackDatas)
         {
-            
+
             bool isWithInRange = TargetDistance <= data.MaxRange && data.MinRange <= TargetDistance && data.StateChangeEnabled;
             if (isWithInRange)
                 possibleSkillDataList.Add(data);
@@ -265,7 +268,7 @@ public class BossController : MonoBehaviour, IHp
     {
         _currentExplorationTimer -= Time.deltaTime;
 
-        if(_currentExplorationTimer <= 0)
+        if (_currentExplorationTimer <= 0)
         {
             FindTarget(0.02f);
             _currentExplorationTimer = _explorationTime;
@@ -325,9 +328,9 @@ public class BossController : MonoBehaviour, IHp
     {
         if (_hp == _minHp)
             return;
-
+            
         _hitParticle.Play();
-
+        _soundController.PlaySound(CharacterSoundType.Hit);
         _hp = Mathf.Clamp(_hp - value, _minHp, _maxHp);
 
         OnHpChanged?.Invoke(subject, value);
@@ -340,6 +343,5 @@ public class BossController : MonoBehaviour, IHp
             _rigidbody.isKinematic = true;
             OnHpMin?.Invoke();
         }
-
     }
 }

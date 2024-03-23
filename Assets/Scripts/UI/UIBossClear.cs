@@ -16,6 +16,10 @@ public class UIBossClear : MonoBehaviour
     [SerializeField] private RectTransform _target;
     [SerializeField] private CanvasGroup _canvasGroup;
 
+    [Space]
+    [Header("Option")]
+    [SerializeField] private string _changeSceneName;
+
 
     private Vector2 _tmpPos;
 
@@ -58,7 +62,7 @@ public class UIBossClear : MonoBehaviour
 
     private void OnButtonClicked()
     {
-        LoadingSceneManager.LoadScene("Title Screen");
+        LoadingSceneManager.LoadScene(_changeSceneName);
     }
 
 }

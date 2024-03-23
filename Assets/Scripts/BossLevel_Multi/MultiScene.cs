@@ -52,9 +52,8 @@ public class MultiScene : MonoBehaviour
 
     private void OnSceneChanged()
     {
-        if(PhotonNetwork.InLobby)
-            PhotonNetwork.LeaveLobby();
-
+        if(PhotonNetwork.InRoom)
+            PhotonNetwork.LeaveRoom();
 
         LoadingSceneManager.OnLoadSceneHandler -= OnSceneChanged;
     }

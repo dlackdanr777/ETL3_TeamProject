@@ -5,17 +5,6 @@ using Unity.Mathematics;
 using UnityEngine;
 
 
-public enum PlayerSoundType
-{
-    FootStepWalk,
-    Dash,
-    Hit,
-    Attack1,
-    Attack2,
-    Attack3,
-    Attack4,
-}
-
 
 public class PlayerController : MonoBehaviour,IHp,IStamina
 {
@@ -152,48 +141,45 @@ public class PlayerController : MonoBehaviour,IHp,IStamina
     }
 
 
-    public void PlaySound(PlayerSoundType type)
+    public void PlaySound(CharacterSoundType type)
     {
         switch (type)
         {
-            case PlayerSoundType.FootStepWalk:
+            case CharacterSoundType.FootStepWalk:
                 _footStepSource.clip = _walkSound;
                 _footStepSource.Play();
                 break;
 
-            case PlayerSoundType.Dash:
+            case CharacterSoundType.Dash:
                 _footStepSource.clip = _dashSound;
                 _footStepSource.Play();
                 break;
 
-            case PlayerSoundType.Hit:
+            case CharacterSoundType.Hit:
                 int randInt = UnityEngine.Random.Range(0, _hitSounds.Length);
                 _bodySource.clip = _hitSounds[randInt];
                 _bodySource.Play();
                 break;
 
-            case PlayerSoundType.Attack1:
+            case CharacterSoundType.Attack1:
                 _weaponSource.clip = _attack1Sound;
                 _weaponSource.Play();
                 break;
 
-            case PlayerSoundType.Attack2:
+            case CharacterSoundType.Attack2:
                 _weaponSource.clip = _attack2Sound;
                 _weaponSource.Play();
                 break;
 
-            case PlayerSoundType.Attack3:
+            case CharacterSoundType.Attack3:
                 _weaponSource.clip = _attack3Sound;
                 _weaponSource.Play();
                 break;
 
-            case PlayerSoundType.Attack4:
+            case CharacterSoundType.Attack4:
                 _weaponSource.clip = _attack4Sound;
                 _weaponSource.Play();
                 break;
-
-
-
         }
     }
 }
