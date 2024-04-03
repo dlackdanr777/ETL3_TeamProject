@@ -3,11 +3,7 @@ using Muks.Tween;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum MainMenuUiName
-{
-    UITitle,
-    UIHome
-}
+
 
 [RequireComponent(typeof(UINavigation))]
 public class UIMainMenu : MonoBehaviour
@@ -40,7 +36,7 @@ public class UIMainMenu : MonoBehaviour
 
     private void ShowTitle()
     {
-        _uiNav.Show("UITitle");
+        _uiNav.Push("UITitle");
     }
 
 

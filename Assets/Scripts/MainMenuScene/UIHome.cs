@@ -7,16 +7,13 @@ using UnityEngine.UI;
 
 public class UIHome : UIView
 {
+    [Header("Components")]
     [SerializeField] private UIButton[] _homeMenus;
-
     [SerializeField] private Image _selectEffect;
 
     private List<Action> _selectMenuActionList;
-
     private int _homeMenusCount;
-
     private int _currentMenuIndex;
-
     private bool _inputEnabled = true;
 
 
@@ -140,14 +137,14 @@ public class UIHome : UIView
 
     private void MultiplayButtonClicked()
     {
-        _uiNav.Show("UIMultiPlayLogin");
+        _uiNav.Push("UIMultiPlayLogin");
         SoundManager.Instance.PlayEffectSound(SoundEffectType.MenuOpen);
     }
 
 
     private void SettingsButtonClicked()
     {
-        _uiNav.Show("UISettings");
+        _uiNav.Push("UISettings");
         SoundManager.Instance.PlayEffectSound(SoundEffectType.MenuOpen);
     }
 

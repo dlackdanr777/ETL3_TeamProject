@@ -11,29 +11,22 @@ using UnityEngine.UI;
 [RequireComponent(typeof(UINavigation))]
 public class UIMultiplayLobby : MonoBehaviourPunCallbacks
 {
+    [Header("Components")]
     [SerializeField] private UIRoom _uiRoom;
-
     [SerializeField] private Button _joinRoomButton;
-
     [SerializeField] private Button _createRoomButton;
-
     [SerializeField] private GameObject _roomListItemPrefab;
-
     [SerializeField] private Transform _rtContent;
-
     [SerializeField] private TextMeshProUGUI _userNameText;
 
     // 방 목록을 가지고 있는 Dictionary 변수
     private Dictionary<string, RoomInfo> _dicRoomInfo = new Dictionary<string, RoomInfo>();
-
     private List<RoomListItem> _roomList = new List<RoomListItem>();
-
     private UINavigation _uiNav;
-
     private string _selectRoomName;
 
 
-    void Start()
+    private void Start()
     {
         _joinRoomButton.onClick.AddListener(OnClickJoinRoom);
         _createRoomButton.onClick.AddListener(OnCreateRoomButtonClicked);
@@ -62,7 +55,7 @@ public class UIMultiplayLobby : MonoBehaviourPunCallbacks
     }
 
 
-    void SelectRoomItem(string roomName)
+    private void SelectRoomItem(string roomName)
     {
         _selectRoomName = roomName;
 
@@ -73,7 +66,7 @@ public class UIMultiplayLobby : MonoBehaviourPunCallbacks
     }
 
 
-    void DeleteRoomListItem()
+    private void DeleteRoomListItem()
     {
         _roomList.Clear();
         foreach (Transform tr in _rtContent)
@@ -83,7 +76,7 @@ public class UIMultiplayLobby : MonoBehaviourPunCallbacks
     }
 
 
-    void UpdateRoomListItem(List<RoomInfo> roomList)
+    private void UpdateRoomListItem(List<RoomInfo> roomList)
     {
         foreach (RoomInfo info in roomList)
         {
@@ -112,7 +105,7 @@ public class UIMultiplayLobby : MonoBehaviourPunCallbacks
     }
 
 
-    void CreateRoomListItem()
+    private void CreateRoomListItem()
     {
         foreach (RoomInfo info in _dicRoomInfo.Values)
         {
@@ -176,7 +169,7 @@ public class UIMultiplayLobby : MonoBehaviourPunCallbacks
     private void OnCreateRoomButtonClicked()
     {
         SoundManager.Instance.PlayEffectSound(SoundEffectType.ButtonClick);
-        _uiNav.Show("UICreateRoom");
+        _uiNav.Push("UICreateRoom");
     }
 
 }

@@ -116,25 +116,6 @@ public class UICreateRoom : UIView
     }
 
 
-    // 생성 버튼 클릭시 호출되는 함수
-    private void OnClickCreateRoom()
-    {
-
-        //방 옵션
-        RoomOptions options = new RoomOptions();
-        options.MaxPlayers = int.Parse(_maxPlayerInput.text);
-
-        //방 목록에 보이게 할것인가?
-        options.IsVisible = true;
-
-        //방에 참여 가능 여부
-        options.IsOpen = true;
-
-        //방 생성
-        PhotonNetwork.CreateRoom(_roomNameInput.text, options);
-    }
-
-
     private void CreateRoomButtonClicked()
     {
         SoundManager.Instance.PlayEffectSound(SoundEffectType.ButtonClick);

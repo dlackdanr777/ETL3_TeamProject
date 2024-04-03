@@ -59,7 +59,7 @@ namespace Muks.PCUI
 
 
         /// <summary>이름을 받아 해당하는 UIView를 열어주는 함수</summary>
-        public void Show(string viewName, Action onCompleted = null)
+        public void Push(string viewName)
         {
             if (_viewDic.TryGetValue(viewName, out UIView uiView))
             {
@@ -69,7 +69,6 @@ namespace Muks.PCUI
                 if (!_activeViewList.Contains(uiView))
                 {
                     _activeViewList.AddFirst(uiView);
-                    uiView.Show(onCompleted);
                 }
                 else
                 {
@@ -83,7 +82,7 @@ namespace Muks.PCUI
 
 
         /// <summary>포커스중인 UI를 닫는 함수</summary>
-        public void Hide(Action onCompleted = null)
+        public void Pop()
         {
             if (!ViewsVisibleStateCheck())
                 return;
@@ -91,7 +90,6 @@ namespace Muks.PCUI
             if (_activeViewList.First == null)
                 return;
 
-            _activeViewList.First.Value.Hide(onCompleted);
             _activeViewList.RemoveFirst();
 
             if (_activeViewList.First == null)
@@ -102,7 +100,7 @@ namespace Muks.PCUI
 
 
         /// <summary> viewName을 확인해 해당 UI를 닫는 함수</summary>
-        public void Hide(string viewName, Action onCompleted = null)
+        public void Hide(string viewName)
         {
             if (_viewDic.TryGetValue(viewName, out UIView uiView))
             {
@@ -113,7 +111,6 @@ namespace Muks.PCUI
                     return;
 
                 _activeViewList.Remove(uiView);
-                uiView.Hide(onCompleted);
             }
         }
 

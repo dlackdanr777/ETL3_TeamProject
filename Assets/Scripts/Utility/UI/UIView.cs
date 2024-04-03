@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Muks.PCUI
 {
@@ -13,7 +14,7 @@ namespace Muks.PCUI
     }
 
 
-    public abstract class UIView : MonoBehaviour
+    public abstract class UIView : MonoBehaviour, IPointerDownHandler
     {
         ///  <summary> Appeared, Disappeared일때 Show(), Hide()실행 가능</summary>
         public VisibleState VisibleState;
@@ -39,6 +40,13 @@ namespace Muks.PCUI
 
         /// <summary>UI를 끌때 실행되는 함수</summary>
         public abstract void Hide(Action onCompleted = null);
+
+
+        /// <summary>해당 UI 창을 클릭하면 실행될 함수</summary>
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            OnFocus?.Invoke();
+        }
     }
 }
 

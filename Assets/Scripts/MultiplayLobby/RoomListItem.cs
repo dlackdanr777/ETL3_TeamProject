@@ -5,12 +5,10 @@ using UnityEngine.UI;
 
 public class RoomListItem : MonoBehaviour
 {
+    [Header("Components")]
     [SerializeField] private Button _button;
-
     [SerializeField] private GameObject _selectImage;
-
     [SerializeField] private TextMeshProUGUI _roomNameText;
-
     [SerializeField] private TextMeshProUGUI _maxNumText;
 
     //클릭되었을때 호출되는 함수

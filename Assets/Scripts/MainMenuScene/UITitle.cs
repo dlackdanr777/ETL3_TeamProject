@@ -7,6 +7,10 @@ using Muks.PCUI;
 
 public class UITitle : UIView
 {
+    [Header("Components")]
+    [SerializeField] private Button _backgroundButton;
+
+    [Space]
     [Header("Button Animation")]
     [SerializeField] private TextMeshProUGUI _pressAniButton;
 
@@ -20,11 +24,9 @@ public class UITitle : UIView
 
     [SerializeField] private TweenMode _aniButtonTweenMode;
 
-    [Space]
-    [SerializeField] private Button _backgroundButton;
-
     [Tooltip("UI변경 애니메이션 시간")]
     [SerializeField] private float _changeUiTime;
+
 
     private bool _isButtonClicked;
     
@@ -33,14 +35,14 @@ public class UITitle : UIView
     {
         base.Init(uiNav);
 
-        _backgroundButton.onClick.AddListener(() => Hide(() => _uiNav.Show("UIHome")));
+        _backgroundButton.onClick.AddListener(() => Hide(() => _uiNav.Push("UIHome")));
     }
 
 
     private void Update()
     {
         if (Input.anyKeyDown)
-            Hide(() => _uiNav.Show("UIHome"));
+            Hide(() => _uiNav.Push("UIHome"));
     }
 
 
