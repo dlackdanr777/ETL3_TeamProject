@@ -1,7 +1,5 @@
-using Muks.Tween;
 using System;
 using System.Collections;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -25,7 +23,7 @@ public enum SoundEffectType
 public class SoundManager : SingletonHandler<SoundManager>
 {
     [Header("Components")]
-    [SerializeField] AudioMixer _audioMixer;
+    [SerializeField] private  AudioMixer _audioMixer;
 
     [Header("Volume")]
     [Range(0f, 1f)]
@@ -45,19 +43,12 @@ public class SoundManager : SingletonHandler<SoundManager>
 
     private AudioSource[] _audios;
 
-    private float _backgroundVolumeMul;
-    public float BackgroundVolumeMul => _backgroundVolumeMul;
-
-    private float _effectVolumeMul;
-    public float EffectVolumeMul => _effectVolumeMul;
-
     //배경 음악 변경시 볼륨 업, 다운 기능을 위한 변수
     private Coroutine _changeAudioRoutine;
     private Coroutine _stopBackgroundAudioRoutine;
-    private Coroutine _stopEffectAudioRoutine;
-
 
     public event Action<float> OnEffectVolumeChanged; 
+
 
     public override void Awake()
     {
@@ -76,9 +67,6 @@ public class SoundManager : SingletonHandler<SoundManager>
             obj.transform.parent = transform;
             _audios[i] = obj.AddComponent<AudioSource>();
         }
-
-        _backgroundVolumeMul = 1;
-        _effectVolumeMul = 1;
 
         _audios[(int)AudioType.BackgroundAudio].loop = true;
         _audios[(int)AudioType.BackgroundAudio].playOnAwake = true;
@@ -216,22 +204,5 @@ public class SoundManager : SingletonHandler<SoundManager>
         }
     }
 
-
-    private IEnumerator IEStopEffectAudio(float duration)
-    {
-        float maxVolume = _audios[(int)AudioType.EffectAudio].volume;
-        float changeDuration = duration;
-        float timer = 0;
-
-        while (timer < changeDuration)
-        {
-            timer += 0.02f;
-            _audios[(int)AudioType.EffectAudio].volume = Mathf.Lerp(maxVolume, 0, timer / changeDuration);
-
-            yield return YieldCache.WaitForSeconds(0.02f);
-        }
-
-        _audios[(int)AudioType.BackgroundAudio].Stop();
-    }
 }
 

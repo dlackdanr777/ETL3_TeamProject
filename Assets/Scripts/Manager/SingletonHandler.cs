@@ -2,27 +2,27 @@ using UnityEngine;
 
 public class SingletonHandler<T> : MonoBehaviour where T : MonoBehaviour
 {
-    private static T instance;
+    private static T _instance;
 
     public static T Instance
     {
         get
         {
-            if (!instance)
+            if (!_instance)
             {
                 GameObject obj;
                 obj = GameObject.Find(typeof(T).Name);
                 if (!obj)
                 {
                     obj = new GameObject(typeof(T).Name);
-                    instance = obj.AddComponent<T>();
+                    _instance = obj.AddComponent<T>();
                 }
                 else
                 {
-                    instance = obj.GetComponent<T>();
+                    _instance = obj.GetComponent<T>();
                 }
             }
-            return instance;
+            return _instance;
         }
     }
 
@@ -30,9 +30,9 @@ public class SingletonHandler<T> : MonoBehaviour where T : MonoBehaviour
     {
         GameObject obj = GameObject.Find(typeof(T).Name);
 
-        if (!obj || !instance)
+        if (!obj || !_instance)
         {
-            instance = gameObject.GetComponent<T>();
+            _instance = gameObject.GetComponent<T>();
             DontDestroyOnLoad(gameObject);
         }
         else
