@@ -1,12 +1,12 @@
 using Photon.Pun;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class MultiCharacter : Character
 {
+    [Space]
+    [Header("Photon")]
     [SerializeField] private PhotonView _view;
+
 
     protected override void Start()
     {
