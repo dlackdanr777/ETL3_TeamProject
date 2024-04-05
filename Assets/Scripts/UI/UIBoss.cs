@@ -17,16 +17,16 @@ public class UIBoss : MonoBehaviour
         _boss.OnHpChanged += OnHpChanged;
     }
 
-
     private void OnDestroy()
     {
         _boss.OnHpChanged -= OnHpChanged;
     }
 
 
-    public void OnHpChanged(object subject, float value)
+    private void OnHpChanged(object subject, float value)
     {
         _healthBar.SetBar(_boss.MaxHp, _boss.Hp);
     }
+
 
 }

@@ -24,22 +24,21 @@ public class UIPlayer : MonoBehaviour
     }
 
 
-    private void OnDestroy()
-    {
-        _player.playerController.OnHpChanged -= OnHpChanged;
-        _player.playerController.OnStaChanged -= OnSteminaChanged;
-    }
-
-
-    public void OnHpChanged(object subject, float value)
+    private void OnHpChanged(object subject, float value)
     {
         _healthBar.SetBar(_player.playerController.MaxHp, _player.playerController.Hp);
     }
 
 
-    public void OnSteminaChanged(object subject, float value)
+    private void OnSteminaChanged(object subject, float value)
     {
         _steminaBar.SetBarAfterNoAnime(_player.playerController.MaxSta, _player.playerController.Sta);
     }
 
+
+    private void OnDestroy()
+    {
+        _player.playerController.OnHpChanged -= OnHpChanged;
+        _player.playerController.OnStaChanged -= OnSteminaChanged;
+    }
 }

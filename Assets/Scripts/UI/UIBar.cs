@@ -28,15 +28,13 @@ public class UIBar : MonoBehaviour
     private float _duration;
 
 
-    public void Update()
+    private void Update()
     {
         UpdateBar();
     }
 
 
-
-
-    /// <summary></summary>
+    /// <summary>애니메이션을 실행하고 Bar상태를 업데이트 하는 함수</summary>
     public void SetBar(float maxValue, float currentValue)
     {
         if (_barType == BarType.Decrease)
@@ -54,7 +52,8 @@ public class UIBar : MonoBehaviour
         _duration = 0;
     }
 
-    //애니메이션을 실행하지 않고 Bar 상태를 업데이트 하는 함수
+
+    /// <summary>애니메이션을 실행하지 않고 Bar상태를 업데이트 하는 함수</summary>
     public void SetBarAfterNoAnime(float maxValue, float currentValue)
     {
         _bar.fillAmount = currentValue / maxValue;

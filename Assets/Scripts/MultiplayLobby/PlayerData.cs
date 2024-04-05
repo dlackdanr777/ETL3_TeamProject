@@ -11,5 +11,6 @@ public class PlayerData : MonoBehaviour
     public void Init(string name)
     {
         _nameText.text = name;
+        transform.localScale = Vector3.one;
     }
 }

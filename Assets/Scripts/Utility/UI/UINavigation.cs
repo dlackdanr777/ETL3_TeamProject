@@ -61,8 +61,10 @@ namespace Muks.PCUI
         /// <summary>이름을 받아 해당하는 UIView를 열어주는 함수</summary>
         public void Push(string viewName)
         {
+
             if (_viewDic.TryGetValue(viewName, out UIView uiView))
             {
+
                 if (!ViewsVisibleStateCheck())
                     return;
 
@@ -75,7 +77,7 @@ namespace Muks.PCUI
                     _activeViewList.Remove(uiView);
                     _activeViewList.AddFirst(uiView);
                 }
-
+                uiView.Show();
                 uiView.transform.SetAsLastSibling();
             }
         }
@@ -90,10 +92,12 @@ namespace Muks.PCUI
             if (_activeViewList.First == null)
                 return;
 
+            _activeViewList.Last.Value.Hide();
             _activeViewList.RemoveFirst();
 
             if (_activeViewList.First == null)
                 return;
+
 
             _activeViewList.First.Value.transform.SetAsLastSibling();
         }
@@ -110,6 +114,7 @@ namespace Muks.PCUI
                 if (!_activeViewList.Contains(uiView))
                     return;
 
+                uiView.Hide();
                 _activeViewList.Remove(uiView);
             }
         }
