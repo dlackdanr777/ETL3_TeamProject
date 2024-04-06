@@ -191,3 +191,4 @@ public class Character : MonoBehaviour
         controller.Move(movement);
     }
 }
+
