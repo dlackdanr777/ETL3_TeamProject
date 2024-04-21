@@ -286,6 +286,7 @@ public class BossController : MonoBehaviour, IHp
     }
 
 
+    /// <summary>일정시간마다 PlayerController를 가진 오브젝트를 찾아 _target에 추가하는 코루틴</summary>
     private IEnumerator FindTargetRoutine(float time)
     {
         yield return YieldCache.WaitForSeconds(time);
@@ -298,10 +299,11 @@ public class BossController : MonoBehaviour, IHp
 
         for (int i = 0, count = hitCollider.Length; i < count; i++)
         {
-            if (hitCollider[i].TryGetComponent(out player))
-            {
-                playerList.Add(player);
-            }
+            if (!hitCollider[i].TryGetComponent(out player))
+                continue;
+
+            playerList.Add(player);
+
         }
 
         if (playerList.Count == 0)

@@ -31,13 +31,13 @@ public class BossMeeleAttack : BossAttack
     {
         GameObject obj = _hitObjects.Find(x => x == other.gameObject);
 
-        if (obj == null)
+        if (obj != null)
+            return;
+
+        if (other.TryGetComponent(out IHp iHp))
         {
-            if(other.TryGetComponent(out IHp iHp))
-            {
-                iHp.DepleteHp(_boss.gameObject, _damage);
-                _hitObjects.Add(other.gameObject);
-            }
+            iHp.DepleteHp(_boss.gameObject, _damage);
+            _hitObjects.Add(other.gameObject);
         }
     }
 }

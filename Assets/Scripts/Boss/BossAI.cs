@@ -2,20 +2,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-
+/// <summary>보스의 행동 패턴AI 클래스 </summary>
 public class BossAI
 {
     private BehaviorTree _bt;
-
     private BossController _boss;
-
     private BossAttackData _currentAttackData;
 
 
     public BossAI(BossController boss)
     {
         _boss = boss;
-        //_boss.OnHpDepleted += ChangeGuardState;
         NodeInit();
     }
 
